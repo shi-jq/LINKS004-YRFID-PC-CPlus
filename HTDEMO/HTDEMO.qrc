@@ -1,0 +1,41 @@
+<RCC>
+    <qresource prefix="/combox">
+        <file>skin/combox_down.png</file>
+    </qresource>
+    <qresource prefix="/ico">
+        <file>skin/logo.png</file>
+        <file>skin/casc2.ico</file>
+    </qresource>
+    <qresource prefix="/cebian">
+        <file>skin/cebian_down.png</file>
+        <file>skin/cebian_left.png</file>
+        <file>skin/cebian_right.png</file>
+        <file>skin/cebian_up.png</file>
+    </qresource>
+    <qresource prefix="/btn">
+        <file>skin/radio_btn.png</file>
+        <file>skin/zhiding.png</file>
+        <file>skin/refush.png</file>
+        <file>skin/radio_btn2.png</file>
+        <file>skin/btn_left.png</file>
+        <file>skin/btn_right.png</file>
+    </qresource>
+    <qresource prefix="/title">
+        <file>skin/titile.png</file>
+        <file>skin/gb-titile.png</file>
+    </qresource>
+    <qresource prefix="/checkbox">
+        <file>skin/ckb_checked.png</file>
+        <file>skin/ckb_unchecked.png</file>
+    </qresource>
+    <qresource prefix="/spinbox">
+        <file>skin/btn_up.png</file>
+        <file>skin/btn_down.png</file>
+    </qresource>
+    <qresource prefix="/message">
+        <file>skin/Error.png</file>
+        <file>skin/Information.png</file>
+        <file>skin/Question.png</file>
+        <file>skin/Warning.png</file>
+    </qresource>
+</RCC>

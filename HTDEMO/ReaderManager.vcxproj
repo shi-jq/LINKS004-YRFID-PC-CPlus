@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D21C7F8D-B62A-3E3B-AE93-BF2B728D61F3}</ProjectGuid>
+    <RootNamespace>ReaderManager</RootNamespace>
+    <Keyword>QtVS_v303</Keyword>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <PlatformToolset>v141</PlatformToolset>
+    <OutputDirectory>..\bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>Release\obj\</IntermediateDirectory>
+    <PrimaryOutput>ReaderManager</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <PlatformToolset>v140</PlatformToolset>
+    <OutputDirectory>..\bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>Debug\obj\</IntermediateDirectory>
+    <PrimaryOutput>ReaderManager</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>Debug\obj\</IntDir>
+    <TargetName>ReaderManager</TargetName>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>Release\obj\</IntDir>
+    <TargetName>ReaderManager</TargetName>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <QtInstall>msvc2015_64</QtInstall>
+    <QtModules>core;network;gui;multimedia;widgets</QtModules>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <QtInstall>msvc2015_64</QtInstall>
+    <QtModules>core;network;gui;multimedia;widgets</QtModules>
+  </PropertyGroup>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;..\bin;Release\moc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>Release\obj\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>Release\obj\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_NO_DEBUG;QT_NO_DEBUG_OUTPUT;QT_NO_WARNING_OUTPUT;NDEBUG;WIN32;QT_NO_DEBUG;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>shell32.lib;QtNetwork4.lib;..\bin\RFIDAPI.lib;ws2_32.lib;Ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\utils\my_sql\my_sql\lib;C:\utils\postgresql\pgsql\lib;..\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\ReaderManager.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_NO_DEBUG;QT_NO_DEBUG_OUTPUT;QT_NO_WARNING_OUTPUT;NDEBUG;WIN32;QT_NO_DEBUG;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./$(Configuration)/moc/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>$(Configuration)\moc</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>$(ProjectDir)</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;..\bin;Debug\moc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>Debug\obj\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>Debug\obj\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>shell32.lib;..\bin\RFIDAPI.lib;ws2_32.lib;Ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\utils\my_sql\my_sql\lib;C:\utils\postgresql\pgsql\lib;..\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\ReaderManager.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;WIN32;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>$(ProjectDir)</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./$(Configuration)/moc/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>$(Configuration)\moc</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="BuzzerSpeakerCtrl.cpp" />
+    <ClCompile Include="CheckTime.cpp" />
+    <ClCompile Include="LanguageSrc.cpp" />
+    <ClCompile Include="Lock.cpp" />
+    <ClCompile Include="MessageBox.cpp" />
+    <ClCompile Include="ReadCardFor6CThread.cpp" />
+    <ClCompile Include="SetDebugNew.cpp" />
+    <ClCompile Include="UdpWorkerThread.cpp" />
+    <ClCompile Include="antennaprmform.cpp" />
+    <ClCompile Include="appconfig.cpp" />
+    <ClCompile Include="busaddrconfigdlg.cpp" />
+    <ClCompile Include="carrierconfigform.cpp" />
+    <ClCompile Include="comconfigdlg.cpp" />
+    <ClCompile Include="connetdlg.cpp" />
+    <ClCompile Include="filtratetagfor6cdlg.cpp" />
+    <ClCompile Include="findtagform.cpp" />
+    <ClCompile Include="firmwareupdatefor6cdlg.cpp" />
+    <ClCompile Include="flashconfigfor6cdlg.cpp" />
+    <ClCompile Include="gprsconfigdlg.cpp" />
+    <ClCompile Include="guidemaindlg.cpp" />
+    <ClCompile Include="helpfor6cdlg.cpp" />
+    <ClCompile Include="ioconfigfor6cdlg.cpp" />
+    <ClCompile Include="languagesetdlg.cpp" />
+    <ClCompile Include="lockopform.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainapp.cpp" />
+    <ClCompile Include="maininit.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="netconfigfor6cdlg.cpp" />
+    <ClCompile Include="oplistdlg.cpp" />
+    <ClCompile Include="paramadd6cdlg.cpp" />
+    <ClCompile Include="paramconfigfor6cdlg.cpp" />
+    <ClCompile Include="pointconfigform.cpp" />
+    <ClCompile Include="progressbardlg.cpp" />
+    <ClCompile Include="pwdsetform.cpp" />
+    <ClCompile Include="qvaluedlg.cpp" />
+    <ClCompile Include="readcardfor6cdlg.cpp" />
+    <ClCompile Include="readconfigfor6cdlg.cpp" />
+    <ClCompile Include="readerdllbase.cpp" />
+    <ClCompile Include="readerinfo6cform.cpp" />
+    <ClCompile Include="readermanager.cpp" />
+    <ClCompile Include="readertimesetdlg.cpp" />
+    <ClCompile Include="readwritedataform.cpp" />
+    <ClCompile Include="rebootdeviceform.cpp" />
+    <ClCompile Include="softconfigdlg.cpp" />
+    <ClCompile Include="tabapplyinfoform.cpp" />
+    <ClCompile Include="tabconnetinfoform.cpp" />
+    <ClCompile Include="tabparamconfigform.cpp" />
+    <ClCompile Include="tabsysinfoform.cpp" />
+    <ClCompile Include="tabuploadform.cpp" />
+    <ClCompile Include="tagfilterform.cpp" />
+    <ClCompile Include="tagopdialog.cpp" />
+    <ClCompile Include="tcpclient.cpp" />
+    <ClCompile Include="udpclient.cpp" />
+    <ClCompile Include="uploadpramform.cpp" />
+    <ClCompile Include="versioncommondlg.cpp" />
+    <ClCompile Include="weigenconfigform.cpp" />
+    <ClCompile Include="widgetconfig.cpp" />
+    <ClCompile Include="workdpacedlg.cpp" />
+    <ClCompile Include="writeeidform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AppPath.h" />
+    <ClInclude Include="BuzzerSpeakerCtrl.h" />
+    <ClInclude Include="CheckTime.h" />
+    <ClInclude Include="LanguageSrc.h" />
+    <ClInclude Include="Lock.h" />
+    <QtMoc Include="MessageBox.h">
+    </QtMoc>
+    <ClInclude Include="..\bin\RFIDAPIEXPORT.h" />
+    <QtMoc Include="ReadCardFor6CThread.h">
+    </QtMoc>
+    <ClInclude Include="SetDebugNew.h" />
+    <ClInclude Include="Singleton.h" />
+    <QtMoc Include="UdpWorkerThread.h">
+    </QtMoc>
+    <QtMoc Include="antennaprmform.h">
+    </QtMoc>
+    <ClInclude Include="appconfig.h" />
+    <QtMoc Include="busaddrconfigdlg.h">
+    </QtMoc>
+    <QtMoc Include="carrierconfigform.h">
+    </QtMoc>
+    <QtMoc Include="comconfigdlg.h">
+    </QtMoc>
+    <QtMoc Include="connetdlg.h">
+    </QtMoc>
+    <QtMoc Include="filtratetagfor6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="findtagform.h">
+    </QtMoc>
+    <QtMoc Include="firmwareupdatefor6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="flashconfigfor6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="gprsconfigdlg.h">
+    </QtMoc>
+    <QtMoc Include="guidemaindlg.h">
+    </QtMoc>
+    <QtMoc Include="helpfor6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="ioconfigfor6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="languagesetdlg.h">
+    </QtMoc>
+    <QtMoc Include="lockopform.h">
+    </QtMoc>
+    <ClInclude Include="mainapp.h" />
+    <ClInclude Include="maininit.h" />
+    <QtMoc Include="mainwindow.h">
+    </QtMoc>
+    <QtMoc Include="netconfigfor6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="oplistdlg.h">
+    </QtMoc>
+    <QtMoc Include="paramadd6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="paramconfigfor6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="pointconfigform.h">
+    </QtMoc>
+    <QtMoc Include="progressbardlg.h">
+    </QtMoc>
+    <QtMoc Include="pwdsetform.h">
+    </QtMoc>
+    <QtMoc Include="qvaluedlg.h">
+    </QtMoc>
+    <QtMoc Include="readcardfor6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="readconfigfor6cdlg.h">
+    </QtMoc>
+    <ClInclude Include="readerdllbase.h" />
+    <QtMoc Include="readerinfo6cform.h">
+    </QtMoc>
+    <ClInclude Include="readermanager.h" />
+    <QtMoc Include="readertimesetdlg.h">
+    </QtMoc>
+    <QtMoc Include="readwritedataform.h">
+    </QtMoc>
+    <QtMoc Include="rebootdeviceform.h">
+    </QtMoc>
+    <QtMoc Include="softconfigdlg.h">
+    </QtMoc>
+    <QtMoc Include="tabapplyinfoform.h">
+    </QtMoc>
+    <QtMoc Include="tabconnetinfoform.h">
+    </QtMoc>
+    <QtMoc Include="tabparamconfigform.h">
+    </QtMoc>
+    <QtMoc Include="tabsysinfoform.h">
+    </QtMoc>
+    <QtMoc Include="tabuploadform.h">
+    </QtMoc>
+    <QtMoc Include="tagfilterform.h">
+    </QtMoc>
+    <QtMoc Include="tagopdialog.h">
+    </QtMoc>
+    <ClInclude Include="tcpclient.h" />
+    <ClInclude Include="udpclient.h" />
+    <QtMoc Include="uploadpramform.h">
+    </QtMoc>
+    <QtMoc Include="versioncommondlg.h">
+    </QtMoc>
+    <QtMoc Include="weigenconfigform.h">
+    </QtMoc>
+    <ClInclude Include="widgetconfig.h" />
+    <QtMoc Include="workdpacedlg.h">
+    </QtMoc>
+    <QtMoc Include="writeeidform.h">
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Debug\moc\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zi -MDd -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;Debug\moc\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Debug\moc\moc_predefs.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Release\moc\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -O2 -MD -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;Release\moc\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Release\moc\moc_predefs.h;%(Outputs)</Outputs>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="antennaprmform.ui">
+    </QtUic>
+    <QtUic Include="busaddrconfigdlg.ui">
+    </QtUic>
+    <QtUic Include="carrierconfigform.ui">
+    </QtUic>
+    <QtUic Include="comconfigdlg.ui">
+    </QtUic>
+    <QtUic Include="connetdlg.ui">
+    </QtUic>
+    <QtUic Include="filtratetagfor6cdlg.ui">
+    </QtUic>
+    <QtUic Include="findtagform.ui">
+    </QtUic>
+    <QtUic Include="firmwareupdatefor6cdlg.ui">
+    </QtUic>
+    <QtUic Include="flashconfigfor6cdlg.ui">
+    </QtUic>
+    <QtUic Include="gprsconfigdlg.ui">
+    </QtUic>
+    <QtUic Include="guidemaindlg.ui">
+    </QtUic>
+    <QtUic Include="helpfor6cdlg.ui">
+    </QtUic>
+    <QtUic Include="ioconfigfor6cdlg.ui">
+    </QtUic>
+    <QtUic Include="languagesetdlg.ui">
+    </QtUic>
+    <QtUic Include="lockopform.ui">
+    </QtUic>
+    <QtUic Include="mainwindow.ui">
+    </QtUic>
+    <QtUic Include="netconfigfor6cdlg.ui">
+    </QtUic>
+    <QtUic Include="oplistdlg.ui">
+    </QtUic>
+    <QtUic Include="paramadd6cdlg.ui">
+    </QtUic>
+    <QtUic Include="paramconfigfor6cdlg.ui">
+    </QtUic>
+    <QtUic Include="pointconfigform.ui">
+    </QtUic>
+    <QtUic Include="progressbardlg.ui">
+    </QtUic>
+    <QtUic Include="pwdsetform.ui">
+    </QtUic>
+    <QtUic Include="qvaluedlg.ui">
+    </QtUic>
+    <QtUic Include="readcardfor6cdlg.ui">
+    </QtUic>
+    <QtUic Include="readconfigfor6cdlg.ui">
+    </QtUic>
+    <QtUic Include="readerinfo6cform.ui">
+    </QtUic>
+    <QtUic Include="readertimesetdlg.ui">
+    </QtUic>
+    <QtUic Include="readwritedataform.ui">
+    </QtUic>
+    <QtUic Include="rebootdeviceform.ui">
+    </QtUic>
+    <QtUic Include="softconfigdlg.ui">
+    </QtUic>
+    <QtUic Include="tabapplyinfoform.ui">
+    </QtUic>
+    <QtUic Include="tabconnetinfoform.ui">
+    </QtUic>
+    <QtUic Include="tabparamconfigform.ui">
+    </QtUic>
+    <QtUic Include="tabsysinfoform.ui">
+    </QtUic>
+    <QtUic Include="tabuploadform.ui">
+    </QtUic>
+    <QtUic Include="tagfilterform.ui">
+    </QtUic>
+    <QtUic Include="tagopdialog.ui">
+    </QtUic>
+    <QtUic Include="uploadpramform.ui">
+    </QtUic>
+    <QtUic Include="versioncommondlg.ui">
+    </QtUic>
+    <QtUic Include="weigenconfigform.ui">
+    </QtUic>
+    <QtUic Include="workdpacedlg.ui">
+    </QtUic>
+    <QtUic Include="writeeidform.ui">
+    </QtUic>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
+</Project>
