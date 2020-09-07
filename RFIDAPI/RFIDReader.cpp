@@ -155,12 +155,8 @@ bool CRFIDReader::SetMsgResult(CRFrame& RFIDFrame)
 {
 	unsigned char nCommand = RFIDFrame.bCommand;
 
-	if( nCommand == RFIDCommand[COM_6CREAD_EPC] ||
-		nCommand == RFIDCommand[COM_6CREAD_TID] ||
-		nCommand == RFIDCommand[COM_6BREAD_UID] ||
-		nCommand == RFIDCommand[COM_EAS_ENABLE] ||
-		//added by liuzhibin in 2013-01-05
-		nCommand == RFIDCommand[COM_6CREAD_EPCTID])
+	if( nCommand == RFIDCommand[COM_YMAKE_TAGUPLOAD] ||
+		nCommand == RFIDCommand[COM_SEND_HEART] )
 	{
 		if( !m_CardIDBuffer.Add(&RFIDFrame) )
 		{
@@ -1782,6 +1778,92 @@ bool CRFIDReader::SAAT6BTagLockQuery (unsigned char nAntenna,
 }
 
 
+bool CRFIDReader::SAATYMakeTagUpLoadIDCode(unsigned char nOpType, unsigned char nIDType)
+{
+	ClearErrorCode();
+
+	if (!m_bOpen)
+	{
+		return false;
+	}
+
+	unsigned char pSendData[DATA_BUFFER];
+	unsigned char ucCommand = RFIDCommand[COM_YMAKE_TAGUPLOAD];
+
+	pSendData[0] = nOpType;
+	pSendData[1] = nIDType;
+
+	CRFIDFrame RFIDInOutFrame;
+	if (SendMsg(&ucCommand, pSendData, 2, RFIDInOutFrame))
+		return true;
+	else
+		return false;
+}
+
+bool CRFIDReader::SAATYRevIDMsgDecRssiExpand(
+	unsigned char* nTagType, 
+	unsigned int* pId,
+	int* nParam1,
+	int* nRSSI,
+	int* nAntenna)
+{
+	ClearErrorCode();
+
+	if (!m_bOpen)
+	{
+		return false;
+	}
+
+	if (NULL == nTagType ||
+		NULL == pId ||
+		NULL == nParam1 ||
+		NULL == nRSSI ||
+		NULL == nAntenna)
+	{
+		SetErrorCode(ERR_POINTER_NULL);
+		return 0;
+	}
+
+	CRFIDFrame revInOutFrame;
+	CRFrame& revFrame = revInOutFrame.RFIDOutFrame;
+
+	if (GetCard(revFrame, TAG_REV_TIME))
+	{
+
+		if (revFrame.bCommand == RFIDCommand[COM_STOP_READ]) //这里的指令变成53了
+		{
+			return -1;
+		}
+
+		if (revFrame.bCommand == RFIDCommand[COM_SEND_HEART]) //心跳包
+		{
+			return 2;
+		}
+
+		if (revFrame.bData[0] != 0)
+		{
+			SetErrorCode(revFrame.bData[0], true);
+			return 0;
+		}
+		else
+		{
+			*nTagType = (revFrame.bData[1]);
+			*nRSSI = (revFrame.bData[2]);
+			*nAntenna = 1;
+			*pId = revFrame.bData[3] << 24
+				+ revFrame.bData[4] << 16 
+				+ revFrame.bData[5] << 8 
+				+ revFrame.bData[6];				
+			
+			*nParam1 = (revFrame.bData[7]);
+		
+		
+			return 1;
+		}
+	}
+	return 0;
+}
+
 bool CRFIDReader::SAAT6CTagSelect ( unsigned char nBank ,unsigned short nStartAddr,unsigned char MaskBit, 
 										   unsigned char *Data ,unsigned char Datalength,unsigned char nSessionZone,
 										   unsigned char nActiveFlag, unsigned char nCutFlag )
@@ -3009,11 +3091,7 @@ bool CRFIDReader::TestHeart()
 bool CRFIDReader::CheckIsReadCardCommand(unsigned char nCommand)
 {
 	bool bRet = false;
-	if( nCommand == RFIDCommand[COM_6CREAD_EPC] ||
-		nCommand == RFIDCommand[COM_6CREAD_TID] ||
-		nCommand == RFIDCommand[COM_6BREAD_UID] ||
-		nCommand == RFIDCommand[COM_EAS_ENABLE] ||
-		nCommand == RFIDCommand[COM_6CREAD_EPCTID])
+	if( nCommand == RFIDCommand[COM_YMAKE_TAGUPLOAD])
 	{
 		bRet = true;
 	}
@@ -3072,34 +3150,10 @@ bool CRFIDReader::SendMsg(unsigned char* pCommand,unsigned char *pSendData, int 
 		}
 
 		//是否读卡命令 这里直接赋值，导致handle泄漏，故操作有handle的结构体小心
-		if( *pCommand== RFIDCommand[COM_6CREAD_EPC] )
+		if( *pCommand== RFIDCommand[COM_YMAKE_TAGUPLOAD] )
 		{
 			//memcpy((void*)&m_ReadCardFrame,(void*)&pRevFrame,sizeof(CRFIDFrame));
 			m_ReadState = READ_EPC;
-			m_CardIDBuffer.Clear();
-		}
-		else if( *pCommand == RFIDCommand[COM_6CREAD_TID] )
-		{
-			//memcpy((void*)&m_ReadCardFrame,(void*)&pRevFrame,sizeof(CRFIDFrame));
-			m_ReadState = READ_TID;
-			m_CardIDBuffer.Clear();
-		}
-		else if( *pCommand == RFIDCommand[COM_6BREAD_UID] )
-		{
-			//memcpy((void*)&m_ReadCardFrame,(void*)&pRevFrame,sizeof(CRFIDFrame));
-			m_ReadState = READ_UID;
-			m_CardIDBuffer.Clear();
-		}else if( *pCommand == RFIDCommand[COM_EAS_ENABLE] )
-		{
-			//memcpy((void*)&m_ReadCardFrame,(void*)&pRevFrame,sizeof(CRFIDFrame));
-			m_ReadState = READ_EAS;
-			m_CardIDBuffer.Clear();
-		}
-		//added by haowenfeng in 2013-01-05
-		else if( *pCommand == RFIDCommand[COM_6CREAD_EPCTID] )
-		{
-			//memcpy((void*)&m_ReadCardFrame,(void*)&pRevFrame,sizeof(CRFIDFrame));
-			m_ReadState = READ_EPCTID;
 			m_CardIDBuffer.Clear();
 		}
 
@@ -3180,22 +3234,38 @@ bool CRFIDReader::PowerOff()
 {
 	ClearErrorCode();
 
-	if( !m_bOpen )
+	if (!m_bOpen)
 	{
-		return true;
+		return false;
 	}
 
-	//if( m_ReadState != READ_IDLE )
+	bool bRet = false;
+	unsigned char SendCommand = RFIDCommand[COM_YSTOP];//指令
+	unsigned char pSendData[API_SENDDATA_BUFF];
+	int nDataLen = 0;//数据内容长度
+
+	CRFIDFrame InRFIDFrame;
+	CRFrame& RFIDFrame = InRFIDFrame.RFIDOutFrame;
+	do
 	{
-		if( !SAATCarrierWaveOp(0x00,0x01) ) 
+		if (!SendNRevMsg(&SendCommand, pSendData, nDataLen, InRFIDFrame, 3000))
 		{
-			m_ReadState = READ_IDLE;//停不了判断是已经停止了
-			return false;
+			break;
 		}
-	}
+
+		if (RFIDFrame.bData[0] != 0) //判断返回值 
+		{
+			SetErrorCode(RFIDFrame.bData[0], true);
+			break;
+		}
+
+	
+		bRet = true;
+
+	} while (0);
 
 	m_ReadState = READ_IDLE;
-	return true;
+	return bRet;
 }
 
 bool CRFIDReader::WriteEPCCode(unsigned char nAntenna,

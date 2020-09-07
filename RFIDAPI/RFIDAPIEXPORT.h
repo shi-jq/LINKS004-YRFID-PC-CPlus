@@ -1905,10 +1905,8 @@ extern "C" {
 		void *pHandle,
 		unsigned char* nTagType,
 		unsigned int* pId,
-		unsigned char* pBit, 
 		int* nParam1,
-		int* nParam2,
-		int* nParam3,
+		int* nRssi,
 		int* nAntenna);
 
 

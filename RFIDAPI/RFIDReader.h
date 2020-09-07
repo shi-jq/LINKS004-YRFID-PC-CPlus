@@ -101,6 +101,11 @@ public:
 	/***********************************6B²Ù×÷************************************************/
 
 
+	bool SAATYMakeTagUpLoadIDCode(unsigned char nOpType, unsigned char nIDType);
+	bool SAATYRevIDMsgDecRssiExpand(unsigned char* nTagType, unsigned int* pId, 
+		 int* nParam1, int* nRssi, int* nAntenna);
+
+
 	/***********************************6C²Ù×÷************************************************/
 	bool SAAT6CTagSelect ( unsigned char nBank ,unsigned short nStartAddr,unsigned char MaskBit, 
 		unsigned char *Data ,unsigned char Datalength,unsigned char nSessionZone,

@@ -70,10 +70,9 @@ void ReadCardFor6CThread::run()
 
 		int nRet = SAAT_YRevIDMsgDecRssiExpand(
 			mReaderDllBase->m_hCom,
-			&nFlag, &iIdCode,
-			&nBit,
+			&nFlag,
+			&iIdCode,
 			&nHighPTR,
-			&nLowPTR,
 			&nParam3,
 			&nAntenna);
 

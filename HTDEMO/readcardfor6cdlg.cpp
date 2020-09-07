@@ -301,30 +301,14 @@ bool ReadCardFor6CDlg::SendReadCommand(const QString& strInfo,int nReadType)
 	}
 
 	bool bRet = false;
-	if (nReadType == ReadCardFor6CThread::READ_FOR_MAKETAGUPLOAD)
-	{
-		int isDoAffirm = 0x01;
-		int nIDType = 0x01;
-		bRet = SAAT_YMakeTagUpLoadIDCode (
-			pReaderDllBase->m_hCom,		
-			isDoAffirm,
-			nIDType);
-	}
-	else if(nReadType == ReadCardFor6CThread::READ_FOR_YTAGREAD)
-	{
-		int isDoAffirm = 0x01;
-		int nIDType = 0x01;
-		unsigned int nUiPreRead = 0x01;
-		bRet = SAAT_YReadIDCode ( 
-			pReaderDllBase->m_hCom,
-			isDoAffirm,
-			nIDType,
-			nUiPreRead);
-	}	
-	else
-	{
-		assert(false);
-	}
+	
+	int isDoAffirm = 0x01;
+	int nIDType = 0x01;
+	bRet = SAAT_YMakeTagUpLoadIDCode(
+		pReaderDllBase->m_hCom,
+		isDoAffirm,
+		nIDType);
+
 
 	return bRet;
 }

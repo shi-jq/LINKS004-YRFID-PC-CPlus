@@ -35,3 +35,16 @@
 *.log
 RFIDAPI.VC.db
 RFIDAPI.VC.VC.opendb
+*.ilk
+*.exp
+*.user
+*.props
+*.ipch
+*.ipch
+*.sln
+*.sln
+*.sln
+*.sln
+*.sln
+*.exp
+*.exp
