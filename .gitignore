@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+*.tlog
+*.pdb
+*.log
+RFIDAPI.VC.db
+RFIDAPI.VC.VC.opendb
