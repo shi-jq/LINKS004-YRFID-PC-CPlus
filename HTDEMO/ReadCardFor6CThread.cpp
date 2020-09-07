@@ -53,12 +53,10 @@ bool ReadCardFor6CThread::StopRead()
 
 void ReadCardFor6CThread::run()
 {
-	unsigned char nBit = 0;
 	unsigned int  iIdCode;
 	unsigned char nFlag = 0xFF;
-	int nHighPTR = 0;
-	int nLowPTR = 0;
-	int nParam3 = 0;	
+	int nParam = 0;
+	int nRssi = 0;	
 	int nAntenna = 0;
 
 	while( !mIsStop )
@@ -72,13 +70,13 @@ void ReadCardFor6CThread::run()
 			mReaderDllBase->m_hCom,
 			&nFlag,
 			&iIdCode,
-			&nHighPTR,
-			&nParam3,
+			&nParam,
+			&nRssi,
 			&nAntenna);
 
 		if( 1 == nRet/* && 0 != nLen*/  ) //¶Áµ½¿¨,¿Õ¿¨Òª¿¼ÂÇ
 		{
-			AnalysisCard(nFlag,iIdCode,nBit,nHighPTR,nLowPTR,nParam3,nAntenna);
+			AnalysisCard(nFlag,iIdCode, nParam, nRssi,nAntenna);
 		}
 		else //Î´¶Áµ½¿¨
 		{
@@ -228,27 +226,24 @@ void ReadCardFor6CThread::SetReader(ReaderDllBase* pReaderDllBase)
 	mReaderDllBase = pReaderDllBase;
 }
 
-bool ReadCardFor6CThread::AnalysisCard(
-									   unsigned char nTagType,
-									   unsigned int pId,
-									   unsigned char pBit, 
-									   int nParam1, 
-									   int nParam2,
-									   int nParam3,
-									   int nAntenna)
-{
 
+bool ReadCardFor6CThread::AnalysisCard(
+	unsigned char nTagType,
+	unsigned int pId,
+	int nParam1, 
+	int nRssi, int nAntenna)
+{
 	mCardLock.Lock();
 	QString cardStr = QString("%1").arg(pId);
 	CardFor6CInfo* pCardFor6CInfo = NULL;
 	pCardFor6CInfo = GetCard(cardStr);
-	assert(pCardFor6CInfo);	
+	assert(pCardFor6CInfo);
 
 	pCardFor6CInfo->m_szCardID = cardStr;
 	pCardFor6CInfo->m_szCurReadTime = QDateTime::currentDateTime().toString(QString("yyyy-MM-dd hh:mm:ss"));
-	pCardFor6CInfo->m_szTagState = GetTagStateStr(nTagType,pId);
-	pCardFor6CInfo->m_otherInfo = GetTagDescribe(nTagType,nParam1,nParam2,nParam3);
-	pCardFor6CInfo->m_szRssi = GetTagRSSI(nTagType,nParam3);
+	pCardFor6CInfo->m_szTagState = GetTagStateStr(nTagType, pId);
+	pCardFor6CInfo->m_otherInfo = GetTagDescribe(nTagType, nParam1);
+	pCardFor6CInfo->m_szRssi = GetTagRSSI(nTagType, nRssi);
 
 	if (nAntenna == 1)
 	{
@@ -265,7 +260,7 @@ bool ReadCardFor6CThread::AnalysisCard(
 	else if (nAntenna == 4)
 	{
 		pCardFor6CInfo->m_nAntenna4Count++;
-	}	
+	}
 	else
 	{
 		pCardFor6CInfo->m_nAntenna1Count++;
@@ -397,27 +392,15 @@ QString ReadCardFor6CThread::GetCurrentTagState(int nTagState)
 	return retStr;
 }	
 
-QString ReadCardFor6CThread::GetTagDescribe(int nTagType, int nParam1, int nParam2,int nParam3)
+QString ReadCardFor6CThread::GetTagDescribe(int nTagType, int nParam)
 {
 	QString retStr = "";
 	switch (nTagType) {
-		case 0x00:// ÆÕÍ¨±êÇ©
-			retStr += GetNarmalTagDescribe(nParam1, nParam2, nParam3);
-			break;
-
-		case 0x01:// ÎÂ¶È±êÇ©
-			retStr += GetTemperatureTagDescribe(nParam1, nParam2, nParam3);
-			break;
-
-		case 0x02:// ¼¤Àø±êÇ©
-			retStr += GetInvigoratTagDescribe(nParam1, nParam2, nParam3);
-			break;
-
-		case 0x03:// µçÁ÷±êÇ©
-			retStr += GetCurrentTagDescribe(nParam1, nParam2, nParam3);
+		case 0x01:// ÆÕÍ¨±êÇ©
+			retStr += GetNarmalTagDescribe(nParam);
 			break;
 		default:
-			retStr += GetNarmalTagDescribe(nParam1, nParam2, nParam3);
+			retStr += GetNarmalTagDescribe(nParam);
 			break;
 	}
 
@@ -425,9 +408,7 @@ QString ReadCardFor6CThread::GetTagDescribe(int nTagType, int nParam1, int nPara
 }
 
 QString ReadCardFor6CThread::GetNarmalTagDescribe(
-	int nParam1, 
-	int nParam2,
-	int nParam3)
+	int nParam1)
 {
 	return GET_TXT("IDCS_TAG_DESCRIBE_NULL");
 }
@@ -483,11 +464,9 @@ QString ReadCardFor6CThread::GetInvigoratTagDescribe(
 }
 
 QString ReadCardFor6CThread::GetCurrentTagDescribe(
-	int nParam1, 
-	int nParam2,
-	int nParam3)
+	int nParam1)
 {
-	return GetNarmalTagDescribe(nParam1, nParam2, nParam3);
+	return GetNarmalTagDescribe(nParam1);
 }
 
 QString ReadCardFor6CThread::GetTagRSSI(int nTagType,int nParam3)

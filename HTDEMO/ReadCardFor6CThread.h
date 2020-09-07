@@ -31,10 +31,8 @@ private:
 	bool AnalysisCard(
 		unsigned char nTagType,
 		unsigned int pId,
-		unsigned char pBit, 
 		int nParam1,
-		int nParam2,
-		int nParam3,
+		int nRssi,
 		int nAntenna);
 
 	QString GetTagStateStr(unsigned char nTagType,int nTagState);
@@ -43,11 +41,11 @@ private:
 	QString GetInvigoratTagState(int nTagState);//激励标签
 	QString GetCurrentTagState(int nTagState);//电流标签
 
-	QString GetTagDescribe(int nTagType, int nParam1, int nParam2,int nParam3);
-	QString GetNarmalTagDescribe(int nParam1, int nParam2,int nParam3);//普通标签
+	QString GetTagDescribe(int nTagType, int nParam);
+	QString GetNarmalTagDescribe(int nParam);//普通标签
 	QString GetTemperatureTagDescribe(int nParam1, int nParam2,int nParam3);//温度标签
 	QString GetInvigoratTagDescribe(int nParam1, int nParam2,int nParam3);//激励标签
-	QString GetCurrentTagDescribe(int nParam1, int nParam2,int nParam3);//电流标签
+	QString GetCurrentTagDescribe(int nParam1);//电流标签
 
 	QString GetTagRSSI(int nTagType,int nParam3);
 	

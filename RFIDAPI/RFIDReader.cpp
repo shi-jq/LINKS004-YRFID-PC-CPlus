@@ -1847,15 +1847,23 @@ bool CRFIDReader::SAATYRevIDMsgDecRssiExpand(
 		}
 		else
 		{
-			*nTagType = (revFrame.bData[1]);
+			if (revFrame.bLength <= 2)
+			{
+				return 2;
+			}
+
+			*nTagType = (revFrame.bData[1]);		
+			
 			*nRSSI = (revFrame.bData[2]);
 			*nAntenna = 1;
-			*pId = revFrame.bData[3] << 24
-				+ revFrame.bData[4] << 16 
-				+ revFrame.bData[5] << 8 
-				+ revFrame.bData[6];				
+			*pId = (revFrame.bData[3] << 24)
+				+ (revFrame.bData[4] << 16 )
+				+ (revFrame.bData[5] << 8) 
+				+ (revFrame.bData[6]);				
 			
 			*nParam1 = (revFrame.bData[7]);
+
+			
 		
 		
 			return 1;
@@ -3040,7 +3048,8 @@ bool CRFIDReader::CheckMsg(unsigned char nCommand)
 		nCommand == RFIDCommand[COM_IO_OP] || //IOÖ¸Áî
 		nCommand == RFIDCommand[COM_CARRY_OP] || //Í£Ö¹Ö¸Áî
 		nCommand == RFIDCommand[COM_INPUT_QUERY] ||
-		nCommand == RFIDCommand[COM_EAS_ENABLE] )
+		nCommand == RFIDCommand[COM_EAS_ENABLE] ||
+		nCommand == RFIDCommand[COM_YSTOP])
 	{
 		return true;
 	}
