@@ -48,5 +48,5 @@ RFIDAPI.VC.VC.opendb
 *.sln
 *.exp
 *.exp
-/Debug
+/Debug/
 /moc
