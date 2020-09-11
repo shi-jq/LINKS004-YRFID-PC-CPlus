@@ -12,6 +12,7 @@
 #include "tabapplyinfoform.h"
 #include "tabparamconfigform.h"
 #include "tabuploadform.h"
+#include "tabforwardconfigform.h"
 
 workDpaceDlg::workDpaceDlg(QWidget *parent) :
     QFrame(parent),
@@ -156,11 +157,11 @@ void workDpaceDlg::CreateView()
 	mTabSysInfoForm = new TabSysInfoForm(mTabWidget);
 	mTabWidget->addTab(mTabSysInfoForm,QIcon(),GET_TXT("IDCS_SYS_CONFIG"));
 	
-//	mTabConnetInfoForm = new TabConnetInfoForm(mTabWidget);
-//	mTabWidget->addTab(mTabConnetInfoForm,QIcon(),GET_TXT("IDCS_CONNET_CONFIG"));
+    mTabConnetInfoForm = new TabConnetInfoForm(mTabWidget);
+    mTabWidget->addTab(mTabConnetInfoForm,QIcon(),GET_TXT("IDCS_CONNET_CONFIG"));
 
-//	mTabUploadForm = new TabUploadForm(mTabWidget);
-//	mTabWidget->addTab(mTabUploadForm,QIcon(),GET_TXT("IDCS_DATA_UPLOAD"));
+    mTabUploadForm = new TabUploadForm(mTabWidget);
+    mTabWidget->addTab(mTabUploadForm,QIcon(),GET_TXT("IDCS_DATA_UPLOAD"));
 
 //	mTabParamConfigForm = new TabParamConfigForm(mTabWidget);
 //	mTabWidget->addTab(mTabParamConfigForm,QIcon(),GET_TXT("IDCS_PARAM_CONFIG_OP"));
@@ -168,6 +169,8 @@ void workDpaceDlg::CreateView()
 //	mTabApplyInfoForm = new TabApplyInfoForm(mTabWidget);
 //	mTabWidget->addTab(mTabApplyInfoForm,QIcon(),GET_TXT("IDCS_IO_CONTRL"));
 
+    mTabForwardConfigForm = new TabForwardConfigForm(mTabWidget);
+    mTabWidget->addTab(mTabForwardConfigForm,QIcon(),GET_TXT("IDCS_FORWARD_CONFIG"));
 	mLeftBtn->show();
 	mDownBtn->show();	
 

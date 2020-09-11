@@ -87,7 +87,7 @@ void BusAddrConfigDlg::showEvent(QShowEvent *event)
 
 	if (mFirst)
 	{
-		mFirst =!Query();
+        //mFirst =!Query();
 	}
 	QWidget::showEvent(event);
 }

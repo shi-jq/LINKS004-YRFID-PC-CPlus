@@ -1912,7 +1912,10 @@ extern "C" {
 
 	bool RFID_API  __stdcall SAAT_Updata (void* pHandle,unsigned char nType ,int nFileLen ,unsigned char* pCRC32 ,unsigned char nFileNameLen ,unsigned char* pFileName);
 
+	//×ª·¢ÅäÖÃ
+	bool RFID_API __stdcall SAAT_ForwardSet(void* pHandle, unsigned char nType, unsigned char communication, char* pHostname, int nsocketPort, int nLen);
 
+	bool RFID_API __stdcall SAAT_ForwardQuery(void* pHandle, unsigned char* param, unsigned char* pLen);
 
 
 #ifdef __cplusplus

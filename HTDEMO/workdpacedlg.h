@@ -20,6 +20,8 @@ class TabConnetInfoForm;
 class TabApplyInfoForm;
 class TabParamConfigForm;
 class TabUploadForm;
+class TabForwardConfigForm;
+
 class workDpaceDlg : public QFrame
 {
     Q_OBJECT
@@ -42,7 +44,7 @@ private:
 	TabApplyInfoForm* mTabApplyInfoForm;
 	TabParamConfigForm* mTabParamConfigForm;
 	TabUploadForm* mTabUploadForm;
-
+    TabForwardConfigForm *mTabForwardConfigForm;
 	QPushButton* mDownBtn;
 	QPushButton* mLeftBtn;
 

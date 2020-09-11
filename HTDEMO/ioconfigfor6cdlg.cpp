@@ -85,7 +85,7 @@ void IoConfigFor6CDlg::showEvent(QShowEvent *event)
 	}
 	if (mFirst)
 	{
-		mFirst = !QueryOutPutAll();
+        //mFirst = !QueryOutPutAll();
 	}
 	QWidget::showEvent(event);
 }

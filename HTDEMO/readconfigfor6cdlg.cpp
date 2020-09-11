@@ -70,7 +70,7 @@ void ReadConfigFor6CDlg::showEvent(QShowEvent *event)
 	}
 	if(mIsFirst)
 	{
-		mIsFirst = !QurAll();	
+        //mIsFirst = !QurAll();
 	}
 	QWidget::showEvent(event);
 }

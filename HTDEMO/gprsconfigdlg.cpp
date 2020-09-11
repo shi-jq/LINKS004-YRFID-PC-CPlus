@@ -114,7 +114,7 @@ void GprsConfigDlg::showEvent(QShowEvent *event)
 	}
 	if (mFirst)
 	{
-		mFirst = !QueryAll();
+        //mFirst = !QueryAll();
 	}
 	QWidget::showEvent(event);
 }

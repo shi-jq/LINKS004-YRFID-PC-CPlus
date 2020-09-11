@@ -271,7 +271,7 @@ void ReaderInfo6CForm::showEvent(QShowEvent *event)
 
 	if (mFirst)
 	{
-		mFirst = !QueryAll();
+        //mFirst = !QueryAll();
 	}
  
     QWidget::showEvent(event);

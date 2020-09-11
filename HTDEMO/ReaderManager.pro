@@ -53,7 +53,10 @@ SOURCES += ./main.cpp \
     ./workdpacedlg.cpp \
     ./oplistdlg.cpp \
     ./mainapp.cpp \
-    ./appconfig.cpp \   
+    ./appconfig.cpp \
+    forwardconfigdlg.cpp \
+    forwardsetdlg.cpp \
+    tabforwardconfigform.cpp \
     ./SetDebugNew.cpp \
     ./udpclient.cpp \
     ./UdpWorkerThread.cpp \
@@ -149,6 +152,8 @@ HEADERS  += ./mainwindow.h \
     #./tagerasefor6cdlg.h \
     #./tagselectfor6cdlg.h \
     ./firmwareupdatefor6cdlg.h \
+    forwardconfigdlg.h \
+    forwardsetdlg.h \
     netconfigfor6cdlg.h \
     comconfigdlg.h \
     busaddrconfigdlg.h \
@@ -162,7 +167,8 @@ HEADERS  += ./mainwindow.h \
     guidemaindlg.h \
     languagesetdlg.h \
     softconfigdlg.h \
-    ./tcpclient.h \ 
+    ./tcpclient.h \  \
+    tabforwardconfigform.h \
     MessageBox.h \
     progressbardlg.h \
     helpfor6cdlg.h \
@@ -192,7 +198,10 @@ HEADERS  += ./mainwindow.h \
 FORMS    += ./mainwindow.ui \
     ./connetdlg.ui \
     ./workdpacedlg.ui \
-    ./oplistdlg.ui \    
+    ./oplistdlg.ui \
+    forwardconfigdlg.ui \
+    forwardsetdlg.ui \
+    tabforwardconfigform.ui \
     ./readcardfor6cdlg.ui \
     ./readconfigfor6cdlg.ui \
     #./tagopfor6cdlg.ui \
