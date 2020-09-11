@@ -40,13 +40,8 @@ RFIDAPI.VC.VC.opendb
 *.user
 *.props
 *.ipch
-*.ipch
-*.sln
-*.sln
-*.sln
-*.sln
 *.sln
 *.exp
-*.exp
+*.suo
 Debug/
 /moc
