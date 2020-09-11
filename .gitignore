@@ -89,3 +89,4 @@ HTDEMO/ui_carrierconfigform.h
 HTDEMO/ui_busaddrconfigdlg.h
 HTDEMO/ui_antennaprmform.h
 bin/RFIDAPI.exp
+HTDEMO/ReaderManager.VC.db
