@@ -48,3 +48,5 @@ RFIDAPI.VC.VC.opendb
 *.sln
 *.exp
 *.exp
+
+/moc
