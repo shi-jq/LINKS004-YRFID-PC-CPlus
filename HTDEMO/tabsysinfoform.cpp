@@ -34,8 +34,7 @@ TabSysInfoForm::TabSysInfoForm(QWidget *parent) :
 	gridLayout->setSpacing(0);
 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->addWidget(mRebootDeviceForm);*/
-    ui->widget_4->setEnabled(false);
-    ui->widget_6->setEnabled(false);
+    ui->widget_3->hide();
 }
 
 TabSysInfoForm::~TabSysInfoForm()
