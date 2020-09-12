@@ -22,7 +22,7 @@ CRFIDReader::CRFIDReader(void)
 
 bool CRFIDReader::InitCFG(CRFIDSystemCfg& cfg)
 {
-	memcpy((void*)&m_sysCfg,(void*)&cfg,sizeof(cfg) );
+	m_sysCfg = cfg;
 	return true;
 }
 
