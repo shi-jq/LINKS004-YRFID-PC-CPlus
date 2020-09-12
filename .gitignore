@@ -91,3 +91,4 @@ HTDEMO/ui_antennaprmform.h
 bin/RFIDAPI.exp
 HTDEMO/ReaderManager.VC.db
 HTDEMO/ReaderManager.VC.VC.opendb
+*.vcxproj
