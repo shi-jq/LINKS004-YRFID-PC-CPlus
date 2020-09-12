@@ -24,7 +24,7 @@ public:
 	bool StartRead(int nReadType);
 	bool StopRead();
 	void clearCard();
-	void GetCardList(std::map<QString,CardFor6CInfo*>& cardList);
+	void GetCardList(std::vector<CardFor6CInfo*>& cardList);
 	
 	void run();
 private:
@@ -49,9 +49,9 @@ private:
 
 	QString GetTagRSSI(int nTagType,int nParam3);
 	
-	CardFor6CInfo* GetCard(const QString& szCard);
-	CardFor6CInfo* FindCard(const QString& szCard);
-	CardFor6CInfo* CreateCard(const QString& szCard);
+	CardFor6CInfo* GetCard(const QString& szCard, int antenna);
+	CardFor6CInfo* FindCard(const QString& szCard, int antenna);
+	CardFor6CInfo* CreateCard(const QString& szCard, int antenna);
 private:
 	ReaderDllBase* mReaderDllBase;
 	bool mIsStop;			
@@ -59,17 +59,15 @@ private:
 	int mReadingType;
 
 	CLock mCardLock;
-	std::map<QString,CardFor6CInfo*>  mCardList;
+	std::vector<CardFor6CInfo*>  mCardList;
 };
 
 class CardFor6CInfo
 {
 public:	
 	CardFor6CInfo(){
-		m_nAntenna1Count = 0;
-		m_nAntenna2Count = 0;
-		m_nAntenna3Count = 0;
-		m_nAntenna4Count = 0;
+		m_nAntennaNo = 0;
+		m_nAntennaCount = 0;
 	}
 	~CardFor6CInfo(){}
 public:
@@ -78,10 +76,8 @@ public:
 	QString m_szRssi;
 	QString m_otherInfo;
 	QString m_szCurReadTime;	
-	unsigned int m_nAntenna1Count;
-	unsigned int m_nAntenna2Count;
-	unsigned int m_nAntenna3Count;
-	unsigned int m_nAntenna4Count;
+	unsigned int m_nAntennaNo;
+	unsigned int m_nAntennaCount;
 };
 
 #endif // READCARD_FOR_6C_THREAD_H

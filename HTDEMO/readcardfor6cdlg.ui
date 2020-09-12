@@ -216,6 +216,16 @@
          </spacer>
         </item>
         <item>
+         <widget class="QCheckBox" name="checkBox_2">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>保存记录</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QSpinBox" name="spinBox_2">
           <property name="minimumSize">
            <size>
@@ -228,16 +238,6 @@
           </property>
           <property name="maximum">
            <number>9999</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBox_2">
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>消息记录</string>
           </property>
          </widget>
         </item>

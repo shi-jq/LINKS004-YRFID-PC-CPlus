@@ -55,7 +55,8 @@ void ReadCardFor6CThread::run()
 {
 	unsigned int  iIdCode;
 	unsigned char nFlag = 0xFF;
-	int nParam = 0;
+	int nParam1= 0;
+	int nParam2 = 0;
 	int nRssi = 0;	
 	int nAntenna = 0;
 
@@ -70,13 +71,14 @@ void ReadCardFor6CThread::run()
 			mReaderDllBase->m_hCom,
 			&nFlag,
 			&iIdCode,
-			&nParam,
 			&nRssi,
-			&nAntenna);
+			&nAntenna,
+			&nParam1, 
+			&nParam2);
 
 		if( 1 == nRet/* && 0 != nLen*/  ) //¶Áµ½¿¨,¿Õ¿¨Òª¿¼ÂÇ
 		{
-			AnalysisCard(nFlag,iIdCode, nParam, nRssi,nAntenna);
+			AnalysisCard(nFlag,iIdCode, nParam1, nRssi,nAntenna);
 		}
 		else //Î´¶Áµ½¿¨
 		{
@@ -91,65 +93,67 @@ void ReadCardFor6CThread::clearCard()
 {
 	mCardLock.Lock();
 
-	std::map<QString,CardFor6CInfo*>::iterator iter = mCardList.begin();
+	std::vector<CardFor6CInfo*>::iterator iter = mCardList.begin();
 	for (; iter!= mCardList.end(); ++iter)
 	{
-		delete iter->second;
-		iter->second = NULL;
+		delete (*iter);
+		(*iter) = NULL;
 	}	
 	mCardList.clear();
 
 	mCardLock.Unlock();
 }
 
-void ReadCardFor6CThread::GetCardList(std::map<QString,CardFor6CInfo*>& cardList)
+void ReadCardFor6CThread::GetCardList(std::vector<CardFor6CInfo*>& cardList)
 {
 	mCardLock.Lock();
-	std::map<QString,CardFor6CInfo*>::iterator iter = mCardList.begin();
+	std::vector<CardFor6CInfo*>::iterator iter = mCardList.begin();
 	for (;iter!=mCardList.end(); ++iter)
 	{
 		CardFor6CInfo* pCardInfo = new CardFor6CInfo();
-		pCardInfo->m_szCardID = iter->second->m_szCardID;
-		pCardInfo->m_szTagState = iter->second->m_szTagState;
-		pCardInfo->m_szRssi = iter->second->m_szRssi;
-		pCardInfo->m_otherInfo = iter->second->m_otherInfo;
-		pCardInfo->m_szCurReadTime = iter->second->m_szCurReadTime;
-		pCardInfo->m_nAntenna1Count = iter->second->m_nAntenna1Count;
-		pCardInfo->m_nAntenna2Count = iter->second->m_nAntenna2Count;
-		pCardInfo->m_nAntenna3Count = iter->second->m_nAntenna3Count;
-		pCardInfo->m_nAntenna4Count = iter->second->m_nAntenna4Count;
-		cardList.insert(
-			std::map<QString,CardFor6CInfo*>::value_type(iter->first,pCardInfo));
-
+		pCardInfo->m_szCardID = (*iter)->m_szCardID;
+		pCardInfo->m_szTagState = (*iter)->m_szTagState;
+		pCardInfo->m_szRssi = (*iter)->m_szRssi;
+		pCardInfo->m_otherInfo = (*iter)->m_otherInfo;
+		pCardInfo->m_szCurReadTime = (*iter)->m_szCurReadTime;
+		pCardInfo->m_nAntennaNo = (*iter)->m_nAntennaNo;
+		pCardInfo->m_nAntennaCount = (*iter)->m_nAntennaCount;
+		cardList.push_back(pCardInfo);
 	}
 
 	mCardLock.Unlock();
 }
 
-CardFor6CInfo* ReadCardFor6CThread::GetCard(const QString& szCard)
+CardFor6CInfo* ReadCardFor6CThread::GetCard(const QString& szCard,int antenna)
 {
 	CardFor6CInfo*  pCardFor6CInfo = NULL;
 
-	pCardFor6CInfo = FindCard(szCard);
+	pCardFor6CInfo = FindCard(szCard, antenna);
 	if (!pCardFor6CInfo)
 	{
-		pCardFor6CInfo = CreateCard(szCard);
+		pCardFor6CInfo = CreateCard(szCard, antenna);
 	}
 	
 	return pCardFor6CInfo;
 }
 
-CardFor6CInfo* ReadCardFor6CThread::FindCard(const QString& szCard)
+CardFor6CInfo* ReadCardFor6CThread::FindCard(const QString& szCard, int antenna)
 {
-	std::map<QString,CardFor6CInfo*>::iterator iter = mCardList.find(szCard);
-	if (iter != mCardList.end())
+	std::vector<CardFor6CInfo*>::iterator iter = mCardList.begin();
+	for (; iter != mCardList.end(); ++iter)
 	{
-		return iter->second;
+		CardFor6CInfo* pCard = *iter;
+		if (pCard->m_nAntennaNo == antenna
+			&& pCard->m_szCardID.compare(szCard) == 0 )
+		{
+			return pCard;
+		}
 	}
+
 	return NULL;
 }
 
-CardFor6CInfo* ReadCardFor6CThread::CreateCard(const QString& szCard)
+CardFor6CInfo* ReadCardFor6CThread::CreateCard(const QString& szCard, int antenna)
 {
 	if(szCard.isEmpty())
 	{
@@ -160,12 +164,10 @@ CardFor6CInfo* ReadCardFor6CThread::CreateCard(const QString& szCard)
 
 	pCardFor6CInfo->m_szCardID = szCard;
 
-	pCardFor6CInfo->m_nAntenna1Count = 0;
-	pCardFor6CInfo->m_nAntenna2Count = 0;
-	pCardFor6CInfo->m_nAntenna3Count = 0;
-	pCardFor6CInfo->m_nAntenna4Count = 0;
+	pCardFor6CInfo->m_nAntennaNo= antenna;
+	pCardFor6CInfo->m_nAntennaCount = 0;
 
-	mCardList.insert(std::map<QString,CardFor6CInfo*>::value_type(szCard,pCardFor6CInfo));
+	mCardList.push_back(pCardFor6CInfo);
 	
 	return pCardFor6CInfo;
 }
@@ -236,35 +238,17 @@ bool ReadCardFor6CThread::AnalysisCard(
 	mCardLock.Lock();
 	QString cardStr = QString("%1").arg(pId);
 	CardFor6CInfo* pCardFor6CInfo = NULL;
-	pCardFor6CInfo = GetCard(cardStr);
+	pCardFor6CInfo = GetCard(cardStr, nAntenna);
 	assert(pCardFor6CInfo);
-
 	pCardFor6CInfo->m_szCardID = cardStr;
 	pCardFor6CInfo->m_szCurReadTime = QDateTime::currentDateTime().toString(QString("yyyy-MM-dd hh:mm:ss"));
 	pCardFor6CInfo->m_szTagState = GetTagStateStr(nTagType, pId);
 	pCardFor6CInfo->m_otherInfo = GetTagDescribe(nTagType, nParam1);
 	pCardFor6CInfo->m_szRssi = GetTagRSSI(nTagType, nRssi);
 
-	if (nAntenna == 1)
-	{
-		pCardFor6CInfo->m_nAntenna1Count++;
-	}
-	else if (nAntenna == 2)
-	{
-		pCardFor6CInfo->m_nAntenna2Count++;
-	}
-	else if (nAntenna == 3)
-	{
-		pCardFor6CInfo->m_nAntenna3Count++;
-	}
-	else if (nAntenna == 4)
-	{
-		pCardFor6CInfo->m_nAntenna4Count++;
-	}
-	else
-	{
-		pCardFor6CInfo->m_nAntenna1Count++;
-	}
+	pCardFor6CInfo->m_nAntennaNo = nAntenna;
+	pCardFor6CInfo->m_nAntennaCount++;
+	
 	mCardLock.Unlock();
 
 	return true;
@@ -281,9 +265,9 @@ QString ReadCardFor6CThread::GetTagStateStr(unsigned char nTagType,int nTagState
 			break;
 
 		case 0x01:
-			retStr += GET_TXT("IDCS_TAG_TYPE_TEMPERATURE");
+			retStr += GET_TXT("IDCS_TAG_NORMAL");
 			retStr += ",";
-			retStr += GetTemperatureTagState(nTagState);
+			retStr += GetNormalTagState(nTagState);
 			break;
 
 		case 0x02:

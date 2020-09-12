@@ -1800,18 +1800,19 @@ bool CRFIDReader::SAATYMakeTagUpLoadIDCode(unsigned char nOpType, unsigned char 
 		return false;
 }
 
-bool CRFIDReader::SAATYRevIDMsgDecRssiExpand(
+int CRFIDReader::SAATYRevIDMsgDecRssiExpand(
 	unsigned char* nTagType, 
-	unsigned int* pId,
-	int* nParam1,
+	unsigned int* pId,	
 	int* nRSSI,
-	int* nAntenna)
+	int* nAntenna,
+	int* nParam1, 
+	int* nParam2)
 {
 	ClearErrorCode();
 
 	if (!m_bOpen)
 	{
-		return false;
+		return -1;
 	}
 
 	if (NULL == nTagType ||
@@ -1852,10 +1853,9 @@ bool CRFIDReader::SAATYRevIDMsgDecRssiExpand(
 				return 2;
 			}
 
-			*nTagType = (revFrame.bData[1]);		
-			
-			*nRSSI = (revFrame.bData[2]);
-			*nAntenna = 1;
+			*nTagType = (uint8_t)(revFrame.bData[1]);
+			*nRSSI = 0xFFFFFF00;
+			*nRSSI += (revFrame.bData[2]);			
 			*pId = (revFrame.bData[3] << 24)
 				+ (revFrame.bData[4] << 16 )
 				+ (revFrame.bData[5] << 8) 
@@ -1863,7 +1863,26 @@ bool CRFIDReader::SAATYRevIDMsgDecRssiExpand(
 			
 			*nParam1 = (revFrame.bData[7]);
 
-			
+			if (revFrame.bLength > 9)
+			{
+				*nAntenna = (revFrame.bData[8]);
+			}
+			else 
+			{
+				*nAntenna = 1;
+			}
+
+			if (revFrame.bLength >= 13 )
+			{
+				*nParam2 = (revFrame.bData[9] << 24)
+					+ (revFrame.bData[10] << 16)
+					+ (revFrame.bData[11] << 8)
+					+ (revFrame.bData[12]);
+			}
+			else
+			{
+				*nParam2 = 0;
+			}
 		
 		
 			return 1;

@@ -36,6 +36,8 @@ ReadCardFor6CDlg::ReadCardFor6CDlg(QWidget *parent,workDpaceDlg* pWorkSpaceDlg) 
 	UpdateLanguage();
 	haveNewCard = false;
 	mIsReading = false;
+
+	mTagOpBtn->hide();
 }
 
 ReadCardFor6CDlg::~ReadCardFor6CDlg()
@@ -102,26 +104,22 @@ void ReadCardFor6CDlg::CreateView()
 	sl << GET_TXT("IDCS_NUMBER")
 		<< GET_TXT("IDCS_CRAD_NUMBER")
 		<< GET_TXT("IDCS_READTIME")
-		<< GET_TXT("IDCS_ANTENNA_ONE_COUNT")
-		<< GET_TXT("IDCS_ANTENNA_TWO_COUNT")
-		<< GET_TXT("IDCS_ANTENNA_THREE_COUNT")
-		<< GET_TXT("IDCS_ANTENNA_FOUR_COUNT")
+		<< GET_TXT("IDCS_ANTENNA_NO")
+		<< GET_TXT("IDCS_TAG_COUNT")
 		<< GET_TXT("IDCS_TAG_STATUS")
 		<< GET_TXT("IDCS_RSSI")
 		<< GET_TXT("IDCS_OTHER_INFO");
 
 	mTagTree->setHeaderLabels( sl );
-	mTagTree->setColumnCount( 10);
+	mTagTree->setColumnCount( 8);
 	mTagTree->setColumnWidth( 0, 60 );
 	mTagTree->setColumnWidth( 1, 80 );
 	mTagTree->setColumnWidth( 2, 130 );
-	mTagTree->setColumnWidth( 3, 50 );
-	mTagTree->setColumnWidth( 4, 50 );
-	mTagTree->setColumnWidth( 5, 50 );
-	mTagTree->setColumnWidth( 6, 50 );
-	mTagTree->setColumnWidth( 7, 100 );
-	mTagTree->setColumnWidth( 8, 70 );
-	mTagTree->setColumnWidth( 9, 100 );
+	mTagTree->setColumnWidth( 3, 60 );//天线号
+	mTagTree->setColumnWidth(4, 100);//天线个数
+	mTagTree->setColumnWidth( 5, 140 );
+	mTagTree->setColumnWidth( 6, 70 );
+	mTagTree->setColumnWidth( 7, 60 );
 	mTagTree->setAlternatingRowColors( true );
 
 	connect( mMakeTagUpLoadBtn, SIGNAL( clicked()), this, SLOT( slot_makeTagUpLoadBtnClicked( ) ) );
@@ -152,6 +150,7 @@ void ReadCardFor6CDlg::UpdateLanguage()
 {	
 	ui->checkBox_2->setText(GET_TXT("IDCS_RECORD_INFO"));
 	ui->label_6->setText(GET_TXT("IDCS_READ_ALL_COUNT"));
+	mYTagReadBtn->setText(GET_TXT("IDCS_START"));
 }
 
 void ReadCardFor6CDlg::slot_refresh_time()
@@ -160,10 +159,10 @@ void ReadCardFor6CDlg::slot_refresh_time()
 	unsigned int cardSizeCount = 0;
 
 	QTreeWidgetItem* tagItem = NULL;
-	std::map<QString,CardFor6CInfo*> tmpList;
+	std::vector<CardFor6CInfo*> tmpList;
 	CardFor6CInfo* pCardFor6CInfo = NULL;
 
-	std::map<QString,CardFor6CInfo*>::iterator ListIter;
+	std::vector<CardFor6CInfo*>::iterator ListIter;
 	std::map<QString,ReadCardFor6CThread*>::iterator ThreadIter = mThreadMap.begin();
 	for (; ThreadIter!=mThreadMap.end(); ++ThreadIter)
 	{
@@ -172,11 +171,8 @@ void ReadCardFor6CDlg::slot_refresh_time()
 		for(; ListIter!=tmpList.end(); ++ListIter)
 		{	
 
-			pCardFor6CInfo = ListIter->second;
-			nowCount += pCardFor6CInfo->m_nAntenna1Count
-				+pCardFor6CInfo->m_nAntenna2Count
-				+pCardFor6CInfo->m_nAntenna3Count
-				+pCardFor6CInfo->m_nAntenna4Count;
+			pCardFor6CInfo = *ListIter;
+			nowCount += pCardFor6CInfo->m_nAntennaNo;
 
 
 			if (!mFilterMap.empty())
@@ -187,17 +183,15 @@ void ReadCardFor6CDlg::slot_refresh_time()
 				}
 			}
 
-			tagItem = GetTagItem(ThreadIter->first,pCardFor6CInfo->m_szCardID);
+			tagItem = GetTagItem(ThreadIter->first,pCardFor6CInfo->m_szCardID, pCardFor6CInfo->m_nAntennaNo);
 			tagItem->setText(1,pCardFor6CInfo->m_szCardID);
 	
 			tagItem->setText(2,pCardFor6CInfo->m_szCurReadTime);
-			tagItem->setText(3,QString("%1").arg(pCardFor6CInfo->m_nAntenna1Count));
-			tagItem->setText(4,QString("%1").arg(pCardFor6CInfo->m_nAntenna2Count));
-			tagItem->setText(5,QString("%1").arg(pCardFor6CInfo->m_nAntenna3Count));
-			tagItem->setText(6,QString("%1").arg(pCardFor6CInfo->m_nAntenna4Count));	
-			tagItem->setText(7,pCardFor6CInfo->m_szTagState);	
-			tagItem->setText(8,pCardFor6CInfo->m_szRssi);	
-			tagItem->setText(9,pCardFor6CInfo->m_otherInfo);	
+			tagItem->setText(3,QString("%1").arg(pCardFor6CInfo->m_nAntennaNo));	
+			tagItem->setText(4, QString("%1").arg(pCardFor6CInfo->m_nAntennaCount));
+			tagItem->setText(5,pCardFor6CInfo->m_szTagState);	
+			tagItem->setText(6,pCardFor6CInfo->m_szRssi);	
+			tagItem->setText(7,pCardFor6CInfo->m_otherInfo);	
 			
 		}
 		cardSizeCount = tmpList.size();
@@ -205,8 +199,8 @@ void ReadCardFor6CDlg::slot_refresh_time()
 		ListIter = tmpList.begin();
 		for(; ListIter!=tmpList.end(); ++ListIter)
 		{
-			delete ListIter->second;
-			ListIter->second = NULL;
+			delete *ListIter;
+			*ListIter = NULL;
 		}
 		tmpList.clear();
 	}
@@ -326,19 +320,19 @@ bool ReadCardFor6CDlg::SendStopCommand(const QString& strInfo)
 	return SAAT_PowerOff(pReaderDllBase->m_hCom);
 }
 
-QTreeWidgetItem* ReadCardFor6CDlg::GetTagItem(const QString&strInfo,const QString& cardStr)
+QTreeWidgetItem* ReadCardFor6CDlg::GetTagItem(const QString&strInfo,const QString& cardStr,int antenna)
 {
-	QTreeWidgetItem * item = FindTagItem(strInfo,cardStr);
+	QTreeWidgetItem * item = FindTagItem(strInfo,cardStr, antenna);
 	if (item)
 	{
 		return item;
 	}
 
-	item = CreateTagItem(strInfo,cardStr);
+	item = CreateTagItem(strInfo,cardStr,antenna);
 	return item;
 }
 
-QTreeWidgetItem* ReadCardFor6CDlg::FindTagItem(const QString&strInfo,const QString& cardStr)
+QTreeWidgetItem* ReadCardFor6CDlg::FindTagItem(const QString&strInfo,const QString& cardStr, int antenna)
 {
 	QTreeWidgetItem* tagItem = NULL;
 	QTreeWidgetItem* tmpItem = NULL;
@@ -350,7 +344,9 @@ QTreeWidgetItem* ReadCardFor6CDlg::FindTagItem(const QString&strInfo,const QStri
 		tmpItem  = readerItem->child(j);
 		
 		tmpStr = tmpItem->data(1,Qt::UserRole+1).toString();
-		if (tmpItem->data(1,Qt::UserRole+1).toString().compare(cardStr) == 0)
+		int antennaItem = tmpItem->data(3, Qt::UserRole + 1).toInt();
+		if (tmpItem->data(1,Qt::UserRole+1).toString().compare(cardStr) == 0
+			&& antennaItem == antenna)
 		{
 			tagItem = tmpItem; 
 			break;
@@ -383,7 +379,7 @@ QTreeWidgetItem* ReadCardFor6CDlg::GetReaderItem(const QString&strInfo)
 	return tagItem;
 }
 
-QTreeWidgetItem* ReadCardFor6CDlg::CreateTagItem(const QString&strInfo,const QString& cardStr)
+QTreeWidgetItem* ReadCardFor6CDlg::CreateTagItem(const QString&strInfo,const QString& cardStr, int antenna)
 {
 	QTreeWidgetItem* readerItem = GetReaderItem(strInfo);
 	QTreeWidgetItem* tagItem = NULL;
@@ -391,6 +387,8 @@ QTreeWidgetItem* ReadCardFor6CDlg::CreateTagItem(const QString&strInfo,const QSt
 	tagItem->setText(0,QString::fromUtf8("%1").arg(readerItem->childCount()));
 	tagItem->setText(1,cardStr);
 	tagItem->setData(1,Qt::UserRole+1,cardStr);
+	tagItem->setText(3, QString::number(antenna));
+	tagItem->setData(3, Qt::UserRole + 1, antenna);
 
 	return tagItem;
 }
@@ -459,7 +457,7 @@ bool ReadCardFor6CDlg::SaveDataToFile(const QString& fileStr)
 	QTextStream out(&file);	
 	QString OutPutStr;	
 
-	std::map<QString,CardFor6CInfo*> tmpList;
+	std::vector<CardFor6CInfo*> tmpList;
 	CardFor6CInfo* pCardFor6CInfo = NULL;
 
 	std::map<QString,ReadCardFor6CThread*>::iterator ThreadIter = mThreadMap.begin();
@@ -469,11 +467,11 @@ bool ReadCardFor6CDlg::SaveDataToFile(const QString& fileStr)
 		OutPutStr = QString("%1").arg(ThreadIter->first);
 		OutPutStr += "\t\n"; 
 		out<<OutPutStr;
-		std::map<QString,CardFor6CInfo*>::iterator ListIter = tmpList.begin();
+		std::vector<CardFor6CInfo*>::iterator ListIter = tmpList.begin();
 
 		for(int index=1; ListIter!=tmpList.end(); ++ListIter,++index)
 		{			
-			pCardFor6CInfo = ListIter->second;
+			pCardFor6CInfo = *ListIter;
 			OutPutStr.clear();
 			OutPutStr += GET_TXT("IDCS_NUMBER");
 			OutPutStr += ":";
@@ -487,21 +485,13 @@ bool ReadCardFor6CDlg::SaveDataToFile(const QString& fileStr)
 			OutPutStr += ":";
 			OutPutStr += pCardFor6CInfo->m_szCurReadTime;
 			OutPutStr += "\t";
-			OutPutStr += GET_TXT("IDCS_ANTENNA_ONE_COUNT");
+			OutPutStr += GET_TXT("IDCS_ANTENNA_NO");
 			OutPutStr += ":";
-			OutPutStr += QString("%1").arg(pCardFor6CInfo->m_nAntenna1Count);
+			OutPutStr += QString("%1").arg(pCardFor6CInfo->m_nAntennaNo);
 			OutPutStr += "\t";
-			OutPutStr += GET_TXT("IDCS_ANTENNA_TWO_COUNT");
+			OutPutStr += GET_TXT("IDCS_TAG_COUNT");
 			OutPutStr += ":";
-			OutPutStr += QString("%1").arg(pCardFor6CInfo->m_nAntenna2Count);
-			OutPutStr += "\t";
-			OutPutStr += GET_TXT("IDCS_ANTENNA_THREE_COUNT");
-			OutPutStr += ":";
-			OutPutStr += QString("%1").arg(pCardFor6CInfo->m_nAntenna3Count);
-			OutPutStr += "\t";
-			OutPutStr += GET_TXT("IDCS_ANTENNA_FOUR_COUNT");
-			OutPutStr += ":";
-			OutPutStr += QString("%1").arg(pCardFor6CInfo->m_nAntenna4Count);
+			OutPutStr += QString("%1").arg(pCardFor6CInfo->m_nAntennaCount);		
 			OutPutStr += "\t\n";
 
 			out<<OutPutStr;
@@ -513,8 +503,8 @@ bool ReadCardFor6CDlg::SaveDataToFile(const QString& fileStr)
 		ListIter = tmpList.begin();
 		for(; ListIter!=tmpList.end(); ++ListIter)
 		{
-			delete ListIter->second;
-			ListIter->second = NULL;
+			delete *ListIter;
+			*ListIter = NULL;
 		}
 		tmpList.clear();
 	}

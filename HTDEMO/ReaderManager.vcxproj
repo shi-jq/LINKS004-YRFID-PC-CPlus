@@ -11,15 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D21C7F8D-B62A-3E3B-AE93-BF2B728D61F3}</ProjectGuid>
+    <ProjectGuid>{1B9A90CD-8862-3C94-A7CA-77100FEFC804}</ProjectGuid>
     <RootNamespace>ReaderManager</RootNamespace>
     <Keyword>QtVS_v303</Keyword>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <OutputDirectory>..\bin\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>NotSet</CharacterSet>
@@ -28,7 +28,7 @@
     <PrimaryOutput>ReaderManager</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <OutputDirectory>..\bin\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>NotSet</CharacterSet>
@@ -125,6 +125,13 @@
       <QtMocDir>$(Configuration)\moc</QtMocDir>
       <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
     </QtMoc>
+    <QtRcc>
+      <InitFuncName>HTDEMO</InitFuncName>
+      <Compression>default</Compression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <QtRccDir>$(Configuration)</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
+    </QtRcc>
     <QtUic>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
       <QtUicDir>$(ProjectDir)</QtUicDir>
@@ -170,11 +177,6 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;WIN32;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-    <QtUic>
-      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
-      <QtUicDir>$(ProjectDir)</QtUicDir>
-      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
-    </QtUic>
     <QtMoc>
       <CompilerFlavor>msvc</CompilerFlavor>
       <Include>./$(Configuration)/moc/moc_predefs.h</Include>
@@ -183,6 +185,18 @@
       <QtMocDir>$(Configuration)\moc</QtMocDir>
       <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
     </QtMoc>
+    <QtRcc>
+      <InitFuncName>HTDEMO</InitFuncName>
+      <Compression>default</Compression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <QtRccDir>$(Configuration)</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
+    </QtRcc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>$(ProjectDir)</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BuzzerSpeakerCtrl.cpp" />
@@ -203,6 +217,8 @@
     <ClCompile Include="findtagform.cpp" />
     <ClCompile Include="firmwareupdatefor6cdlg.cpp" />
     <ClCompile Include="flashconfigfor6cdlg.cpp" />
+    <ClCompile Include="forwardconfigdlg.cpp" />
+    <ClCompile Include="forwardsetdlg.cpp" />
     <ClCompile Include="gprsconfigdlg.cpp" />
     <ClCompile Include="guidemaindlg.cpp" />
     <ClCompile Include="helpfor6cdlg.cpp" />
@@ -232,6 +248,7 @@
     <ClCompile Include="softconfigdlg.cpp" />
     <ClCompile Include="tabapplyinfoform.cpp" />
     <ClCompile Include="tabconnetinfoform.cpp" />
+    <ClCompile Include="tabforwardconfigform.cpp" />
     <ClCompile Include="tabparamconfigform.cpp" />
     <ClCompile Include="tabsysinfoform.cpp" />
     <ClCompile Include="tabuploadform.cpp" />
@@ -261,6 +278,7 @@
     <ClInclude Include="Singleton.h" />
     <QtMoc Include="UdpWorkerThread.h">
     </QtMoc>
+    <ClInclude Include="\" />
     <QtMoc Include="antennaprmform.h">
     </QtMoc>
     <ClInclude Include="appconfig.h" />
@@ -279,6 +297,10 @@
     <QtMoc Include="firmwareupdatefor6cdlg.h">
     </QtMoc>
     <QtMoc Include="flashconfigfor6cdlg.h">
+    </QtMoc>
+    <QtMoc Include="forwardconfigdlg.h">
+    </QtMoc>
+    <QtMoc Include="forwardsetdlg.h">
     </QtMoc>
     <QtMoc Include="gprsconfigdlg.h">
     </QtMoc>
@@ -331,6 +353,8 @@
     <QtMoc Include="tabapplyinfoform.h">
     </QtMoc>
     <QtMoc Include="tabconnetinfoform.h">
+    </QtMoc>
+    <QtMoc Include="tabforwardconfigform.h">
     </QtMoc>
     <QtMoc Include="tabparamconfigform.h">
     </QtMoc>
@@ -393,6 +417,10 @@
     </QtUic>
     <QtUic Include="flashconfigfor6cdlg.ui">
     </QtUic>
+    <QtUic Include="forwardconfigdlg.ui">
+    </QtUic>
+    <QtUic Include="forwardsetdlg.ui">
+    </QtUic>
     <QtUic Include="gprsconfigdlg.ui">
     </QtUic>
     <QtUic Include="guidemaindlg.ui">
@@ -441,6 +469,8 @@
     </QtUic>
     <QtUic Include="tabconnetinfoform.ui">
     </QtUic>
+    <QtUic Include="tabforwardconfigform.ui">
+    </QtUic>
     <QtUic Include="tabparamconfigform.ui">
     </QtUic>
     <QtUic Include="tabsysinfoform.ui">
@@ -461,6 +491,36 @@
     </QtUic>
     <QtUic Include="writeeidform.ui">
     </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="skin\Error.png" />
+    <QtRcc Include="HTDEMO.qrc">
+    </QtRcc>
+    <None Include="skin\Information.png" />
+    <None Include="skin\Question.png" />
+    <None Include="skin\Warning.png" />
+    <None Include="skin\btn_down.png" />
+    <None Include="skin\btn_left.png" />
+    <None Include="skin\btn_right.png" />
+    <None Include="skin\btn_up.png" />
+    <None Include="skin\casc2.ico" />
+    <None Include="skin\cebian_down.png" />
+    <None Include="skin\cebian_left.png" />
+    <None Include="skin\cebian_right.png" />
+    <None Include="skin\cebian_up.png" />
+    <None Include="skin\ckb_checked.png" />
+    <None Include="skin\ckb_unchecked.png" />
+    <None Include="skin\combox_down.png" />
+    <None Include="skin\gb-titile.png" />
+    <None Include="skin\logo.png" />
+    <None Include="skin\radio_btn.png" />
+    <None Include="skin\radio_btn2.png" />
+    <None Include="skin\refush.png" />
+    <None Include="skin\titile.png" />
+    <None Include="skin\zhiding.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="HTDEMO.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

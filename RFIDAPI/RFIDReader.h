@@ -102,8 +102,12 @@ public:
 
 
 	bool SAATYMakeTagUpLoadIDCode(unsigned char nOpType, unsigned char nIDType);
-	bool SAATYRevIDMsgDecRssiExpand(unsigned char* nTagType, unsigned int* pId, 
-		 int* nParam1, int* nRssi, int* nAntenna);
+	int SAATYRevIDMsgDecRssiExpand(unsigned char* nTagType,
+		unsigned int* pId, 
+		int* nRssi, 
+		int* nAntenna, 
+		int* nParam1,
+		int* nParam2);
 
 
 	/***********************************6C²Ù×÷************************************************/

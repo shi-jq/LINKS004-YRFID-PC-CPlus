@@ -1,0 +1,811 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BuzzerSpeakerCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LanguageSrc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadCardFor6CThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDebugNew.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UdpWorkerThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="antennaprmform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="appconfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="busaddrconfigdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="carrierconfigform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="comconfigdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="connetdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filtratetagfor6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="findtagform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="firmwareupdatefor6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flashconfigfor6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="forwardconfigdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="forwardsetdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gprsconfigdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="guidemaindlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpfor6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ioconfigfor6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="languagesetdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lockopform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainapp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="maininit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="netconfigfor6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="oplistdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="paramadd6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="paramconfigfor6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pointconfigform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="progressbardlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pwdsetform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qvaluedlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readcardfor6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readconfigfor6cdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readerdllbase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readerinfo6cform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readermanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readertimesetdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readwritedataform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rebootdeviceform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="softconfigdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tabapplyinfoform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tabconnetinfoform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tabforwardconfigform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tabparamconfigform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tabsysinfoform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tabuploadform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tagfilterform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tagopdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tcpclient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="udpclient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="uploadpramform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="versioncommondlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="weigenconfigform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="widgetconfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workdpacedlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="writeeidform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AppPath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BuzzerSpeakerCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LanguageSrc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="MessageBox.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="..\bin\RFIDAPIEXPORT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="ReadCardFor6CThread.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="SetDebugNew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="UdpWorkerThread.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="\">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="antennaprmform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="appconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="busaddrconfigdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="carrierconfigform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="comconfigdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="connetdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="filtratetagfor6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="findtagform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="firmwareupdatefor6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="flashconfigfor6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="forwardconfigdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="forwardsetdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="gprsconfigdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="guidemaindlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="helpfor6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ioconfigfor6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="languagesetdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="lockopform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="mainapp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="maininit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="mainwindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="netconfigfor6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="oplistdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="paramadd6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="paramconfigfor6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="pointconfigform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="progressbardlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="pwdsetform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="qvaluedlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="readcardfor6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="readconfigfor6cdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="readerdllbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="readerinfo6cform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="readermanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="readertimesetdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="readwritedataform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="rebootdeviceform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="softconfigdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tabapplyinfoform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tabconnetinfoform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tabforwardconfigform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tabparamconfigform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tabsysinfoform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tabuploadform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tagfilterform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tagopdialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="tcpclient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="udpclient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="uploadpramform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="versioncommondlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="weigenconfigform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="widgetconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="workdpacedlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="writeeidform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <CustomBuild Include="Debug\moc\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Release\moc\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="antennaprmform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="busaddrconfigdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="carrierconfigform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="comconfigdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="connetdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="filtratetagfor6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="findtagform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="firmwareupdatefor6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="flashconfigfor6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="forwardconfigdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="forwardsetdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="gprsconfigdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="guidemaindlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="helpfor6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ioconfigfor6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="languagesetdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="lockopform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="mainwindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="netconfigfor6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="oplistdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="paramadd6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="paramconfigfor6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="pointconfigform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="progressbardlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="pwdsetform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="qvaluedlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="readcardfor6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="readconfigfor6cdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="readerinfo6cform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="readertimesetdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="readwritedataform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="rebootdeviceform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="softconfigdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="tabapplyinfoform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="tabconnetinfoform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="tabforwardconfigform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="tabparamconfigform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="tabsysinfoform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="tabuploadform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="tagfilterform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="tagopdialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="uploadpramform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="versioncommondlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="weigenconfigform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="workdpacedlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="writeeidform.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="skin\Error.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <QtRcc Include="HTDEMO.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <None Include="skin\Information.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\Question.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\Warning.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\btn_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\btn_left.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\btn_right.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\btn_up.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\casc2.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\cebian_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\cebian_left.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\cebian_right.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\cebian_up.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\ckb_checked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\ckb_unchecked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\combox_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\gb-titile.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\logo.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\radio_btn.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\radio_btn2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\refush.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\titile.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skin\zhiding.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="HTDEMO.rc" />
+  </ItemGroup>
+</Project>

@@ -67,11 +67,11 @@ private:
 private:
 	bool SendReadCommand(const QString& strInfo,int nReadType);
 	bool SendStopCommand(const QString& strInfo);
-	QTreeWidgetItem* GetTagItem(const QString&strInfo, const QString& cardStr);
-	QTreeWidgetItem* FindTagItem(const QString&strInfo,const QString& cardStr);
+	QTreeWidgetItem* GetTagItem(const QString&strInfo, const QString& cardStr, int antenna);
+	QTreeWidgetItem* FindTagItem(const QString&strInfo,const QString& cardStr, int antenna);
 	QTreeWidgetItem* GetReaderItem(const QString&strInfo);
 	
-	QTreeWidgetItem* CreateTagItem(const QString&strInfo,const QString& cardStr);
+	QTreeWidgetItem* CreateTagItem(const QString&strInfo,const QString& cardStr,int antenna);
 	bool SaveDataToFile(const QString& fileStr);
 	
 	void UpdateReaderThreadMap();

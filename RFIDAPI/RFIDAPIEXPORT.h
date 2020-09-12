@@ -1904,10 +1904,11 @@ extern "C" {
 	int RFID_API  STDCALL SAAT_YRevIDMsgDecRssiExpand(
 		void *pHandle,
 		unsigned char* nTagType,
-		unsigned int* pId,
-		int* nParam1,
+		unsigned int* pId,		
 		int* nRssi,
-		int* nAntenna);
+		int* nAntenna,
+		int* nParam1, 
+		int* nParam2);
 
 
 	bool RFID_API  __stdcall SAAT_Updata (void* pHandle,unsigned char nType ,int nFileLen ,unsigned char* pCRC32 ,unsigned char nFileNameLen ,unsigned char* pFileName);

@@ -43,9 +43,9 @@ win32: {
         LIBS += -lws2_32 -lOle32
 }
 
-#RESOURCES += HTDEMO.qrc
+RESOURCES += HTDEMO.qrc
 
-#RC_FILE = HTDEMO.rc
+RC_FILE = HTDEMO.rc
 
 SOURCES += ./main.cpp \
     ./mainwindow.cpp \

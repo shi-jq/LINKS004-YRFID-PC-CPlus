@@ -169,8 +169,8 @@ void workDpaceDlg::CreateView()
 //	mTabApplyInfoForm = new TabApplyInfoForm(mTabWidget);
 //	mTabWidget->addTab(mTabApplyInfoForm,QIcon(),GET_TXT("IDCS_IO_CONTRL"));
 
-    mTabForwardConfigForm = new TabForwardConfigForm(mTabWidget);
-    mTabWidget->addTab(mTabForwardConfigForm,QIcon(),GET_TXT("IDCS_FORWARD_CONFIG"));
+    //mTabForwardConfigForm = new TabForwardConfigForm(mTabWidget);
+    //mTabWidget->addTab(mTabForwardConfigForm,QIcon(),GET_TXT("IDCS_FORWARD_CONFIG"));
 	mLeftBtn->show();
 	mDownBtn->show();	
 
