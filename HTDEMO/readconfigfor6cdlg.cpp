@@ -19,8 +19,7 @@ ReadConfigFor6CDlg::ReadConfigFor6CDlg(QWidget *parent) :
     ui->setupUi(this);
 	CreateView();
 	updateLanguage();
-	mIsFirst= true;
-    ui->widget_10->setEnabled(false);
+	mIsFirst = true;
 }
 
 ReadConfigFor6CDlg::~ReadConfigFor6CDlg()
@@ -35,6 +34,7 @@ void ReadConfigFor6CDlg::CreateView()
 	gridLayout->setSpacing(0);
 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->addWidget(mAntennaPrmForm);	
+	ui->widget_9->hide();
 
 	mCarrierConfigForm = new CarrierConfigForm(ui->widget_12);
 	gridLayout = new QGridLayout(ui->widget_12);

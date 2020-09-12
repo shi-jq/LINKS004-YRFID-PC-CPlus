@@ -15,7 +15,6 @@ CarrierConfigForm::CarrierConfigForm(QWidget *parent) :
 	mCarrierCb = ui->comboBox;
 	mQueryBtn = ui->pushButton;
 	mSetBtn = ui->pushButton_2;
-    ui->pushButton->setHidden(true);
 	int nLimit = 24;
 	QString tmpStr;
 	for( int i = 0 ; i < nLimit; i++)

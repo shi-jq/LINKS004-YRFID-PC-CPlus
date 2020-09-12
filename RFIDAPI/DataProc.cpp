@@ -170,8 +170,7 @@ bool CDataProc::Open(CRFIDSystemCfg& cfg)
 		return false;
 	}
 
-	memcpy((void*)&m_RFIDSystemCfg,(void*)&cfg,sizeof(m_RFIDSystemCfg));
-
+	m_RFIDSystemCfg = cfg;
 
 	m_pConnect->InitConnect(this);//初始化连接指针
 

@@ -19,6 +19,13 @@ PointConfigForm::PointConfigForm(QWidget *parent) :
     mFreqPwrCb = ui->comboBox_2;
     mPowerCb = ui->comboBox_4;
 
+	mPortEnableCb->hide();
+	m2401Cb->hide();
+	mPowerCb->hide();
+	ui->label->hide();
+	ui->label_4->hide();
+	ui->label_3->hide();
+	
     QStringList sl;
     sl<<GET_TXT("IDCS_EDIT_ALL_PRM_CONFIG");
     sl<<GET_TXT("IDCS_EDIT_SEND_POWER");
@@ -39,9 +46,9 @@ PointConfigForm::PointConfigForm(QWidget *parent) :
     m2401Cb->addItems(sl);
 
     sl.clear();
-    for (int i=0; i<=15; i++)
+    for (int i=0; i<=30; i+=2)
     {
-        sl<<QString("%1db").arg(i);
+        sl<<QString("-%1db").arg(i);
     }
     mFreqPwrCb->addItems(sl);
 

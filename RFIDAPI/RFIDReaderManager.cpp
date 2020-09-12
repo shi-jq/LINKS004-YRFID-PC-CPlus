@@ -151,7 +151,6 @@ bool CRFIDReaderManager::CheckReaderExit(CRFIDReader* pReader)
 }
 bool CRFIDReaderManager::CloseReader(CRFIDReader* pReader)
 {
-	return true;
 	/*string strReaderName = pReader->GetProuctSN();
 	map <string, CRFIDReader*> :: iterator m1_AcIter;
 	m1_AcIter = map_ReaderList.find(strReaderName);
