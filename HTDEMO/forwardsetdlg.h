@@ -23,7 +23,6 @@ private:
 
     QPushButton *mReadForwardBtn;
     QPushButton *mWriteForwardBtn;
-    QComboBox *mForwardChanCbx;
     QLineEdit *mIpEdit;
     QLineEdit *mPortEdit;
 
@@ -33,6 +32,11 @@ private slots:
     void slot_WriteForwardBtnClicked();
 private:
     bool CheckIPEdit(const QString& str);//检查ip地址是否合法
+	bool QueryAll();
+	bool QueryIpAddr();
+	bool QueryPort();
+	bool SetIpAddr();
+	bool SetDSCPort();
 };
 
 #endif // FORWARDSETDLG_H

@@ -3,6 +3,7 @@
 #include "filtratetagfor6cdlg.h"
 #include "flashconfigfor6cdlg.h"
 #include "uploadpramform.h"
+#include "forwardsetdlg.h"
 TabUploadForm::TabUploadForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TabUploadForm)
@@ -26,6 +27,15 @@ TabUploadForm::TabUploadForm(QWidget *parent) :
 	gridLayout->setSpacing(0);
 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->addWidget(mUploadPramForm);	
+
+
+	mForwardSetDlg = new ForwardSetDlg(ui->widget_8);
+	gridLayout = new QGridLayout(ui->widget_8);
+	gridLayout->setSpacing(0);
+	gridLayout->setContentsMargins(0, 0, 0, 0);
+	gridLayout->addWidget(mForwardSetDlg);
+
+	ui->widget_5->hide();
 }
 
 TabUploadForm::~TabUploadForm()

@@ -762,18 +762,6 @@
     <None Include="skin\casc2.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="skin\cebian_down.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="skin\cebian_left.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="skin\cebian_right.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="skin\cebian_up.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="skin\ckb_checked.png">
       <Filter>Resource Files</Filter>
     </None>
@@ -784,9 +772,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="skin\gb-titile.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="skin\logo.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="skin\radio_btn.png">

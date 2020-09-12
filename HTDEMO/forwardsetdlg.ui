@@ -44,33 +44,23 @@
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0" colspan="2">
-        <widget class="QLabel" name="label">
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="lineEdit_2"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>转发通道</string>
+          <string>上传端口</string>
          </property>
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QComboBox" name="comboBox"/>
-       </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>转发地址</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
         <widget class="QLineEdit" name="lineEdit"/>
        </item>
-       <item row="2" column="2">
-        <widget class="QLineEdit" name="lineEdit_2"/>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QLabel" name="label_3">
+       <item row="0" column="0" colspan="2">
+        <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>端口</string>
+          <string>上传地址</string>
          </property>
         </widget>
        </item>

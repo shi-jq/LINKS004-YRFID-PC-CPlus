@@ -212,7 +212,7 @@ void ConnetDlg::CreateView()
 	mConnectItemBtn = ui->pushButton_6;
 	//ui->widget->hide();
 	ui->label_9->hide();
-	ui->label_12->setWordWrap(true);
+	//ui->label_12->setWordWrap(true);
 
 	mDeviceList = ui->treeWidget;
 

@@ -47,6 +47,9 @@ UploadPramForm::UploadPramForm(QWidget *parent) :
 	connect( mQueryBtn, SIGNAL( clicked()), this, SLOT( slot_QueryBtnClicked( ) ) );
 	connect( mSetBtn, SIGNAL( clicked()), this, SLOT( slot_SetBtnClicked( ) ) );
 
+
+	ui->label_2->hide();
+	m_CommandTypeValueCb->hide();
 }	
 
 UploadPramForm::~UploadPramForm()
@@ -214,10 +217,10 @@ bool UploadPramForm::QueryAll()
 		bRet = DeviceTypeQuery();
 	}
 
-	if (bRet)
+	/*if (bRet)
 	{
 		bRet = CommandTypeQuery();
-	}	
+	}*/	
 
 	if (bRet)
 	{
@@ -382,10 +385,10 @@ bool UploadPramForm::SetAll()
 		bRet = DeviceTypeSet();
 	}
 
-	if (bRet)
+	/*if (bRet)
 	{
 		bRet = CommandTypeSet();
-	}
+	}*/
 
 	if (bRet)
 	{

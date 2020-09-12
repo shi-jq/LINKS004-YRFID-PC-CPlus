@@ -9,7 +9,6 @@ class TabConnetInfoForm;
 class NetConfigFor6CDlg;
 class ComConfigDlg;
 class BusAddrConfigDlg;
-class GprsConfigDlg;
 class WeiGenConfigForm;
 class TabConnetInfoForm : public QWidget
 {
@@ -24,7 +23,6 @@ private:
 	NetConfigFor6CDlg* mNetConfigFor6CDlg;
 	ComConfigDlg* mComConfigDlg;
 	BusAddrConfigDlg* mBusAddrConfigDlg;
-	GprsConfigDlg* mGprsConfigDlg;
 	WeiGenConfigForm* mWeiGenConfigForm;
 };
 

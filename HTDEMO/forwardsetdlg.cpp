@@ -13,14 +13,9 @@ ForwardSetDlg::ForwardSetDlg(QWidget *parent) :
     this->setWindowTitle(GET_TXT("IDCS_FORWARD_READ_WRITE"));
     mReadForwardBtn = ui->pushButton;
     mWriteForwardBtn =ui->pushButton_2;
-    mForwardChanCbx = ui->comboBox;
     mIpEdit = ui->lineEdit;
     mPortEdit = ui->lineEdit_2;
 
-    QStringList sl;
-    sl<<QString("WIFI")
-     <<QString("4G");
-    mForwardChanCbx->addItems(sl);
     connect(mReadForwardBtn,SIGNAL(clicked()), this ,SLOT(slot_ReadForwardBtnClicked()));
     connect(mWriteForwardBtn,SIGNAL(clicked()), this ,SLOT(slot_WriteForwardBtnClicked()));
 }
@@ -32,78 +27,43 @@ ForwardSetDlg::~ForwardSetDlg()
 
 void ForwardSetDlg::slot_ReadForwardBtnClicked()
 {
-    ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();
-    if (!pReaderDllBase)
-    {
-        MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-        return ;
-    }
-    if (!pReaderDllBase->CheckState(STATE_CONNET))
-    {
-        MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-        return ;
-    }
-    bool bRet = false;
-    unsigned char param[256];
-    unsigned char pLen[256];
-    bRet = SAAT_ForwardQuery(pReaderDllBase->m_hCom,param,pLen);
-    if(bRet)
-    {
-        //需要补充显示在界面上
-        MainShowMsg(GET_TXT("IDCS_READ_DATA_SUCCESS"));
-    }else
-    {
-        MainShowMsg(GET_TXT("IDCS_READ_DATA_FAILED"),true);
-    }
+	QueryAll();
 
 }
 
 void ForwardSetDlg::slot_WriteForwardBtnClicked()
 {
-    ReaderDllBase* pReaderDllBase = pMainApp->GetReader();
-    if (!pReaderDllBase)
-    {
-        MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-        return;
-    }
-    if (!pReaderDllBase->CheckState(STATE_CONNET))
-    {
-        MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-        return ;
-    }
-    if (mIpEdit->text().isEmpty() || mPortEdit->text().isEmpty())
-    {
-        MainShowMsg(GET_TXT("IDCS_INPUT_EMPTY"));
-        return ;
-    }
-    if (!CheckIPEdit(mIpEdit->text()))
-    {
-        MainShowMsg(GET_TXT("IDCS_IPADDR_INVAID"));
-        return ;
-    }
-    if (mPortEdit->text().isEmpty() || mPortEdit->text().toUInt() <=0)
-    {
-        MainShowMsg(GET_TXT("IDCS_IP_PORT_ERRO"));
-        return ;
-    }
-    unsigned char nType = 0x00;
-    if(mForwardChanCbx->currentIndex() == 0)
-    {
-        nType = 0x01;
-    }else
-    {
-        nType = 0x02;
-    }
-    unsigned char communication =0x00;//默认为TCP
-    int nLen = 16;
-	bool retB = SAAT_ForwardSet(pReaderDllBase->m_hCom,nType,communication,mIpEdit->text().toUtf8().data(),mPortEdit->text().toInt(),nLen);
-    if(retB)
-    {
-        MainShowMsg(GET_TXT("IDCS_FORWARD_SET_SUCCESS"));
-    }else
-    {
-        MainShowMsg(GET_TXT("IDCS_FORWARD_SET_FAILED"),true);
-    }
+	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();
+	if (!pReaderDllBase)
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return;
+	}
+	if (!pReaderDllBase->CheckState(STATE_CONNET))
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return;
+	}
+
+	bool bRet = true;
+	if (bRet)
+	{
+		bRet = SetIpAddr();
+	}
+
+	if (bRet)
+	{
+		bRet = SetDSCPort();
+	}
+
+	if (bRet)
+	{
+		MainShowMsg(GET_TXT("IDCS_SET_SUCCESS"));
+	}
+	else
+	{
+		MainShowMsg(GET_TXT("IDCS_SET_FAILED"), true);
+	}
 }
 
 bool ForwardSetDlg::CheckIPEdit(const QString &str)
@@ -122,4 +82,223 @@ bool ForwardSetDlg::CheckIPEdit(const QString &str)
         return false;
     }
     return true;
+}
+
+
+bool ForwardSetDlg::QueryAll()
+{
+	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();
+	if (!pReaderDllBase)
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+	if (!pReaderDllBase->CheckState(STATE_CONNET))
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+
+	bool bRet = true;
+	if (bRet)
+	{
+		bRet = QueryIpAddr();
+	}
+
+	if (bRet)
+	{
+		bRet = QueryPort();
+	}
+
+	if (bRet)
+	{
+		MainShowMsg(GET_TXT("IDCS_QUERY_SUCCESS"));
+	}
+	else
+	{
+
+		MainShowMsg(GET_TXT("IDCS_QUERY_FAILED"), true);
+	}
+
+	return bRet;
+}
+
+bool ForwardSetDlg::QueryIpAddr()
+{
+	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();
+	if (!pReaderDllBase)
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+	if (!pReaderDllBase->CheckState(STATE_CONNET))
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+
+	unsigned char btAddr = 126;	//设备名称起始地址
+	unsigned char nDataLen = 20;//长度
+	unsigned char btExportData[20];
+	ZeroMemory(btExportData, 20);
+	unsigned char nBufferSize = 20;
+
+	btAddr = 250;		//IP地址起始地址
+	nDataLen = 4;		//IP地址长度
+	ZeroMemory(btExportData, 20);
+	nBufferSize = 20;
+	bool bRet = SAAT_ParmOp(pReaderDllBase->m_hCom,
+		0x02,
+		btAddr,
+		nDataLen,
+		btExportData,
+		&nBufferSize);
+
+	if (bRet)
+	{
+		in_addr ia;
+		memcpy(&ia, &btExportData, 4);
+		mIpEdit->setText(QString::fromUtf8(inet_ntoa(ia)));
+	}
+
+	return bRet;
+}
+
+bool ForwardSetDlg::QueryPort()
+{
+	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();
+	if (!pReaderDllBase)
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+	if (!pReaderDllBase->CheckState(STATE_CONNET))
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+
+	unsigned char btAddr = 126;	//设备名称起始地址
+	unsigned char nDataLen = 20;//长度
+	unsigned char btExportData[20];
+	ZeroMemory(btExportData, 20);
+	unsigned char nBufferSize = 20;
+
+	btAddr = 254;		//端口号起始地址
+	nDataLen = 2;		//端口号长度
+	ZeroMemory(btExportData, 20);
+	nBufferSize = 20;
+	bool bRet = SAAT_ParmOp(pReaderDllBase->m_hCom,
+		0x02,
+		btAddr,
+		nDataLen,
+		btExportData,
+		&nBufferSize);
+
+	if (bRet)
+	{
+		int gprsPort = MAKEWORD(btExportData[1], btExportData[0]);
+		mPortEdit->setText(QString("%1").arg(gprsPort));
+	}
+
+	return bRet;
+}
+
+bool ForwardSetDlg::SetIpAddr()
+{
+	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();
+	if (!pReaderDllBase)
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+	if (!pReaderDllBase->CheckState(STATE_CONNET))
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+
+	if (!CheckIPEdit(mIpEdit->text()))
+	{
+		MainShowMsg(GET_TXT("IDCS_IPADDR_INVAID"));
+		return false;
+	}
+
+	unsigned char btParams[16];
+	ZeroMemory(btParams, 16);
+
+	QStringList tmpList = mIpEdit->text().split(".");
+	if (tmpList.size() < 4)
+	{
+		MainShowMsg(GET_TXT("IDCS_IP_ERRO"));
+		return false;
+	}
+
+	btParams[0] = tmpList.at(0).toUInt();
+	btParams[1] = tmpList.at(1).toUInt();
+	btParams[2] = tmpList.at(2).toUInt();
+	btParams[3] = tmpList.at(3).toUInt();
+
+	unsigned char btAddr = 126;
+	unsigned char nDataLen = 11;
+	unsigned char nBufferSize = 16;
+
+	btAddr = 250;	//IP地址参数表中起始地址
+	nDataLen = 4;	//IP地址长度
+	nBufferSize = 4;
+
+	bool bRet = SAAT_ParmOp(pReaderDllBase->m_hCom,
+		0x01,
+		btAddr,
+		nDataLen,
+		btParams,
+		&nBufferSize);
+
+	return bRet;
+}
+
+bool ForwardSetDlg::SetDSCPort()
+{
+	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();
+
+	if (!pReaderDllBase)
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+	if (!pReaderDllBase->CheckState(STATE_CONNET))
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+
+	if (mPortEdit->text().isEmpty())
+	{
+		MainShowMsg(GET_TXT("IDCS_INPUT_EMPTY"));
+		return false;
+	}
+
+	unsigned char btParams[16] = { 0 };
+
+	unsigned char btAddr = 126;
+	unsigned char nDataLen = 11;
+	unsigned char nBufferSize = 16;
+
+	btAddr = 254;
+	nDataLen = 2;
+	nBufferSize = 2;
+
+	ZeroMemory(btParams, 16);
+	WORD dLoSocketPort = LOWORD(mPortEdit->text().toUInt());
+	btParams[0] = HIBYTE(dLoSocketPort);
+	btParams[1] = LOBYTE(dLoSocketPort);
+
+	bool bRet = SAAT_ParmOp(pReaderDllBase->m_hCom,
+		0x01,
+		btAddr,
+		nDataLen,
+		btParams,
+		&nBufferSize);
+
+	return bRet;
 }

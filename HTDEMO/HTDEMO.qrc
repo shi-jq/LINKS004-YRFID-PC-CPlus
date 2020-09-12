@@ -3,14 +3,7 @@
         <file>skin/combox_down.png</file>
     </qresource>
     <qresource prefix="/ico">
-        <file>skin/logo.png</file>
         <file>skin/casc2.ico</file>
-    </qresource>
-    <qresource prefix="/cebian">
-        <file>skin/cebian_down.png</file>
-        <file>skin/cebian_left.png</file>
-        <file>skin/cebian_right.png</file>
-        <file>skin/cebian_up.png</file>
     </qresource>
     <qresource prefix="/btn">
         <file>skin/radio_btn.png</file>

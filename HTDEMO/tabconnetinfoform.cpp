@@ -3,7 +3,6 @@
 #include "netconfigfor6cdlg.h"
 #include "comconfigdlg.h"
 #include "busaddrconfigdlg.h"
-#include "gprsconfigdlg.h"
 #include "weigenconfigform.h"
 
 TabConnetInfoForm::TabConnetInfoForm(QWidget *parent) :
@@ -29,12 +28,6 @@ TabConnetInfoForm::TabConnetInfoForm(QWidget *parent) :
 	gridLayout->setSpacing(0);
 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->addWidget(mBusAddrConfigDlg);	
-
-	mGprsConfigDlg = new GprsConfigDlg(ui->widget_8);
-	gridLayout = new QGridLayout(ui->widget_8);
-	gridLayout->setSpacing(0);
-	gridLayout->setContentsMargins(0,0,0,0);
-	gridLayout->addWidget(mGprsConfigDlg);	
 
 
 	mWeiGenConfigForm = new WeiGenConfigForm(ui->widget_10);
