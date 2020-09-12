@@ -92,3 +92,8 @@ bin/RFIDAPI.exp
 HTDEMO/ReaderManager.VC.db
 HTDEMO/ReaderManager.VC.VC.opendb
 *.vcxproj
+HTDEMO/Release/moc/moc_predefs.h.cbt
+HTDEMO/savefile.txt
+HTDEMO/ui_forwardconfigdlg.h
+HTDEMO/ui_forwardsetdlg.h
+HTDEMO/ui_tabforwardconfigform.h
