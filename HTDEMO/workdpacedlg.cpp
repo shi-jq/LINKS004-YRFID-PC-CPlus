@@ -163,8 +163,8 @@ void workDpaceDlg::CreateView()
     mTabUploadForm = new TabUploadForm(mTabWidget);
     mTabWidget->addTab(mTabUploadForm,QIcon(),GET_TXT("IDCS_DATA_UPLOAD"));
 
-//	mTabParamConfigForm = new TabParamConfigForm(mTabWidget);
-//	mTabWidget->addTab(mTabParamConfigForm,QIcon(),GET_TXT("IDCS_PARAM_CONFIG_OP"));
+	mTabParamConfigForm = new TabParamConfigForm(mTabWidget);
+	mTabWidget->addTab(mTabParamConfigForm,QIcon(),GET_TXT("IDCS_PARAM_CONFIG_OP"));
 
 //	mTabApplyInfoForm = new TabApplyInfoForm(mTabWidget);
 //	mTabWidget->addTab(mTabApplyInfoForm,QIcon(),GET_TXT("IDCS_IO_CONTRL"));

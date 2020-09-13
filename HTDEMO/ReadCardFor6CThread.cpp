@@ -242,7 +242,7 @@ bool ReadCardFor6CThread::AnalysisCard(
 	assert(pCardFor6CInfo);
 	pCardFor6CInfo->m_szCardID = cardStr;
 	pCardFor6CInfo->m_szCurReadTime = QDateTime::currentDateTime().toString(QString("yyyy-MM-dd hh:mm:ss"));
-	pCardFor6CInfo->m_szTagState = GetTagStateStr(nTagType, pId);
+	pCardFor6CInfo->m_szTagState = GetTagStateStr(nTagType, nParam1);
 	pCardFor6CInfo->m_otherInfo = GetTagDescribe(nTagType, nParam1);
 	pCardFor6CInfo->m_szRssi = GetTagRSSI(nTagType, nRssi);
 
@@ -303,6 +303,15 @@ QString ReadCardFor6CThread::GetNormalTagState(int nTagState)
 		}
 
 		retStr += GET_TXT("IDCS_TAG_STATE_LOW_TENSION");
+	}
+
+	if (0 != ((nTagState>>1) & 0x01)) // ·À²ð
+	{
+		if (retStr.length() == 0) {
+			retStr += ",";
+		}
+
+		retStr += GET_TXT("IDCS_TAG_STATE_BACKOUT");
 	}
 
 	if (retStr.length() == 0) {

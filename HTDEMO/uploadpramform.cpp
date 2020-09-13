@@ -50,6 +50,8 @@ UploadPramForm::UploadPramForm(QWidget *parent) :
 
 	ui->label_2->hide();
 	m_CommandTypeValueCb->hide();
+	ui->label->hide();
+	m_DeviceTypeValueCb->hide();
 }	
 
 UploadPramForm::~UploadPramForm()
@@ -212,10 +214,10 @@ bool UploadPramForm::QueryAll()
 	}
 
 
-	if (bRet)
+	/*if (bRet)
 	{
 		bRet = DeviceTypeQuery();
-	}
+	}*/
 
 	/*if (bRet)
 	{
@@ -380,10 +382,10 @@ bool UploadPramForm::SetAll()
 		bRet = WorkModelSet();
 	}
 
-	if (bRet)
+	/*if (bRet)
 	{
 		bRet = DeviceTypeSet();
-	}
+	}*/
 
 	/*if (bRet)
 	{
