@@ -220,6 +220,8 @@ enum RFIDCommandCode {
 	COM_TAG_QUERY,			//标签操作参数查询
 	COM_EXTENDBOARD_SET,	//扩展板参数配置
 	COM_EXTENDBOARD_QUERY,	//扩展板参数查询
+	COM_ANTENNA_SET_EX,		//射频端口参数配置-扩展的
+	COM_ANTENNA_QUERY_EX,	//射频端口参数查询-扩展的
 	COM_CARRY_OP,           //载波操作指令
 	COM_IO_OP,				//输出操作指令
 	COM_INPUT_QUERY,		//输入查询指令

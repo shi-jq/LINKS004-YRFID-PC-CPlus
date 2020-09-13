@@ -17,6 +17,11 @@ WeiGenConfigForm::WeiGenConfigForm(QWidget *parent) :
 	mQueryBtn = ui->pushButton;
 	mSetBtn = ui->pushButton_2;
 
+	mQueryBtn->setText(GET_TXT("IDCS_QUERY"));
+	mSetBtn->setText(GET_TXT("IDCS_SET"));
+	ui->label_2->setText(GET_TXT("IDCS_WENGEN_START"));
+	ui->label->setText(GET_TXT("IDCS_WEGEN_LEN"));
+
 	mFirst = true;
 
 	QStringList sl;

@@ -25,7 +25,11 @@ PointConfigForm::PointConfigForm(QWidget *parent) :
 	ui->label->hide();
 	ui->label_4->hide();
 	ui->label_3->hide();
-	
+
+	ui->label_2->setText(GET_TXT("IDCS_RECV_DECAY"));
+	ui->pushButton_2->setText(GET_TXT("IDCS_QUERY"));
+	ui->pushButton->setText(GET_TXT("IDCS_SET"));
+		
     QStringList sl;
     sl<<GET_TXT("IDCS_EDIT_ALL_PRM_CONFIG");
     sl<<GET_TXT("IDCS_EDIT_SEND_POWER");
@@ -48,7 +52,14 @@ PointConfigForm::PointConfigForm(QWidget *parent) :
     sl.clear();
     for (int i=0; i<=30; i+=2)
     {
-        sl<<QString("-%1db").arg(i);
+		if (i == 0)
+		{
+			sl << QString("%1db").arg(i);
+		}
+		else
+		{
+			sl << QString("-%1db").arg(i);
+		}        
     }
     mFreqPwrCb->addItems(sl);
 

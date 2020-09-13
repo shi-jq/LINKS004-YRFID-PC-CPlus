@@ -1,5 +1,6 @@
 ﻿#include "tabuploadform.h"
 #include "ui_tabuploadform.h"
+#include "LanguageSrc.h"
 #include "filtratetagfor6cdlg.h"
 #include "flashconfigfor6cdlg.h"
 #include "uploadpramform.h"
@@ -36,6 +37,11 @@ TabUploadForm::TabUploadForm(QWidget *parent) :
 	gridLayout->addWidget(mForwardSetDlg);
 
 	ui->widget_5->hide();
+
+	ui->label_6->setText(GET_TXT("IDCS_UP_CONFIG"));
+	ui->label_9->setText(GET_TXT("IDCS_NET_CONFIG"));
+	ui->label_7->setText(GET_TXT("IDCS_FILTER_TAG"));
+	ui->label_8->setText(GET_TXT("IDCS_FLASH"));
 }
 
 TabUploadForm::~TabUploadForm()

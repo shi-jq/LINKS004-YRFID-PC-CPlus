@@ -17,6 +17,14 @@ ParamAdd6CDlg::ParamAdd6CDlg(QWidget *parent) :
 	mStartAddrEdit = ui->lineEdit;
 	mLenEdit = ui->lineEdit_2;
 	mDataEdit = ui->lineEdit_3;
+	
+	mReadParamBtn->setText(GET_TXT("IDCS_READ"));
+	mWriteParamBtn->setText(GET_TXT("IDCS_WRITE"));
+	mResetBtn->setText(GET_TXT("IDCS_RESET"));
+	ui->label->setText(GET_TXT("IDCS_START_ADDR"));
+	ui->label_2->setText(GET_TXT("IDCS_LEN"));
+	ui->label_3->setText(GET_TXT("IDCS_DATA"));
+
 
 	connect( mReadParamBtn, SIGNAL( clicked()), this, SLOT( slot_ReadParamBtnClicked( ) ) );
 	connect( mWriteParamBtn, SIGNAL( clicked()), this, SLOT( slot_WriteParamBtnClicked( ) ) );
@@ -65,7 +73,7 @@ void ParamAdd6CDlg::slot_ReadParamBtnClicked()
 	
 	unsigned char nType = 0x02;
 	unsigned char btAddr = nStartAddr;
-	unsigned char nDataLen = nLen;//³¤¶È
+	unsigned char nDataLen = nLen;//ï¿½ï¿½ï¿½ï¿½
 	unsigned char btParams[256];
 	ZeroMemory(btParams, 256);
 	unsigned char nBufferLen = nDataLen;
@@ -131,7 +139,7 @@ void ParamAdd6CDlg::slot_WriteParamBtnClicked()
 
 	unsigned char nType = 0x01;
 	unsigned char btAddr = nStartAddr;
-	unsigned char nDataLen = nLen;//³¤¶È
+	unsigned char nDataLen = nLen;//ï¿½ï¿½ï¿½ï¿½
 	unsigned char btParams[256];
 	ZeroMemory(btParams, 256);
 	unsigned char nBufferLen = 

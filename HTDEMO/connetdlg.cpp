@@ -352,6 +352,11 @@ void ConnetDlg::UpdateLanguage()
 	ui->label_7->setText(GET_TXT("IDCS_TAG_READ_SPEED"));
 	ui->label_14->setText(GET_TXT("IDCS_PORT"));
 	ui->label_15->setText(GET_TXT("IDCS_PORT"));
+	ui->pushButton_6->setText(GET_TXT("IDCS_CONNET"));
+	ui->pushButton_5->setText(GET_TXT("IDCS_DISCONNET"));
+	ui->pushButton_2->setText(GET_TXT("IDCS_REBOOT"));
+	ui->pushButton_3->setText(GET_TXT("IDCS_CLEAR"));
+	ui->pushButton->setText(GET_TXT("IDCS_READER_ADD"));
 	
 	ui->LableCompanyTitle->setStyleSheet(QString("\
 		.QLabel{\

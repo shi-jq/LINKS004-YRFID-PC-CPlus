@@ -16,6 +16,12 @@ ForwardSetDlg::ForwardSetDlg(QWidget *parent) :
     mIpEdit = ui->lineEdit;
     mPortEdit = ui->lineEdit_2;
 
+
+	mReadForwardBtn->setText(GET_TXT("IDCS_QUERY"));
+	mWriteForwardBtn->setText(GET_TXT("IDCS_SET"));
+	ui->label_2->setText(GET_TXT("IDCS_UP_ADDR"));
+	ui->label_3->setText(GET_TXT("IDCS_UP_PORT"));
+
 	mIpEdit->setInputMask(QString("000.000.000.000;"));
 
     connect(mReadForwardBtn,SIGNAL(clicked()), this ,SLOT(slot_ReadForwardBtnClicked()));

@@ -24,7 +24,7 @@ FiltrateTagFor6CDlg::FiltrateTagFor6CDlg(QWidget *parent) :
 	mQueryBtn->setText(GET_TXT("IDCS_QUERY"));
 	mSetBtn->setText(GET_TXT("IDCS_SET"));
 
-	SetFiltrateEnable(false);
+	//SetFiltrateEnable(true);
 
 	mFirst = true;
 
@@ -40,55 +40,29 @@ FiltrateTagFor6CDlg::~FiltrateTagFor6CDlg()
 
 void FiltrateTagFor6CDlg::slot_QueryBtnClicked()
 {
-	QueryValue();
+	QueryAll();
 }
 
 void FiltrateTagFor6CDlg::slot_SetBtnClicked()
 {
-	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();	
-	if (!pReaderDllBase)
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return;
-	}
-	if (!pReaderDllBase->CheckState(STATE_CONNET))
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return ;
-	}
-
-	int iInfoType = 0x03;	//配置类型
-	byte btParam = mTimeEdit->value();//标签过滤时间
-
-	bool bRet = SAAT_TagOpParaSet(pReaderDllBase->m_hCom,
-		iInfoType,
-		&btParam,
-		1);
-
-
-	if (bRet)
-	{			
-		MainShowMsg(GET_TXT("IDCS_FILTER_TIME_SUCCESS"));	
-	}
-	else
-	{
-		MainShowMsg(GET_TXT("IDCS_FILTER_TIME_FAILED"),true);
-	}	
+	SetAll();
 }
 
-void FiltrateTagFor6CDlg::slot_EnableStateChanged(int state)
+bool FiltrateTagFor6CDlg::SetEnable()
 {
 	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();	
 	if (!pReaderDllBase)
 	{
 		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return;
+		return false;
 	}
 	if (!pReaderDllBase->CheckState(STATE_CONNET))
 	{
 		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return ;
+		return false;
 	}
+
+	int state = mEnableCb->checkState();
 
 	int iInfoType = 0x02;//标签过滤使能
 	unsigned char btParam = (state == Qt::Checked); //使能状态 1为使能，0为不使能
@@ -101,14 +75,51 @@ void FiltrateTagFor6CDlg::slot_EnableStateChanged(int state)
 
 	if (retB)
 	{		
-		SetFiltrateEnable(btParam);		
+		//SetFiltrateEnable(btParam);		
 		MainShowMsg(GET_TXT("IDCS_FILTER_ENABLE_SUCCESS"));	
 	}
 	else
 	{
-		mEnableCb->setChecked(false);
+		//mEnableCb->setChecked(false);
 		MainShowMsg(GET_TXT("IDCS_FILTER_ENABLE_FAILED"),true);
 	}	
+
+	return retB;
+}
+
+bool FiltrateTagFor6CDlg::SetValue()
+{
+	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();
+	if (!pReaderDllBase)
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+	if (!pReaderDllBase->CheckState(STATE_CONNET))
+	{
+		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
+		return false;
+	}
+
+	int iInfoType = 0x03;	//配置类型
+	byte btParam = mTimeEdit->value();//标签过滤时间
+
+	bool bRet = SAAT_TagOpParaSet(pReaderDllBase->m_hCom,
+		iInfoType,
+		&btParam,
+		1);
+
+
+	if (bRet)
+	{
+		MainShowMsg(GET_TXT("IDCS_FILTER_TIME_SUCCESS"));
+	}
+	else
+	{
+		MainShowMsg(GET_TXT("IDCS_FILTER_TIME_FAILED"), true);
+	}
+
+	return bRet;
 }
 
 void FiltrateTagFor6CDlg::showEvent(QShowEvent *event)
@@ -135,9 +146,9 @@ void FiltrateTagFor6CDlg::showEvent(QShowEvent *event)
 void FiltrateTagFor6CDlg::SetFiltrateEnable(bool isEnable)
 {
 	mEnableCb->setChecked(isEnable);
-	mTimeEdit->setEnabled(isEnable);
-	mQueryBtn->setEnabled(isEnable);
-	mSetBtn->setEnabled(isEnable);
+	//mTimeEdit->setEnabled(isEnable);
+	//mQueryBtn->setEnabled(isEnable);
+	//mSetBtn->setEnabled(isEnable);
 }
 
 bool FiltrateTagFor6CDlg::QueryEnable()
@@ -222,6 +233,17 @@ bool FiltrateTagFor6CDlg::QueryAll()
 	if (bRet)
 	{
 		bRet = QueryValue();
+	}
+
+	return bRet;
+}
+
+bool FiltrateTagFor6CDlg::SetAll()
+{
+	bool bRet = SetEnable();
+	if (bRet)
+	{
+		bRet = SetValue();
 	}
 
 	return bRet;

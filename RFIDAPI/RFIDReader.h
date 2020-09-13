@@ -109,6 +109,12 @@ public:
 		int* nParam1,
 		int* nParam2);
 
+	bool SAATYAntennaPortEXQuery(unsigned int* nPortEnable,
+		unsigned int* nPollTime,
+		unsigned int* nParam);//指定射频端口参数查询
+	bool SAATYAntennaPortEXSet(unsigned int nPortEnable,
+		unsigned int nPollTime,
+		unsigned int nParam);//射频端口参数配置
 
 	/***********************************6C操作************************************************/
 	bool SAAT6CTagSelect ( unsigned char nBank ,unsigned short nStartAddr,unsigned char MaskBit, 

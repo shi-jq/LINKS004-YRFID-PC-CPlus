@@ -39,6 +39,16 @@ AntennaPrmForm::AntennaPrmForm(QWidget *parent) :
 	mAntenna4TimeSb->setMaximum(255);
 	mAntenna4TimeSb->setValue(1);	
 
+
+	ui->label_16->setText(GET_TXT("IDCS_ANTENNA_NO"));
+	ui->label_18->setText(GET_TXT("IDCS_ANTENNA_TIME"));
+	ui->checkBox->setText(GET_TXT("IDCS_ANTENNA_ONE"));
+	ui->checkBox_2->setText(GET_TXT("IDCS_ANTENNA_TWO"));
+	ui->checkBox_3->setText(GET_TXT("IDCS_ANTENNA_THREE"));
+	ui->checkBox_4->setText(GET_TXT("IDCS_ANTENNA_FOUR"));
+	ui->pushButton->setText(GET_TXT("IDCS_QUERY"));
+	ui->pushButton_2->setText(GET_TXT("IDCS_SET"));
+
 	connect( mQurAntennaBtn, SIGNAL( clicked()), this, SLOT( slot_QurAntennaBtnClicked( ) ) );
 	connect( mSetAntennaBtn, SIGNAL( clicked()), this, SLOT( slot_SetAntennaBtnClicked( ) ) );
 }

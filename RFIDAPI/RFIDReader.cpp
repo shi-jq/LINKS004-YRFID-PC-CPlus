@@ -1891,6 +1891,134 @@ int CRFIDReader::SAATYRevIDMsgDecRssiExpand(
 	return 0;
 }
 
+bool CRFIDReader::SAATYAntennaPortEXQuery(unsigned int* nPortEnable, 
+	unsigned int* nPollTime, unsigned int* nParam)
+{
+	ClearErrorCode();
+
+	if (!m_bOpen)
+	{
+		return false;
+	}
+
+	if (NULL == nPortEnable || NULL == nPollTime || NULL == nParam)
+	{
+		SetErrorCode(ERR_POINTER_NULL);
+		return false;
+	}
+
+	bool bRet = false;
+
+	unsigned char SendCommand = RFIDCommand[COM_ANTENNA_QUERY_EX];//指令
+	unsigned char pSendData[API_SENDDATA_BUFF];
+	int nDataLen = 0;//数据内容长度
+
+	CRFIDFrame RFIDInOutFrame;
+	CRFrame &RFIDFrame = RFIDInOutFrame.RFIDOutFrame;
+	do
+	{
+		if (!SendNRevMsg(&SendCommand, pSendData, nDataLen, RFIDInOutFrame))
+		{
+			break;
+		}
+
+		if (RFIDFrame.bData[0] != 0) //判断返回值 
+		{
+			SetErrorCode(RFIDFrame.bData[0], true);
+			break;
+		}
+
+
+		int nRealDataLen = RFIDFrame.bLength - COMMAND_LEN - ANSWER_LEN;
+		if (nRealDataLen < 8)
+		{
+			SetErrorCode(ERR_DATALEN_LOZERO);
+			break;
+		}		
+
+		*nPortEnable = (RFIDFrame.bData[1] << 24)
+			+ (RFIDFrame.bData[2] << 16)
+			+ (RFIDFrame.bData[3] << 8)
+			+ (RFIDFrame.bData[4]);
+
+		*nPollTime = (RFIDFrame.bData[5] << 24)
+			+ (RFIDFrame.bData[6] << 16)
+			+ (RFIDFrame.bData[7] << 8)
+			+ (RFIDFrame.bData[8]);
+
+		if (nRealDataLen > 12)
+		{
+			*nParam = (RFIDFrame.bData[9] << 24)
+				+ (RFIDFrame.bData[10] << 16)
+				+ (RFIDFrame.bData[11] << 8)
+				+ (RFIDFrame.bData[12]);
+		}
+		else 
+		{
+			*nParam = 0;
+		}
+
+	
+
+		bRet = true;
+	} while (0);
+
+	return bRet;
+}
+
+bool CRFIDReader::SAATYAntennaPortEXSet(unsigned int nPortEnable, unsigned int nPollTime, unsigned int nParam)
+{
+	ClearErrorCode();
+
+	if (!m_bOpen)
+	{
+		return false;
+	}
+
+	bool bRet = false;
+	/*
+	*/
+	unsigned char SendCommand = RFIDCommand[COM_ANTENNA_SET_EX];//指令
+	unsigned char pSendData[API_SENDDATA_BUFF];
+	pSendData[0] = (nPortEnable >> 24) & 0xff;
+	pSendData[1] = (nPortEnable >> 16) & 0xff;
+	pSendData[2] = (nPortEnable >> 8 ) & 0xff;
+	pSendData[3] = nPortEnable & 0xff;
+
+	pSendData[4] = (nPollTime >> 24) & 0xff;
+	pSendData[5] = (nPollTime >> 16) & 0xff;
+	pSendData[6] = (nPollTime >> 8) & 0xff;
+	pSendData[7] = nPollTime & 0xff;
+
+	pSendData[8] = (nParam >> 24) & 0xff;
+	pSendData[9] = (nParam >> 16) & 0xff;
+	pSendData[10] = (nParam >> 8) & 0xff;
+	pSendData[11] = nParam & 0xff;
+
+	int nDataLen = 12;//数据内容长度
+
+	CRFIDFrame RFIDInOutFrame;
+	CRFrame &RFIDFrame = RFIDInOutFrame.RFIDOutFrame;
+	do
+	{
+		if (!SendNRevMsg(&SendCommand, pSendData, nDataLen, RFIDInOutFrame))
+		{
+			break;
+		}
+
+		if (RFIDFrame.bData[0] != 0) //判断返回值 
+		{
+			SetErrorCode(RFIDFrame.bData[0], true);
+			break;
+		}
+
+		bRet = true;
+
+	} while (0);
+
+	return bRet;
+}
+
 bool CRFIDReader::SAAT6CTagSelect ( unsigned char nBank ,unsigned short nStartAddr,unsigned char MaskBit, 
 										   unsigned char *Data ,unsigned char Datalength,unsigned char nSessionZone,
 										   unsigned char nActiveFlag, unsigned char nCutFlag )

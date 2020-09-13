@@ -1,5 +1,6 @@
 ﻿#include "tabconnetinfoform.h"
 #include "ui_tabconnetinfoform.h"
+#include "LanguageSrc.h"
 #include "netconfigfor6cdlg.h"
 #include "comconfigdlg.h"
 #include "busaddrconfigdlg.h"
@@ -35,7 +36,11 @@ TabConnetInfoForm::TabConnetInfoForm(QWidget *parent) :
 	gridLayout->setSpacing(0);
 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->addWidget(mWeiGenConfigForm);	
-	
+
+	ui->label_8->setText(GET_TXT("IDCS_NET_CONFIG"));
+	ui->label_6->setText(GET_TXT("IDCS_COM_CONFIG"));
+	ui->label_7->setText(GET_TXT("IDCS_BUS_CONFIG"));
+	ui->label_10->setText(GET_TXT("IDCS_WENGEN_CONFIG"));
 }
 
 TabConnetInfoForm::~TabConnetInfoForm()

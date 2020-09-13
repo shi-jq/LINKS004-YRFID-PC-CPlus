@@ -1474,9 +1474,15 @@ extern "C" {
 		int* nParam1,
 		int* nParam2);
 
-	bool RFID_API STDCALL SAAT_YAntennaPort_EXSet(void* pHandle, unsigned int nPortEnable, unsigned int nPollTime, unsigned int nParam);
+	bool RFID_API STDCALL SAAT_YAntennaPort_EXSet(void* pHandle,
+		unsigned int nPortEnable,
+		unsigned int nPollTime,
+		unsigned int nParam);
 
-	bool RFID_API STDCALL SAAT_YAntennaPort_EXQuery(void* pHandle, unsigned int* nPortEnable, unsigned int* nPollTime, unsigned int* nParam);
+	bool RFID_API STDCALL SAAT_YAntennaPort_EXQuery(void* pHandle, 
+		unsigned int* nPortEnable, 
+		unsigned int* nPollTime, 
+		unsigned int* nParam);
 
 	bool RFID_API  STDCALL SAAT_Updata(void* pHandle, unsigned char nType, int nFileLen, unsigned char* pCRC32, unsigned char nFileNameLen, unsigned char* pFileName);
 

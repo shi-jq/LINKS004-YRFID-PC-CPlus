@@ -31,10 +31,15 @@ private:
 	bool QueryEnable();
 	bool QueryValue();
 	bool QueryAll();
+	bool SetAll();
+
+	bool SetEnable();
+	bool SetValue();
+
 private slots:
 	void slot_QueryBtnClicked();
 	void slot_SetBtnClicked();
-	void slot_EnableStateChanged(int state);
+	
 };
 
 #endif // FILTRATETAGFOR6CDLG_H

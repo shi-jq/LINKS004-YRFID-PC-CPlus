@@ -17,6 +17,11 @@ UploadPramForm::UploadPramForm(QWidget *parent) :
 	mSetBtn = ui->pushButton_2;
 	m_WorkModelCb = ui->comboBox_3;
 
+
+	mQueryBtn->setText(GET_TXT("IDCS_QUERY"));
+	mSetBtn->setText(GET_TXT("IDCS_SET"));
+	ui->label_3->setText(GET_TXT("IDCS_WORK_MODEL_PARAM"));
+	ui->label_4->setText(GET_TXT("IDCS_CONNET_PORT"));
 	mFirst = true;
 
 	QStringList sl;

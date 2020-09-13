@@ -41,6 +41,7 @@ ReaderInfo6CForm::ReaderInfo6CForm(QWidget *parent) :
     ui->pushButton_2->setText(GET_TXT("IDCS_SET"));
     ui->pushButton_3->setText(GET_TXT("IDCS_SET"));
     ui->pushButton_4->setText(GET_TXT("IDCS_QUERY"));
+	ui->label_8->setText(GET_TXT("IDCS_PWD"));
 
 	mFirst = true;
 
@@ -185,7 +186,7 @@ void ReaderInfo6CForm::slot_ProductSerialSetBtnClicked()
 		return ;
 	}
 
-	if (!mSerialPwdEdit->text().contains("szaat"))
+	if (!mSerialPwdEdit->text().compare("Admin@cirfid.com") == 0)
 	{
 		MainShowMsg(GET_TXT("IDCS_PWD_ERRO"));
 		return ;

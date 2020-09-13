@@ -25,6 +25,7 @@ ReaderTimeSetDlg::ReaderTimeSetDlg(QWidget *parent) :
 
 	ui->label->setText(GET_TXT("IDCS_DATE"));
 	ui->label_2->setText(GET_TXT("IDCS_TIME"));
+	ui->pushButton_3->setText(GET_TXT("IDCS_SYNCH_TIME"));
 	mQueryBtn->setText(GET_TXT("IDCS_QUERY"));
 	mSetBtn->setText(GET_TXT("IDCS_SET"));	
 

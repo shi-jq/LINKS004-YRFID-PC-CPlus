@@ -34,7 +34,7 @@ void ReadConfigFor6CDlg::CreateView()
 	gridLayout->setSpacing(0);
 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->addWidget(mAntennaPrmForm);	
-	ui->widget_9->hide();
+	//ui->widget_9->hide();
 
 	mCarrierConfigForm = new CarrierConfigForm(ui->widget_12);
 	gridLayout = new QGridLayout(ui->widget_12);
@@ -51,7 +51,9 @@ void ReadConfigFor6CDlg::CreateView()
 
 void ReadConfigFor6CDlg::updateLanguage()
 {
-	
+	ui->label_16->setText(GET_TXT("IDCS_ANTENNA_PORT_SET"));
+	ui->label_18->setText(GET_TXT("IDCS_RADIO_CONFIG"));
+	ui->label_17->setText(GET_TXT("IDCS_CARRIER_PARAM"));
 }
 
 void ReadConfigFor6CDlg::showEvent(QShowEvent *event)

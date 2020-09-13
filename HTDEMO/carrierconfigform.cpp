@@ -23,6 +23,10 @@ CarrierConfigForm::CarrierConfigForm(QWidget *parent) :
 		mCarrierCb->addItem(tmpStr);
 	}
 
+	ui->label->setText(GET_TXT("IDCS_CARRIER_PARAM"));
+	ui->pushButton->setText(GET_TXT("IDCS_QUERY"));
+	ui->pushButton_2->setText(GET_TXT("IDCS_SET"));
+
 	connect( mQueryBtn, SIGNAL( clicked()), this, SLOT( slot_QurBtnClicked( ) ) );
 	connect( mSetBtn, SIGNAL( clicked()), this, SLOT( slot_SetBtnClicked( ) ) );
 }

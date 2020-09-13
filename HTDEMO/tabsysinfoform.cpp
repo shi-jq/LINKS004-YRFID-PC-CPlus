@@ -1,5 +1,6 @@
 ﻿#include "tabsysinfoform.h"
 #include "ui_tabsysinfoform.h"
+#include "LanguageSrc.h"
 #include "readerinfo6cform.h"
 #include "firmwareupdatefor6cdlg.h"
 #include "readertimesetdlg.h"
@@ -34,6 +35,11 @@ TabSysInfoForm::TabSysInfoForm(QWidget *parent) :
 	gridLayout->setSpacing(0);
 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->addWidget(mRebootDeviceForm);*/
+
+
+	ui->label_6->setText(GET_TXT("IDCS_READER_INFO"));
+	ui->label_7->setText(GET_TXT("IDCS_FIRMWARE_UPDATE"));
+	ui->label_8->setText(GET_TXT("IDCS_SYSTEM_TIME"));
     ui->widget_3->hide();
 }
 

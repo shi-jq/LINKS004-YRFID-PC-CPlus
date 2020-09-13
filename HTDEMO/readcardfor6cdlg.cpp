@@ -105,7 +105,7 @@ void ReadCardFor6CDlg::CreateView()
 		<< GET_TXT("IDCS_CRAD_NUMBER")
 		<< GET_TXT("IDCS_READTIME")
 		<< GET_TXT("IDCS_ANTENNA_NO")
-		<< GET_TXT("IDCS_TAG_COUNT")
+		<< GET_TXT("IDCS_READ_COUNT")
 		<< GET_TXT("IDCS_TAG_STATUS")
 		<< GET_TXT("IDCS_RSSI")
 		<< GET_TXT("IDCS_OTHER_INFO");
@@ -151,6 +151,10 @@ void ReadCardFor6CDlg::UpdateLanguage()
 	ui->checkBox_2->setText(GET_TXT("IDCS_RECORD_INFO"));
 	ui->label_6->setText(GET_TXT("IDCS_READ_ALL_COUNT"));
 	mYTagReadBtn->setText(GET_TXT("IDCS_START"));
+	ui->pushButton_4->setText(GET_TXT("IDCS_STOP"));
+	ui->pushButton->setText(GET_TXT("IDCS_CLEAR"));
+	ui->pushButton_5->setText(GET_TXT("IDCS_ADD_FILTER"));
+	ui->pushButton_6->setText(GET_TXT("IDCS_CLEAR_FILTER"));
 }
 
 void ReadCardFor6CDlg::slot_refresh_time()
@@ -162,6 +166,7 @@ void ReadCardFor6CDlg::slot_refresh_time()
 	std::vector<CardFor6CInfo*> tmpList;
 	CardFor6CInfo* pCardFor6CInfo = NULL;
 
+	QStringList listCount;
 	std::vector<CardFor6CInfo*>::iterator ListIter;
 	std::map<QString,ReadCardFor6CThread*>::iterator ThreadIter = mThreadMap.begin();
 	for (; ThreadIter!=mThreadMap.end(); ++ThreadIter)
@@ -172,8 +177,13 @@ void ReadCardFor6CDlg::slot_refresh_time()
 		{	
 
 			pCardFor6CInfo = *ListIter;
-			nowCount += pCardFor6CInfo->m_nAntennaCount;
+			if (!listCount.contains(pCardFor6CInfo->m_szCardID))
+			{
+				listCount.append(pCardFor6CInfo->m_szCardID);
+				cardSizeCount += 1;
+			}
 
+			nowCount += pCardFor6CInfo->m_nAntennaCount;
 
 			if (!mFilterMap.empty())
 			{
@@ -194,8 +204,6 @@ void ReadCardFor6CDlg::slot_refresh_time()
 			tagItem->setText(7,pCardFor6CInfo->m_otherInfo);	
 			
 		}
-		cardSizeCount = tmpList.size();
-
 		ListIter = tmpList.begin();
 		for(; ListIter!=tmpList.end(); ++ListIter)
 		{
