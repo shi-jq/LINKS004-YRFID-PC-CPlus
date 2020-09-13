@@ -172,7 +172,7 @@ void ReadCardFor6CDlg::slot_refresh_time()
 		{	
 
 			pCardFor6CInfo = *ListIter;
-			nowCount += pCardFor6CInfo->m_nAntennaNo;
+			nowCount += pCardFor6CInfo->m_nAntennaCount;
 
 
 			if (!mFilterMap.empty())

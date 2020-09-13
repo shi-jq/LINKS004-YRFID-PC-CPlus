@@ -355,7 +355,6 @@ void ConnetDlg::UpdateLanguage()
 	
 	ui->LableCompanyTitle->setStyleSheet(QString("\
 		.QLabel{\
-		min-height:35px;\
 		image: url(%1/logo.png);\
 		}").arg(CSingleton<AppConfig>::GetInstance()->GetPngPath()));
 }

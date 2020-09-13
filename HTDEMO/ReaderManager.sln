@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RFIDAPI", "..\RFIDAPI\RFIDAPI.vcxproj", "{6EED8EEC-2090-4FD9-832E-AFB1CA0300A4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReaderManager", "ReaderManager.vcxproj", "{D21C7F8D-B62A-3E3B-AE93-BF2B728D61F3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReaderManager", "ReaderManager.vcxproj", "{1B9A90CD-8862-3C94-A7CA-77100FEFC804}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +23,12 @@ Global
 		{6EED8EEC-2090-4FD9-832E-AFB1CA0300A4}.Release|x64.Build.0 = Release|x64
 		{6EED8EEC-2090-4FD9-832E-AFB1CA0300A4}.Release|x86.ActiveCfg = Release|Win32
 		{6EED8EEC-2090-4FD9-832E-AFB1CA0300A4}.Release|x86.Build.0 = Release|Win32
-		{D21C7F8D-B62A-3E3B-AE93-BF2B728D61F3}.Debug|x64.ActiveCfg = Debug|x64
-		{D21C7F8D-B62A-3E3B-AE93-BF2B728D61F3}.Debug|x64.Build.0 = Debug|x64
-		{D21C7F8D-B62A-3E3B-AE93-BF2B728D61F3}.Debug|x86.ActiveCfg = Debug|x64
-		{D21C7F8D-B62A-3E3B-AE93-BF2B728D61F3}.Release|x64.ActiveCfg = Release|x64
-		{D21C7F8D-B62A-3E3B-AE93-BF2B728D61F3}.Release|x64.Build.0 = Release|x64
-		{D21C7F8D-B62A-3E3B-AE93-BF2B728D61F3}.Release|x86.ActiveCfg = Release|x64
+		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Debug|x64.ActiveCfg = Debug|x64
+		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Debug|x64.Build.0 = Debug|x64
+		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Debug|x86.ActiveCfg = Debug|x64
+		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Release|x64.ActiveCfg = Release|x64
+		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Release|x64.Build.0 = Release|x64
+		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

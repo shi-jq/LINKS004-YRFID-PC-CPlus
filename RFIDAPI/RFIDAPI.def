@@ -83,7 +83,6 @@ SAAT_RawSendData
 SAAT_RawRevData
 SAAT_RawSendAndRevData
 SAAT_EnterTrans
-SAAT_ResetWifiBaund
 
 SAAT_FlashTotalCountQuery 
 SAAT_FlashDataQuery
@@ -92,10 +91,6 @@ SAAT_ClearFlash
 SAAT_SetReaderTime
 SAAT_ReaderTimeQuery
 
-;SAAT_GPRSParaSet
-;SAAT_GPRSParaQuery
-;SAAT_WIFIParaSet
-;SAAT_WIFIParaQuery
-
+SAAT_YRevIDMsgDecRssiExpand
 
 

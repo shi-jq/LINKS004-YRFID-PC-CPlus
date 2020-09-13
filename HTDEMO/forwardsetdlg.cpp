@@ -16,6 +16,8 @@ ForwardSetDlg::ForwardSetDlg(QWidget *parent) :
     mIpEdit = ui->lineEdit;
     mPortEdit = ui->lineEdit_2;
 
+	mIpEdit->setInputMask(QString("000.000.000.000;"));
+
     connect(mReadForwardBtn,SIGNAL(clicked()), this ,SLOT(slot_ReadForwardBtnClicked()));
     connect(mWriteForwardBtn,SIGNAL(clicked()), this ,SLOT(slot_WriteForwardBtnClicked()));
 }

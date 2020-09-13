@@ -504,15 +504,10 @@
     <None Include="skin\btn_right.png" />
     <None Include="skin\btn_up.png" />
     <None Include="skin\casc2.ico" />
-    <None Include="skin\cebian_down.png" />
-    <None Include="skin\cebian_left.png" />
-    <None Include="skin\cebian_right.png" />
-    <None Include="skin\cebian_up.png" />
     <None Include="skin\ckb_checked.png" />
     <None Include="skin\ckb_unchecked.png" />
     <None Include="skin\combox_down.png" />
     <None Include="skin\gb-titile.png" />
-    <None Include="skin\logo.png" />
     <None Include="skin\radio_btn.png" />
     <None Include="skin\radio_btn2.png" />
     <None Include="skin\refush.png" />

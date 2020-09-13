@@ -41,7 +41,7 @@ extern "C" {
 	//  nsocketPort		网络SOCKET端口
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API STDCALL SAAT_TCPInit(void** pHandle,char *pHostName,int nsocketPort);
+	bool RFID_API STDCALL SAAT_TCPInit(void** pHandle, char *pHostName, int nsocketPort);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ extern "C" {
 	//  nBaud			串口通讯速率
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API STDCALL SAAT_COMInit(void** pHandle,unsigned char nBusAddr,char *pComNum,int nBaud );
+	bool RFID_API STDCALL SAAT_COMInit(void** pHandle, unsigned char nBusAddr, char *pComNum, int nBaud);
 
 	//////////////////////////////////////////////////////////////////////////
 	//1.3 USB参数初始化
@@ -67,7 +67,7 @@ extern "C" {
 	//nBaud			USB口通讯速率,默认为152000
 	//返回值：true：操作成功；false：操作失败。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API __stdcall SAAT_USBInit(void** pHandle,unsigned char nBusAddr,char * pUSBNum,int nBaud );
+	bool RFID_API __stdcall SAAT_USBInit(void** pHandle, unsigned char nBusAddr, char * pUSBNum, int nBaud);
 
 	//////////////////////////////////////////////////////////////////////////
 	//1.4 UDP参数初始化
@@ -80,7 +80,7 @@ extern "C" {
 	//nsocketPort		读写器UDP SOCKET端口，默认为7088
 	//返回值：true：操作成功；false：操作失败。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API __stdcall SAAT_UDPInit(void** pHandle,char *pHostName,int nsocketPort);
+	bool RFID_API __stdcall SAAT_UDPInit(void** pHandle, char *pHostName, int nsocketPort);
 
 	//////////////////////////////////////////////////////////////////////////
 	//1.5 打开读写器
@@ -112,7 +112,7 @@ extern "C" {
 	//szType		语言类型,cn为简体中文,tw为繁体中文,en为英语
 	//返回值：true：操作成功；false：操作失败。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  __stdcall SAAT_SetLanguageType (void* pHandle,char* szType);
+	bool RFID_API  __stdcall SAAT_SetLanguageType(void* pHandle, char* szType);
 
 	//////////////////////////////////////////////////////////////////////////
 	//1.8  获取出错信息
@@ -123,7 +123,7 @@ extern "C" {
 	//      nLen:       szMsg缓冲区的长度    
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_GetErrorMessage(void *pHandle,char *szMsg, int nLen);
+	bool RFID_API  STDCALL SAAT_GetErrorMessage(void *pHandle, char *szMsg, int nLen);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ extern "C" {
 	//		pCode:		返回错误代码
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_GetErrorCode(void *pHandle,int *pCode);
+	bool RFID_API  STDCALL SAAT_GetErrorCode(void *pHandle, int *pCode);
 
 	//////////////////////////////////////////////////////////////////////////
 	//2.0 断开连接并重连
@@ -156,7 +156,7 @@ extern "C" {
 	//pHandle	为打开的端口句柄
 	//返回值：true：连接正常；false：连接断开。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_HeartSend (void* pHandle);
+	bool RFID_API  STDCALL SAAT_HeartSend(void* pHandle);
 
 	//////////////////////////////////////////////////////////////////////////
 	//2.2 系统信息配置
@@ -170,7 +170,7 @@ extern "C" {
 	//	nLen:		系统参数长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_SysInfSet (void* pHandle, unsigned char nType, unsigned char* pParm, int nLen);
+	bool RFID_API  STDCALL SAAT_SysInfSet(void* pHandle, unsigned char nType, unsigned char* pParm, int nLen);
 
 	//////////////////////////////////////////////////////////////////////////
 	//2.3 系统信息查询
@@ -189,7 +189,7 @@ extern "C" {
 	//	pPara：			指向接收读写器参数数据内存的指针 
 	//	pLen： 			pLen指向的内存长度
 	//返回值： true为操作成功, false为操作失败
-	bool RFID_API  STDCALL SAAT_SysInfQuery (void* pHandle ,unsigned char nType, unsigned char *pPara, unsigned char *pLen);
+	bool RFID_API  STDCALL SAAT_SysInfQuery(void* pHandle, unsigned char nType, unsigned char *pPara, unsigned char *pLen);
 
 	//////////////////////////////////////////////////////////////////////////
 	//2.4 工作模式配置
@@ -206,7 +206,7 @@ extern "C" {
 	//0x03			定时模式    读写器根据系统时钟定时来执行标签操作。
 	//返回值：true：操作成功；false：操作失败。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  __stdcall SAAT_WorkModeSet (void* pHandle ,unsigned char nType);
+	bool RFID_API  __stdcall SAAT_WorkModeSet(void* pHandle, unsigned char nType);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -214,16 +214,16 @@ extern "C" {
 	//功能：用于测试读写器
 	//参数：
 	//	pHandle:		打开的端口句柄
-	//	nType ：		测试模式
+	//	nType ：			测试模式
 	//  nAntenna:		天线端口号
 	//	pTestParm: 		测试模式参数
 	//	nLen:			测试模式参数的长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_SysTest(void* pHandle ,
+	bool RFID_API  STDCALL SAAT_SysTest(void* pHandle,
 		unsigned char nType,
-		unsigned char nAntenna, 
-		unsigned char *pTestParm, 
+		unsigned char nAntenna,
+		unsigned char *pTestParm,
 		unsigned char nLen);
 
 
@@ -243,11 +243,11 @@ extern "C" {
 	//注：操作模式为0x00时，起始地址和操作长度两项参数无意义。
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_ParmOp (void* pHandle ,
-		unsigned char nType, 
-		unsigned char nStartAddrr, 
-		unsigned char nLen,  
-		unsigned char *pData, 
+	bool RFID_API  STDCALL SAAT_ParmOp(void* pHandle,
+		unsigned char nType,
+		unsigned char nStartAddrr,
+		unsigned char nLen,
+		unsigned char *pData,
 		unsigned char *pDataLen);
 
 
@@ -271,9 +271,9 @@ extern "C" {
 	//	nLen:		读写器的串行总线参数长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_CommunicatParaSet (void* pHandle ,
-		unsigned char nType, 
-		unsigned char* pPara, 
+	bool RFID_API  STDCALL SAAT_CommunicatParaSet(void* pHandle,
+		unsigned char nType,
+		unsigned char* pPara,
 		unsigned char nLen);
 
 
@@ -287,8 +287,8 @@ extern "C" {
 	//	pLen:		总线参数长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_CommunicatParaQuery (void* pHandle ,
-		unsigned char nType, 
+	bool RFID_API  STDCALL SAAT_CommunicatParaQuery(void* pHandle,
+		unsigned char nType,
 		unsigned char* pPara,
 		unsigned char *pLen);
 
@@ -305,9 +305,9 @@ extern "C" {
 	//	nLen:		参数数据长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_NetParaSet (void* pHandle ,
-		unsigned char nType, 
-		unsigned char* pPara, 
+	bool RFID_API  STDCALL SAAT_NetParaSet(void* pHandle,
+		unsigned char nType,
+		unsigned char* pPara,
 		unsigned char nLen);
 
 
@@ -324,8 +324,8 @@ extern "C" {
 	//		pLen:		参数数据长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_NetParaQuery (void* pHandle ,
-		int nType, 
+	bool RFID_API  STDCALL SAAT_NetParaQuery(void* pHandle,
+		int nType,
 		unsigned char* pPara,
 		unsigned char *pLen);
 
@@ -350,8 +350,8 @@ extern "C" {
 	//		nLen:		匹配数据的长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_TagOpParaSet(void* pHandle ,
-		unsigned char nType, 
+	bool RFID_API  STDCALL SAAT_TagOpParaSet(void* pHandle,
+		unsigned char nType,
 		unsigned char *pPara,
 		unsigned char nLen);
 
@@ -368,7 +368,7 @@ extern "C" {
 	//返回值：true：操作成功；false：操作失败。
 	//说明：nType 为配置的参数类型，定义与上节相同。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API STDCALL SAAT_TagOpParaQuery(void* pHandle ,
+	bool RFID_API STDCALL SAAT_TagOpParaQuery(void* pHandle,
 		unsigned char nType, unsigned char* pPara, unsigned char *pLen);
 
 	//////////////////////////////////////////////////////////////////////////
@@ -406,7 +406,7 @@ extern "C" {
 	//		pLen: 			参数长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_TotalAntennaParmQuery (void* pHandle,unsigned char *szAntennaPara,unsigned char *pLen);
+	bool RFID_API  STDCALL SAAT_TotalAntennaParmQuery(void* pHandle, unsigned char *szAntennaPara, unsigned char *pLen);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -443,7 +443,7 @@ extern "C" {
 	//							3    输出负脉冲
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_IOOperate(void* pHandle,unsigned char nPort,unsigned char nState);
+	bool RFID_API  STDCALL SAAT_IOOperate(void* pHandle, unsigned char nPort, unsigned char nState);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -461,7 +461,7 @@ extern "C" {
 	//							1:高电平
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_IOStateQuery(void* pHandle,unsigned char *pState);
+	bool RFID_API  STDCALL SAAT_IOStateQuery(void* pHandle, unsigned char *pState);
 
 	//////////////////////////////////////////////////////////////////////////
 	//3.8 有源发送读ID码命令
@@ -481,7 +481,7 @@ extern "C" {
 	//		nTagCount: 为同时预计读取标签数, 预计工作环境中一次需要同时读取的最大标签数，设计为1到255张
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YReadIDCode ( void *pHandle,
+	bool RFID_API  STDCALL SAAT_YReadIDCode(void *pHandle,
 		unsigned char nOpType,
 		unsigned char nIDType,
 		unsigned int nTagCount);
@@ -501,7 +501,7 @@ extern "C" {
 	//		nIDType 要接收的ID编码
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YMakeTagUpLoadIDCode ( void *pHandle,
+	bool RFID_API  STDCALL SAAT_YMakeTagUpLoadIDCode(void *pHandle,
 		unsigned char nOpType,
 		unsigned char nIDType);
 
@@ -520,9 +520,9 @@ extern "C" {
 	//		nFlagBit:			EAS标志共有8个比特，置“1”则设置EAS比特位；置“0”则清除EAS位。
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YEASRegSet (void *pHandle, 
-		unsigned char nOpType, 
-		unsigned char nIDType, 
+	bool  RFID_API  STDCALL SAAT_YEASRegSet(void *pHandle,
+		unsigned char nOpType,
+		unsigned char nIDType,
 		unsigned char *pCodeID,
 		unsigned char *pTagPwd,
 		unsigned char nSetMode,
@@ -542,9 +542,9 @@ extern "C" {
 	//		pFlagBit:		置位数据,标签EAS寄存器内的数据
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YEASRegQuery (void *pHandle, 
-		unsigned char nOpType, 
-		unsigned char nIDType, 
+	bool  RFID_API  STDCALL SAAT_YEASRegQuery(void *pHandle,
+		unsigned char nOpType,
+		unsigned char nIDType,
 		unsigned char *pIDCode,
 		unsigned char *pTagPwd,
 		unsigned char *pIDType,
@@ -565,8 +565,8 @@ extern "C" {
 
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YEASMonitorEnable (void *pHandle,
-		unsigned char nOpType, 
+	bool  RFID_API  STDCALL SAAT_YEASMonitorEnable(void *pHandle,
+		unsigned char nOpType,
 		unsigned char nIDType,
 		unsigned char nEasBit);
 
@@ -581,7 +581,7 @@ extern "C" {
 	//		nBit		为标签EAS寄存器内的数据
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	int  RFID_API  STDCALL SAAT_YRevEASIDMsg (void *pHandle, unsigned char* pIDData,
+	int  RFID_API  STDCALL SAAT_YRevEASIDMsg(void *pHandle, unsigned char* pIDData,
 		unsigned char* pIDLen,
 		unsigned char* pBit);
 
@@ -603,7 +603,7 @@ extern "C" {
 	//		                15：-30dB
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YAntennaPowerSet (void* pHandle,unsigned char nPower );
+	bool RFID_API  STDCALL SAAT_YAntennaPowerSet(void* pHandle, unsigned char nPower);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -622,7 +622,7 @@ extern "C" {
 	//		                ...
 	//		                15：-30dB	                
 	//返回值： true为操作成功, false为操作失败
-	bool RFID_API  STDCALL SAAT_YAntennaPowerQuery (void* pHandle,unsigned char* pPower);
+	bool RFID_API  STDCALL SAAT_YAntennaPowerQuery(void* pHandle, unsigned char* pPower);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -636,10 +636,10 @@ extern "C" {
 	//		pWriteEIDData 为写入标签的EPC码的数据
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL  SAAT_YWriteEIDCode ( void* pHandle, 
+	bool RFID_API  STDCALL  SAAT_YWriteEIDCode(void* pHandle,
 		unsigned char nOpMode,
 		unsigned char* pIDCode,
-		unsigned char *pAccessPWD, 
+		unsigned char *pAccessPWD,
 		unsigned char *pWriteEIDData);
 
 	//////////////////////////////////////////////////////////////////////////
@@ -658,8 +658,8 @@ extern "C" {
 	//		nWaitTime	超时时间
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  __stdcall SAAT_YReadUserData ( void* pHandle, 
-		unsigned char nOpMode, 
+	bool RFID_API  __stdcall SAAT_YReadUserData(void* pHandle,
+		unsigned char nOpMode,
 		unsigned char nIDCodeType,
 		unsigned char *pIDCode,
 		unsigned char *pTagPwd,
@@ -683,8 +683,8 @@ extern "C" {
 	//		nWaitTime	超时时间
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  __stdcall SAAT_YWriteUserData ( void* pHandle, 
-		unsigned char nOpMode, 
+	bool RFID_API  __stdcall SAAT_YWriteUserData(void* pHandle,
+		unsigned char nOpMode,
 		unsigned char nIDCodeType,
 		unsigned char *pIDCode,
 		unsigned char *pTagPwd,
@@ -707,11 +707,11 @@ extern "C" {
 	//		pNewPWD为4字节新访问密码
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YAccessPWDSet (void *pHandle,
-		unsigned char nOpMode, 
+	bool RFID_API  STDCALL SAAT_YAccessPWDSet(void *pHandle,
+		unsigned char nOpMode,
 		unsigned char nIDType,
 		unsigned char *pIDCode,
-		unsigned char *pOrgPWD, 
+		unsigned char *pOrgPWD,
 		unsigned char *pNewPWD);
 
 
@@ -727,11 +727,11 @@ extern "C" {
 	//		pNewPWD为4字节新配置密码
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YCFGPWDSet (void *pHandle,
-		unsigned char nOpMode, 
+	bool RFID_API  STDCALL SAAT_YCFGPWDSet(void *pHandle,
+		unsigned char nOpMode,
 		unsigned char nIDType,
 		unsigned char *pIDCode,
-		unsigned char *pOrgPWD, 
+		unsigned char *pOrgPWD,
 		unsigned char *pNewPWD);
 
 
@@ -750,10 +750,10 @@ extern "C" {
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
 	bool RFID_API  STDCALL SAAT_YTagOp(void *pHandle,
-		unsigned char nOpMode, 
+		unsigned char nOpMode,
 		unsigned char nIDType,
 		unsigned char *pIDCode,
-		unsigned char *pTagPWD, 
+		unsigned char *pTagPWD,
 		unsigned char nTagOpType,
 		unsigned short nStartAddr,
 		unsigned char nDataLen);
@@ -791,9 +791,9 @@ extern "C" {
 
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YTagParmSet (void *pHandle, 
-		unsigned char nOpType, 
-		unsigned char nIDType, 
+	bool  RFID_API  STDCALL SAAT_YTagParmSet(void *pHandle,
+		unsigned char nOpType,
+		unsigned char nIDType,
 		unsigned char *pIDCode,
 		unsigned char *pTagPwd,
 		unsigned char nAntennaPower,
@@ -834,9 +834,9 @@ extern "C" {
 
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YTagParmQuery (void *pHandle, 
-		unsigned char nOpType, 
-		unsigned char nIDType, 
+	bool  RFID_API  STDCALL SAAT_YTagParmQuery(void *pHandle,
+		unsigned char nOpType,
+		unsigned char nIDType,
 		unsigned char *pIDCode,
 		unsigned char *nTagPwd,
 		unsigned char *pAntennaPower,
@@ -860,7 +860,7 @@ extern "C" {
 	//* 输出使能信号为脉冲，时间为100mS。
 	//返回值：true：操作成功；false：操作失败。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  __stdcall SAAT_Reading_IOConfig (void* pHandle,unsigned char nConfigBit);
+	bool RFID_API  __stdcall SAAT_Reading_IOConfig(void* pHandle, unsigned char nConfigBit);
 
 	//////////////////////////////////////////////////////////////////////////
 	//5.3.7 读卡指示查询
@@ -879,7 +879,7 @@ extern "C" {
 	//* 输出使能信号为脉冲，时间为100mS。
 	//返回值：true：操作成功；false：操作失败。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  __stdcall SAAT_Reading_IOQuery (void* pHandle,unsigned char* pConfigBit);
+	bool RFID_API  __stdcall SAAT_Reading_IOQuery(void* pHandle, unsigned char* pConfigBit);
 
 	//////////////////////////////////////////////////////////////////////////
 	//5.3.8 读卡指示脉冲宽度配置
@@ -892,7 +892,7 @@ extern "C" {
 	//nWidth：		脉冲宽度(单位为100ms)
 	//返回值：true：操作成功；false：操作失败。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  __stdcall SAAT_IOPulseWidthSet (void* pHandle,unsigned char nIOPort,unsigned char nWidth);
+	bool RFID_API  __stdcall SAAT_IOPulseWidthSet(void* pHandle, unsigned char nIOPort, unsigned char nWidth);
 
 	//////////////////////////////////////////////////////////////////////////
 	//5.3.9 读卡指示脉冲宽度查询
@@ -905,7 +905,7 @@ extern "C" {
 	//pWidth：		脉冲宽度(单位为100ms)
 	//返回值：true：操作成功；false：操作失败。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  __stdcall SAAT_IOPulseWidthQuery (void* pHandle,unsigned char nIOPort,unsigned char* pWidth);
+	bool RFID_API  __stdcall SAAT_IOPulseWidthQuery(void* pHandle, unsigned char nIOPort, unsigned char* pWidth);
 
 	//////////////////////////////////////////////////////////////////////////
 	//5.4  标签工作模式配置指令
@@ -942,9 +942,9 @@ extern "C" {
 
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YTagWorkModeSet (void *pHandle, 
-		unsigned char nOpType, 
-		unsigned char nIDType, 
+	bool  RFID_API  STDCALL SAAT_YTagWorkModeSet(void *pHandle,
+		unsigned char nOpType,
+		unsigned char nIDType,
 		unsigned char *pIDCode,
 		unsigned char *pTagPwd,
 		unsigned char nWorkMode,
@@ -993,9 +993,9 @@ extern "C" {
 	//		*pRemainingCapacity:剩余电量：定义标签内置电池的剩余电量，以百分比表示。
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YTagWorkModeQuery (void *pHandle, 
-		unsigned char nOpType, 
-		unsigned char nIDType, 
+	bool  RFID_API  STDCALL SAAT_YTagWorkModeQuery(void *pHandle,
+		unsigned char nOpType,
+		unsigned char nIDType,
 		unsigned char *pIDCode,
 		unsigned char *pTagPwd,
 		unsigned char *pWorkMode,
@@ -1044,9 +1044,9 @@ extern "C" {
 	//如标签内配置的电池为1000mA，其值为十六进制数0x14，0x14为十进制数20
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YTagFatorySet (void *pHandle, 
-		unsigned char nOpType, 
-		unsigned char nIDType, 
+	bool  RFID_API  STDCALL SAAT_YTagFatorySet(void *pHandle,
+		unsigned char nOpType,
+		unsigned char nIDType,
 		unsigned char *pIDCode,
 		unsigned char *pTagPwd,
 		unsigned char nTagType,
@@ -1094,9 +1094,9 @@ extern "C" {
 	//如标签内配置的电池为1000mA，其值为十六进制数0x14，0x14为十进制数20
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YTagFatoryQuery (void *pHandle, 
-		unsigned char nOpType, 
-		unsigned char nIDType, 
+	bool  RFID_API  STDCALL SAAT_YTagFatoryQuery(void *pHandle,
+		unsigned char nOpType,
+		unsigned char nIDType,
 		unsigned char *pIDCode,
 		unsigned char *pTagPwd,
 		unsigned char *pTagType,
@@ -1125,12 +1125,12 @@ extern "C" {
 	//		配置密码恢复为全“0”；
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool  RFID_API  STDCALL SAAT_YTagResetToFatory (void *pHandle, 
-		unsigned char nOpType, 
-		unsigned char nIDType, 
+	bool  RFID_API  STDCALL SAAT_YTagResetToFatory(void *pHandle,
+		unsigned char nOpType,
+		unsigned char nIDType,
 		unsigned char *pIDCode,
 		unsigned char *nTagPwd);
-	
+
 
 	//////////////////////////////////////////////////////////////////////////
 	//5.9 有源射频端口参数配置
@@ -1141,7 +1141,7 @@ extern "C" {
 	//		nLen: 		参数长度, 12字节
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YAntennaParmSet(void* pHandle ,unsigned char *pPara,unsigned char nLen );
+	bool RFID_API  STDCALL SAAT_YAntennaParmSet(void* pHandle, unsigned char *pPara, unsigned char nLen);
 
 	//////////////////////////////////////////////////////////////////////////
 	//6.0 有源射频端口参数查询
@@ -1187,8 +1187,8 @@ extern "C" {
 	//		23		2520MHZ
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YRFParaSet (void* pHandle ,
-		unsigned char nType, 
+	bool RFID_API  STDCALL SAAT_YRFParaSet(void* pHandle,
+		unsigned char nType,
 		unsigned char nPara);
 
 
@@ -1207,7 +1207,7 @@ extern "C" {
 	//		23		2520MHZ
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YRFParaQuery (void* pHandle ,
+	bool RFID_API  STDCALL SAAT_YRFParaQuery(void* pHandle,
 		unsigned char nType,
 		unsigned char* pPara);
 
@@ -1222,7 +1222,7 @@ extern "C" {
 	//			0x01		打开载波
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YCarrierWaveOp(void* pHandle ,unsigned char nType);
+	bool RFID_API  STDCALL SAAT_YCarrierWaveOp(void* pHandle, unsigned char nType);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -1235,7 +1235,7 @@ extern "C" {
 	//		0x01	打开蜂鸣器鸣叫
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YBuzzerSet (void* pHandle , unsigned char nPara);
+	bool RFID_API  STDCALL SAAT_YBuzzerSet(void* pHandle, unsigned char nPara);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -1246,40 +1246,7 @@ extern "C" {
 	//	pPara: 		查询蜂鸣器结果
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_YBuzzerQuery (void* pHandle ,	unsigned char* pPara);
-
-
-	//////////////////////////////////////////////////////////////////////////
-	//6.6 接收有源ID码命令
-	//功能：用于接收ID码, ID码为8位十进制
-	//参数:
-	//		pHandle 	为已经初始化的端口句柄
-	//		pId			为十进制int型ID, 
-	//		nBit		为标签标记
-	//域	保留	标签ID类型	省电标记	传感标记	按键标记	报警标记	低压标记
-	//位	2	       1           1	       1         	1	       1	       1
-	//返回值： 1为操作成功, 0为操作失败
-	//////////////////////////////////////////////////////////////////////////
-	int RFID_API  STDCALL SAAT_YRevIDMsgDec(void *pHandle, unsigned int* pId, unsigned char* nBit);
-
-
-	//////////////////////////////////////////////////////////////////////////
-	//6.7 接收有源ID码命令
-	//功能：用于接收ID码, ID码为4位(即4字节)十六进制
-	//参数:
-	//		pHandle 	为已经初始化的端口句柄
-	//		pIDData		为ID数据, 
-	//		nIDLen		为ID数据长度
-	//		nBit		为标签标记
-	//域	保留	标签ID类型	省电标记	传感标记	按键标记	报警标记	低压标记
-	//位	2	       1           1	       1         	1	       1	       1
-	//返回值： 1为操作成功, 0为操作失败
-	//////////////////////////////////////////////////////////////////////////
-	int RFID_API  STDCALL SAAT_YRevIDMsgHex(void *pHandle, 
-		unsigned char* pIDData,
-		unsigned char* nIDLen, 
-		unsigned char* nBit);
-
+	bool RFID_API  STDCALL SAAT_YBuzzerQuery(void* pHandle, unsigned char* pPara);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -1303,7 +1270,7 @@ extern "C" {
 	//	nLen:			数据长度	
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_RawSendData(void* pHandle , unsigned char *pSendData, unsigned char nLen); 
+	bool RFID_API  STDCALL SAAT_RawSendData(void* pHandle, unsigned char *pSendData, unsigned char nLen);
 
 	//////////////////////////////////////////////////////////////////////////
 	//7.0 直接收取底层数据
@@ -1315,7 +1282,7 @@ extern "C" {
 	//	nWaitTime       超时时间
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_RawRevData(void* pHandle , unsigned char *pRecvData, unsigned char* pLen,int nWaitTime); 
+	bool RFID_API  STDCALL SAAT_RawRevData(void* pHandle, unsigned char *pRecvData, unsigned char* pLen, int nWaitTime);
 
 	//////////////////////////////////////////////////////////////////////////
 	//7.1 直接发送并收取底层数据
@@ -1329,12 +1296,12 @@ extern "C" {
 	//  nWaitTime       超时时间
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_RawSendAndRevData(void* pHandle , 
+	bool RFID_API  STDCALL SAAT_RawSendAndRevData(void* pHandle,
 		unsigned char *pSendData,
 		unsigned char nLen,
 		unsigned char *pRecvData,
 		unsigned char *pLen,
-		unsigned char nWaitTime); 
+		unsigned char nWaitTime);
 
 	//////////////////////////////////////////////////////////////////////////
 	// 7.2 读写器时间设置
@@ -1345,7 +1312,7 @@ extern "C" {
 	//		pLen:		参数数据长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_SetReaderTime (void* pHandle ,unsigned char* pPara,unsigned char nLen);
+	bool RFID_API  STDCALL SAAT_SetReaderTime(void* pHandle, unsigned char* pPara, unsigned char nLen);
 
 	//////////////////////////////////////////////////////////////////////////
 	// 7.3 读写器时间查询
@@ -1356,7 +1323,7 @@ extern "C" {
 	//		pLen:		参数数据长度
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_ReaderTimeQuery (void* pHandle, unsigned char* pPara, unsigned char *pLen);
+	bool RFID_API  STDCALL SAAT_ReaderTimeQuery(void* pHandle, unsigned char* pPara, unsigned char *pLen);
 
 	//////////////////////////////////////////////////////////////////////////
 	// 7.4 Flash缓存计数查询
@@ -1367,7 +1334,7 @@ extern "C" {
 	//		pLen:		总计数
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_FlashTotalCountQuery (void* pHandle ,
+	bool RFID_API  STDCALL SAAT_FlashTotalCountQuery(void* pHandle,
 		unsigned char* pPara,
 		unsigned char *pLen);
 
@@ -1381,7 +1348,7 @@ extern "C" {
 	//		pLen:		总计数
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  STDCALL SAAT_FlashDataQuery (void* pHandle ,
+	bool RFID_API  STDCALL SAAT_FlashDataQuery(void* pHandle,
 		unsigned char nOpType,
 		unsigned char* pPara,
 		unsigned char *pLen);
@@ -1393,7 +1360,7 @@ extern "C" {
 	//		pHandle :	打开的端口句柄
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API STDCALL SAAT_ClearFlash (void* pHandle );
+	bool RFID_API STDCALL SAAT_ClearFlash(void* pHandle);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -1418,7 +1385,7 @@ extern "C" {
 	//				0x05		115200
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API STDCALL SAAT_WCommunicatParaSet (void* pHandle ,unsigned char nType, unsigned char* pPara, unsigned char nLen);
+	bool RFID_API STDCALL SAAT_WCommunicatParaSet(void* pHandle, unsigned char nType, unsigned char* pPara, unsigned char nLen);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -1443,7 +1410,7 @@ extern "C" {
 	//				0x05		115200
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API STDCALL SAAT_WCommunicatParaQuery (void* pHandle ,unsigned char nType, unsigned char* pPara,unsigned char *pLen);
+	bool RFID_API STDCALL SAAT_WCommunicatParaQuery(void* pHandle, unsigned char nType, unsigned char* pPara, unsigned char *pLen);
 
 	//////////////////////////////////////////////////////////////////////////
 	//7.9 重启读写器
@@ -1457,7 +1424,7 @@ extern "C" {
 	//0x01  BOOT重启模式，启动后RFID设备将发送BOOT指令
 	//返回值：true：操作成功；false：操作失败。
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API STDCALL SAAT_Reboot(void* pHandle ,unsigned char nType);
+	bool RFID_API STDCALL SAAT_Reboot(void* pHandle, unsigned char nType);
 
 	//////////////////////////////////////////////////////////////////////////
 	//8.0 有源标签选择配置
@@ -1469,7 +1436,7 @@ extern "C" {
 	//		MatchData: 匹配数据
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API  __stdcall SAAT_YTagSelect ( void *pHandle, unsigned char nOpEnable, unsigned char nMatchType, unsigned char *MatchData, unsigned char nLenth);
+	bool RFID_API  __stdcall SAAT_YTagSelect(void *pHandle, unsigned char nOpEnable, unsigned char nMatchType, unsigned char *MatchData, unsigned char nLenth);
 
 	//////////////////////////////////////////////////////////////////////////
 	//8.1 读写器配置进入透传模式用函数（WIFI设备调用）
@@ -1479,410 +1446,7 @@ extern "C" {
 	//	nType: 			类型参数参数 0x00-WIFI  0xFD 复位波特率SAAT_ResetWifiBaund
 	//返回值： true为操作成功, false为操作失败
 	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API STDCALL SAAT_EnterTrans(void* pHandle ,unsigned char nType);
-
-	//////////////////////////////////////////////////////////////////////////
-	//8.2 读写器WIFI配置波特率函数(WIFI设备调用)
-	//功能：重新设置WIFI波特率
-	//参数：
-	//	pHandle:		打开的端口句柄
-	//返回值： true为操作成功, false为操作失败
-	//////////////////////////////////////////////////////////////////////////
-	bool RFID_API STDCALL SAAT_ResetWifiBaund(void* pHandle);
-
-	//温度标签
-	//////////////////////////////////////////////////////////////////////////
-	// 8.3接收有源ID码命令
-	//功能：用于接收ID码, ID码为十进制
-	//参数:
-	//		pHandle 	为已经初始化的端口句柄
-	//      nTagType		为标签标记，0x00表示普通标签；0x01表示温度标签；0x02表示激励标签
-	//		pId			为十进制int型ID,
-	//		nBit		为标签标记
-	//					域	保留	标签ID类型	省电标记	传感标记	按键标记	报警标记	低压标记
-	//					位	2	       1           1	       1         	1	       1	       1
-	//      nParam1		温度标签整数 or 激励地址
-	//      nParam2		温度标签小数 or 场强强度
-	//返回值： 1为操作成功, 0为操作失败
-	//////////////////////////////////////////////////////////////////////////
-	//int RFID_API STDCALL SAAT_YRevIDMsgDecTemperature(void *pHandle,unsigned char* nTagType,unsigned int* pId,unsigned char* pBit, unsigned char* nParam1, unsigned char* nParam2);
-	int RFID_API STDCALL SAAT_YRevIDMsgDecExpand(void *pHandle,unsigned char* nTagType,unsigned int* pId,unsigned char* pBit, int* nParam1, int* nParam2);
-
-	//////////////////////////////////////////////////////////////////////////
-	//8.4 接收有源ID码命令
-	//功能：用于接收ID码, ID码为4位(即4字节)十六进制
-	//参数:
-	//		pHandle 	为已经初始化的端口句柄
-	//      nFlag		为标签标记，0x00表示普通标签；0x01表示温度标签；0x02表示激励标签
-	//		pIDData		为ID数据, 
-	//		nIDLen		为ID数据长度
-	//		nBit		为标签标记
-	//					域	保留	标签ID类型	省电标记	传感标记	按键标记	报警标记	低压标记
-	//					位	2	       1           1	       1         	1	       1	       1
-	//      nParam1		温度标签整数 or 激励地址
-	//      nParam2		温度标签小数 or 场强强度
-	//返回值： 1为操作成功, 0为操作失败
-	//////////////////////////////////////////////////////////////////////////
-	int RFID_API  STDCALL SAAT_YRevIDMsgHexExpand(void *pHandle, unsigned char* nTagType, unsigned char* pIDData, unsigned char* nIDLen, unsigned char* nBit, unsigned char* nParam1, unsigned char* nParam2);
-
-
-	bool RFID_API STDCALL SAAT_GCommunicatParaSet (void* pHandle ,unsigned char nType, unsigned char* pPara, unsigned char nLen);
-
-	bool RFID_API STDCALL SAAT_GCommunicatParaQuery (void* pHandle ,unsigned char nType, unsigned char* pPara,unsigned char *pLen);
-
-	bool RFID_API STDCALL SAAT_SendTrans(void* pHandle,unsigned char nType,unsigned char* pData,unsigned char nLen);
-
-	bool RFID_API STDCALL SAAT_RecvTrans(void* pHandle,unsigned char nType,unsigned char *pData,unsigned char* pLen);
-
-	bool RFID_API STDCALL SAAT_ModuleReboot(void* pHandle ,unsigned char nType);
-
-
-	/******************************无线激励器-start******************************************/
-	/*
-	6.1无线激励器系统参数表操作-重置
-	功能描述	无线激励器系统参数表操作-重置。
-	函数原型	bool  SAAT_EncourageParmOpReset(void* pHandle,unsigned int nSNID)
-	传入参数	pHandle	为已经初始化的端口句柄
-				nSNID	激励器SN
-	返回值	true 	操作成功
-	false	操作失败	
-	 **/
-	bool RFID_API STDCALL SAAT_EncourageParmOpReset(void* pHandle,
-		unsigned int nSNID);	
-
-	/*
-	 *6.2无线激励器系统参数表操作-读
-	功能描述	无线激励器系统参数表操作-读。
-	函数原型	bool  SAAT_EncourageParmOpRead(void* pHandle,
-												unsigned int nSNID,  
-												unsigned int nStartAddrr,
-												unsigned char nlen,
-												unsigned char *pData)
-	传入参数	pHandle	为已经初始化的端口句柄
-				nSNID	激励器SN
-				nStartAddrr	参数表操作地址
-				nlen	操作长度
-				pData	数据
-	返回值	true 	操作成功
-			false	操作失败
-
-	 **/
-	bool RFID_API STDCALL SAAT_EncourageParmOpRead(void* pHandle,
-		unsigned int nSNID,  
-		unsigned int nStartAddrr,
-		unsigned char nlen,
-		unsigned char *pData);	//无线激励器系统参数表操作
-
-	/*
-	6.3无线激励器系统参数表操作-写
-	功能描述	无线激励器系统参数表操作-读。
-	函数原型	bool  SAAT_EncourageParmOpWrite (void* pHandle,
-											unsigned int nSNID,  
-											unsigned int nStartAddrr,
-											unsigned char nlen,
-											unsigned char *pData)
-	传入参数	pHandle	为已经初始化的端口句柄
-				nSNID	激励器SN
-				nStartAddrr	参数表操作地址
-				nlen	操作长度
-				pData	数据
-	返回值	true 	操作成功
-			false	操作失败
-
-
-	 **/
-	bool RFID_API STDCALL SAAT_EncourageParmOpWrite(void* pHandle,
-		unsigned int nSNID,  
-		unsigned int nStartAddrr,
-		unsigned char nlen,
-		unsigned char *pData);	//无线激励器系统参数表操作
-
-	/*
-	6.4无线激励器系统参数表操作-应用
-	功能描述	无线激励器系统参数表操作-应用。
-	函数原型	bool  SAAT_EncourageParmOpActive (void* pHandle,unsigned int nSNID)
-	传入参数	pHandle	为已经初始化的端口句柄
-				nSNID	激励器SN
-	返回值	true 	操作成功
-			false	操作失败
-	 **/
-	bool RFID_API STDCALL SAAT_EncourageParmOpActive(void* pHandle,
-		unsigned int nSNID);	//无线激励器系统参数表操作
-
-
-	/*
-	6.5无线激励器系统信息设置
-	功能描述	无线激励器系统信息设置。
-	函数原型	bool  SAAT_EncourageSysInfSet (void* pHandle,
-	unsigned int nSNID,
-	unsigned char nType,
-	unsigned char* pParm,
-	int nLen)
-	传入参数	pHandle	为已经初始化的端口句柄
-	nSNID	激励器SN
-	nType	0x00-0x03 
-	0x00设备名称
-	0x01保留
-	0x02设备序列号
-	0x03设备地址
-	pParm	数据域	N	0x00~0xFF	根据配置内容的不同，数据长度不同
-	nLen	数据长度
-	返回值	true 	操作成功
-	false	操作失败
-	 **/
-	bool RFID_API STDCALL SAAT_EncourageSysInfSet (void* pHandle,
-		unsigned int nSNID,
-		unsigned char nType,
-		unsigned char* pParm,
-		int nLen);//无线激励器系统信息设置
-	
-	/************************************************************************/
-	/* 6.6无线激励器系统信息查询
-	功能描述	无线激励器系统信息查询。
-	函数原型	bool  SAAT_SAAT_EncourageSysInfQuery (void* pHandle,
-													unsigned int nSNID,
-													unsigned char nType,
-													unsigned char* pParm,
-													int nLen)
-	传入参数	pHandle	为已经初始化的端口句柄
-				nSNID	激励器SN
-				nType	0x00-0x03 
-				0x00设备名称
-				0x01保留
-				0x02设备序列号
-				0x03设备地址
-				pPara	数据域	N	0x00~0xFF	根据配置内容的不同，数据长度不同
-				nLen	数据长度
-	返回值	true 	操作成功
-			false	操作失败
-                                                                     */
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_EncourageSysInfQuery (void* pHandle,
-		unsigned int nSNID,
-		unsigned char nType, 
-		unsigned char *pPara, 
-		unsigned char *pLen);//无线激励器系统信息查询
-
-	/************************************************************************/
-	/* 6.7无线激励器重启
-	功能描述	无线激励器重启。
-	函数原型	bool  SAAT_EncourageReboot (void* pHandle,unsigned int nSNID)
-	传入参数	pHandle	为已经初始化的端口句柄
-	nSNID	激励器SN
-	返回值	true 	操作成功
-	false	操作失败
-                                                                     */
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_EncourageReboot(void* pHandle,unsigned int nSNID);	//无线激励器重启
-
-	/************************************************************************/
-	/* 6.8开始无线激励器心跳检测
-	功能描述	开始无线激励器心跳检测, 会收到附近所有激励器的心跳信息。
-	函数原型	bool  SAAT_EncourageUpLoadHeartStart (void* pHandle)
-	传入参数	pHandle	为已经初始化的端口句柄
-	返回值	true 	操作成功
-	false	操作失败
-
-                                                                     */
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_EncourageUpLoadHeartStart (void* pHandle);	
-
-	/************************************************************************/
-	/* 6.9读取激励器心跳
-	功能描述	读取激励器心跳。
-	函数原型	bool  SAAT_YReadEncourageHeart (void* pHandle,
-	unsigned int nSNID,
-	unsigned char nType,
-	unsigned char* pParm,
-	int nLen)
-	传入参数	pHandle	为已经初始化的端口句柄
-	nSNID	激励器SN
-	nState	工作状态
-	0x00或错误代码	激励器工作状态，正常或错误代码
-	pDeviceID	设备ID号	
-	0x00-0xfe	1字节激励器ID号，激励器发送给标签的ID号。
-	pRate	激励器频率 0-85	激励器工作频率
-	pTimeSpace	发送时间间隔	2	200-65535	激励器发送两个激励数据间隔时间
-	pPower	125k输出功率	1		激励器当前的输出功率
-	返回值	true 	操作成功
-	false	操作失败
-                                                                  */
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_YReadEncourageHeart(void* pHandle,
-		unsigned int* pSNID,
-		unsigned char* nState,
-		unsigned char* pDeviceID,
-		unsigned char* pRate,
-		unsigned int* pTimeSpace,
-		unsigned char* pPower);
-
-	/************************************************************************/
-	/* 6.10停止无线激励器心跳检测
-	功能描述	停止无线激励器心跳检测。
-	函数原型	bool  SAAT_EncourageUpLoadHeartStop (void* pHandle)
-	传入参数	pHandle	为已经初始化的端口句柄
-	返回值	true 	操作成功
-	false	操作失败
-                                                                     */
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_EncourageUpLoadHeartStop (void* pHandle);	
-
-	/******************************无线激励器-end******************************************/
-
-
-	/******************************电瓶车管理-start******************************************/
-	/*
-	 * 标签1对应多标签n  绑定 
-	 * */	
-
-	/************************************************************************/
-	/* 开始读取电瓶车标签。
-	功能描述	读取电瓶车标签。
-	函数原型	bool  SAAT_ElectropileUpLoadCardStart (void* pHandle)
-	传入参数	pHandle	为已经初始化的端口句柄
-	返回值	true 	操作成功
-	false	操作失败                       */
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_ElectropileUpLoadCardStart (void* pHandle);
-
-	/************************************************************************/
-	/* 停止读卡                                                                     */
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_ElectropileStop (void* pHandle);
-
-	/************************************************************************/
-	/*接收卡                                                              */
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_YReadElectropileCard(void* pHandle,
-		unsigned int* nSNID,//车id
-		unsigned int* nPresonID,//车主id
-		unsigned char* nWarningMark,//告警
-		unsigned int* nPectral,//加速度
-		unsigned char* pObligate,//预留参数
-		unsigned int* nObligateLen//预留参数长度
-		); //接收卡
-	/************************************************************************/
-	/*
-	电瓶车标签参数表操作-重置
-	功能描述	电瓶车标签参数表操作-重置。
-	函数原型	bool  SAAT_ElectropileParmOpReset(void* pHandle,unsigned int nSNID)
-	传入参数	pHandle	为已经初始化的端口句柄
-				nSNID	标签id
-				nStartAddr	参数起始位置
-				nLen   参数长度
-	返回值	true 	操作成功
-	false	操作失败	
-	 **/
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_ElectropileParmOpReset(void* pHandle,
-		unsigned int nSNID,
-		unsigned int nStartAddr,
-		unsigned int nLen);	
-
-	/************************************************************************/
-	/*电瓶车标签参数表操作-读
-	功能描述	电瓶车标签参数表操作-读。
-	函数原型	bool  SAAT_ElectropileParmOpRead(void* pHandle,
-												unsigned int nSNID,  
-												unsigned int nStartAddrr,
-												unsigned char nlen,
-												unsigned char *pData)
-	传入参数	pHandle	为已经初始化的端口句柄
-				nSNID	标签id
-				nStartAddrr	参数表操作地址
-				nlen	操作长度
-				pData	数据
-	返回值	true 	操作成功
-			false	操作失败
-	*/
-	 /************************************************************************/
-	bool RFID_API STDCALL SAAT_ElectropileParmOpRead(void* pHandle,
-		unsigned int nSNID,  
-		unsigned int nStartAddr,
-		unsigned char nlen,
-		unsigned char *pData);	//无线激励器系统参数表操作
-
-	/*
-	电瓶车标签参数表操作-写
-	功能描述	电瓶车标签参数表操作-写。
-	函数原型	bool  SAAT_ElectropileParmOpWrite (void* pHandle,
-											unsigned int nSNID,  
-											unsigned int nStartAddrr,
-											unsigned char nlen,
-											unsigned char *pData)
-	传入参数	pHandle	为已经初始化的端口句柄
-				nSNID	标签id
-				nStartAddrr	参数表操作地址
-				nlen	操作长度
-				pData	数据
-	返回值	true 	操作成功
-			false	操作失败
-	 **/
-	bool RFID_API STDCALL SAAT_ElectropileParmOpWrite(void* pHandle,
-		unsigned int nSNID,  
-		unsigned int nStartAddrr,
-		unsigned char nlen,
-		unsigned char *pData);	//无线激励器系统参数表操作
-
-	/************************************************************************/
-	/* 绑定车主和车牌id     
-	* 功能描述	绑定车主和车牌id 。
-	函数原型	bool  SAAT_ElectropileBindingPreson (void* pHandle,
-	unsigned int nSNID,  
-	unsigned int nPresonID)
-	传入参数	pHandle	为已经初始化的端口句柄
-	nSNID	标签id
-	nPresonID	人员id
-	nKeyNum		绑定编号
-	返回值	true 	操作成功
-	false	操作失败*/
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_ElectropileBindingPreson(void* pHandle,
-		unsigned int nSNID,  
-		unsigned int nPresonID,
-		unsigned int nKeyNum);
-
-	/************************************************************************/
-	/* 接触绑定车主和车牌id     
-	* 功能描述	接触绑定车主和车牌id 。
-	函数原型	bool  SAAT_ElectropileReBindingPreson (void* pHandle,
-	unsigned int nSNID,  
-	unsigned int nPresonID)
-	传入参数	pHandle	为已经初始化的端口句柄
-	nSNID	标签id
-	nPresonID	人员id
-	nKeyNum		绑定编号
-	返回值	true 	操作成功
-	false	操作失败*/
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_ElectropileReBindingPreson(void* pHandle,
-		unsigned int nSNID,  
-		unsigned int nPresonID,
-		unsigned int nKeyNum);
-
-/************************************************************************/
-	/* 查询绑定车主和车牌id     
-	* 功能描述	接触绑定车主和车牌id 。
-	函数原型	bool  SAAT_ElectropileQueryBindingPreson (void* pHandle,
-	unsigned int nSNID,  
-	unsigned int* pPresonID,
-	unsigned int* nCount)
-	传入参数	pHandle	为已经初始化的端口句柄
-	nSNID	标签id
-	nPresonID	人员id (数组 长度5)
-	nCount		查询到的个数
-	返回值	true 	操作成功
-	false	操作失败*/
-	/************************************************************************/
-	bool RFID_API STDCALL SAAT_ElectropileQueryBindingPreson(
-		void* pHandle,
-		unsigned int nSNID,  
-		unsigned int* pPresonID,
-		unsigned int* nCount);
-	/**********************************电瓶车管理-end**************************************/
-
-	bool RFID_API STDCALL SAAT_YAntennaPort_EXSet(void* pHandle,unsigned int nPortEnable,unsigned int nPollTime,unsigned int nParam); 
-	bool RFID_API STDCALL SAAT_YAntennaPort_EXQuery(void* pHandle,unsigned int* nPortEnable,unsigned int* nPollTime,unsigned int* nParam); 
+	bool RFID_API STDCALL SAAT_EnterTrans(void* pHandle, unsigned char nType);
 
 	//////////////////////////////////////////////////////////////////////////
 	//8.4 接收有源ID码命令扩展
@@ -1904,20 +1468,17 @@ extern "C" {
 	int RFID_API  STDCALL SAAT_YRevIDMsgDecRssiExpand(
 		void *pHandle,
 		unsigned char* nTagType,
-		unsigned int* pId,		
+		unsigned int* pId,
 		int* nRssi,
 		int* nAntenna,
-		int* nParam1, 
+		int* nParam1,
 		int* nParam2);
 
+	bool RFID_API STDCALL SAAT_YAntennaPort_EXSet(void* pHandle, unsigned int nPortEnable, unsigned int nPollTime, unsigned int nParam);
 
-	bool RFID_API  __stdcall SAAT_Updata (void* pHandle,unsigned char nType ,int nFileLen ,unsigned char* pCRC32 ,unsigned char nFileNameLen ,unsigned char* pFileName);
+	bool RFID_API STDCALL SAAT_YAntennaPort_EXQuery(void* pHandle, unsigned int* nPortEnable, unsigned int* nPollTime, unsigned int* nParam);
 
-	//转发配置
-	bool RFID_API __stdcall SAAT_ForwardSet(void* pHandle, unsigned char nType, unsigned char communication, char* pHostname, int nsocketPort, int nLen);
-
-	bool RFID_API __stdcall SAAT_ForwardQuery(void* pHandle, unsigned char* param, unsigned char* pLen);
-
+	bool RFID_API  STDCALL SAAT_Updata(void* pHandle, unsigned char nType, int nFileLen, unsigned char* pCRC32, unsigned char nFileNameLen, unsigned char* pFileName);
 
 #ifdef __cplusplus
 }

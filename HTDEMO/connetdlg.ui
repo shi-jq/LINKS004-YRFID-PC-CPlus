@@ -186,15 +186,15 @@ color:qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #44a3df, st
      <property name="enabled">
       <bool>true</bool>
      </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QLabel" name="LableCompanyTitle">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>100</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>
@@ -202,7 +202,7 @@ color:qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #44a3df, st
          <string/>
         </property>
         <property name="scaledContents">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
