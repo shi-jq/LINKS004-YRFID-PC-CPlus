@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QTime>
 #include <map>
+#include <QTreeWidgetItem>
 
 namespace Ui {
 class ReadCardFor6CDlg;
@@ -21,6 +22,16 @@ class QSound;
 class workDpaceDlg;
 class ReaderDllBase;
 class TagOpDialog;
+
+
+class DataDictionaryTreeItem : public QTreeWidgetItem
+{
+public:
+	explicit DataDictionaryTreeItem();
+	~DataDictionaryTreeItem();
+
+	bool operator<(const QTreeWidgetItem & other) const;
+};
 
 class ReadCardFor6CDlg : public QWidget
 {

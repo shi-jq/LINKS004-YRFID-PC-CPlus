@@ -22,6 +22,7 @@ ConnetDlg::ConnetDlg(QWidget *parent) :
 	UpdateLanguage();
 	StartUDP();	
 	mRefeshTime = 0;
+	slot_ComRefeshBtnClicked();
 }
 
 ConnetDlg::~ConnetDlg()
@@ -213,6 +214,7 @@ void ConnetDlg::CreateView()
 	//ui->widget->hide();
 	ui->label_9->hide();
 	//ui->label_12->setWordWrap(true);
+	mComRefeshBtn = ui->pushButton_7;
 
 	mDeviceList = ui->treeWidget;
 
@@ -248,9 +250,12 @@ void ConnetDlg::CreateView()
 		<<QString("COM7")
 		<<QString("COM8")
 		<<QString("COM9");
+
+
+	
 		
-	mComCb->addItems(sl);
-	mUsbCb->addItems(sl);
+	//mComCb->addItems(sl);
+	//mUsbCb->addItems(sl);
 	
 	QString defaultComName = WIDGETSTRING_GET("ConnetDlg","COM_NAME");
 	if (!defaultComName.isEmpty())
@@ -273,15 +278,11 @@ void ConnetDlg::CreateView()
 	}
 
 	sl.clear();
-	sl<<QString("4800")
-		<<QString("9600")
-		<<QString("19200")
-		<<QString("56000")
-		<<QString("115200")
-		<<QString("128000")
-		<<QString("230400")
-		<<QString("256000")
-		<<QString("460800");
+	sl << QString("4800")
+		<< QString("9600")
+		<< QString("19200")
+		<< QString("56000")
+		<< QString("115200");
 	mBaudRateCb->addItems(sl);
 	mUsbBaudRateCb->addItems(sl);
 
@@ -328,6 +329,7 @@ void ConnetDlg::CreateView()
 	connect( mRebootBtn, SIGNAL( clicked()), this, SLOT( slot_RebootBtnClicked( ) ) );
 	connect( mCutDownBtn, SIGNAL( clicked()), this, SLOT( slot_CutDownBtnClicked( ) ) );
 	connect( mConnectItemBtn, SIGNAL( clicked()), this, SLOT( slot_connetItemBtnClicked( ) ) );
+	connect(mComRefeshBtn, SIGNAL(clicked()), this, SLOT(slot_ComRefeshBtnClicked()));
 
 }
 
@@ -357,6 +359,7 @@ void ConnetDlg::UpdateLanguage()
 	ui->pushButton_2->setText(GET_TXT("IDCS_REBOOT"));
 	ui->pushButton_3->setText(GET_TXT("IDCS_CLEAR"));
 	ui->pushButton->setText(GET_TXT("IDCS_READER_ADD"));
+	ui->pushButton_7->setText(GET_TXT("IDCS_REFASH"));
 	
 	ui->LableCompanyTitle->setStyleSheet(QString("\
 		.QLabel{\
@@ -457,6 +460,11 @@ QTreeWidgetItem*	ConnetDlg::AddConnectTcp()
 
 QTreeWidgetItem* ConnetDlg::AddConnectCom()
 {
+	if (mComCb->currentIndex() == -1 || mComCb->count() == 0)
+	{
+		return NULL;
+	}
+
 	QString strCom = mComCb->currentText();
 	int nBaudreate = mBaudRateCb->currentText().toInt();
 	QString strInfo = QString("%1:%2").arg(strCom).arg(nBaudreate);
@@ -920,6 +928,51 @@ bool ConnetDlg::RebootItem(QTreeWidgetItem *item)
 	return retB;
 }
 
+QString ConnetDlg::getcomm(int index, QString keyorvalue)
+{
+	QString commresult;
+	if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("HARDWARE\\DEVICEMAP\\SERIALCOMM"), 0, KEY_READ, &hKey) != 0)
+	{
+		QString error = "Cannotopenregedit!";//无法打开注册表时返回error
+		return error;
+	}//if(::RegOpenKeyEx(HKEY_LOCAL_MACHINE,subkey,0,KEY_READ,&hKey)!=0)
+	QString keymessage;//键名
+	QString message;
+	QString valuemessage;//键值
+	indexnum = index;//要读取键值的索引号
+	keysize = sizeof(keyname);
+	valuesize = sizeof(keyvalue);
+	if (::RegEnumValue(hKey, indexnum, keyname, &keysize, 0, &type, (BYTE*)keyvalue, &valuesize) == 0)//列举键名和值
+	{
+		for (int i = 0; i < keysize; i++)
+		{
+			message = keyname[i];
+			keymessage.append(message);
+		}//for(inti=0;i<=keysize;i++)    读取键名
+		for (int j = 0; j < valuesize; j++)
+		{
+			if (keyvalue[j] != 0x00)
+			{
+				valuemessage.append(keyvalue[j]);
+			}
+		}//for(intj=0;j<valuesize;j++)读取键值
+		if (keyorvalue == "key")
+		{
+			commresult = keymessage;
+		}
+		if (keyorvalue == "value")
+		{
+			commresult = valuemessage;
+		}
+	}
+	else
+	{
+		commresult = "nokey";
+	}//if(::RegEnumValue(hKey,indexnum,keyname,&keysize,0,&type,(BYTE*)keyvalue,&valuesize)==0)列举键名和值
+	::RegCloseKey(hKey);//关闭注册表	
+	return commresult;
+}
+
 void ConnetDlg::slot_connetItemBtnClicked()
 {
 	QTreeWidgetItem* tempitem = NULL;
@@ -942,5 +995,27 @@ void ConnetDlg::slot_connetItemBtnClicked()
 	}
 
 	ConnectItem(item);
+}
+
+void ConnetDlg::slot_ComRefeshBtnClicked()
+{
+	mUsbCb->clear();
+	mComCb->clear();
+	QString path = "HKEY_LOCAL_MACHINE\\HARDWARE\\DEVICEMAP\\SERIALCOMM\\";
+	QSettings * settings = new QSettings(path, QSettings::NativeFormat);
+	QStringList key = settings->allKeys();
+	int num = (int)key.size();
+	QString value;
+	for (int i = 0; i < num; i++)
+	{
+		value = getcomm(i, "value");
+		m_listcomboName << value;
+
+		//添加文本浏览器textBrowser中
+		//ui->textBrowser->insertPlainText(value + "\r\n");
+		//添加到下拉选择框portNameComboBox中
+		mComCb->addItem(value);
+		mUsbCb->addItem(value);
+	}
 }
 

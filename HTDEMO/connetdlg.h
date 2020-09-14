@@ -56,6 +56,7 @@ private:
 	QPushButton* mRebootBtn;//重启设备
 	QPushButton* mCutDownBtn;//断开按钮
 	QPushButton* mConnectItemBtn;//连接项按钮
+	QPushButton* mComRefeshBtn;//串口刷新
 
 	QComboBox* mConnetTypeCb;//连接方式
 
@@ -92,12 +93,23 @@ private:
 	bool ConnectItem(QTreeWidgetItem *item);
 	bool DisConnectItem(QTreeWidgetItem *item);
 	bool RebootItem(QTreeWidgetItem *item);
+	QString getcomm(int index, QString keyorvalue);
+private:
+	//获取串口的相关配置
+	QStringList m_listcomboName;
+	HKEY hKey;
+	LPCWSTR subkey;
+	wchar_t keyname[256]; //键名数组
+	char keyvalue[256];  //键值数组
+	DWORD keysize, type, valuesize;
+	int indexnum;
 private slots:
 	void slot_RebootBtnClicked();//重启设备
 	void slot_connetBtnClicked();//添加连接
 	void slot_ClearBtnClicked();//清空连接
 	void slot_CutDownBtnClicked();//断开连接
 	void slot_connetItemBtnClicked();//连接
+	void slot_ComRefeshBtnClicked();
 	
 	void slot_quitBtnClicked();//退出程序
 	void slot_queryIpBtnClicked();//udp查询

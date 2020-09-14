@@ -26,6 +26,26 @@
 #include "workdpacedlg.h"
 #include "tagopdialog.h"
 
+
+DataDictionaryTreeItem::DataDictionaryTreeItem() : QTreeWidgetItem()
+{
+
+}
+
+DataDictionaryTreeItem::~DataDictionaryTreeItem()
+{
+
+}
+
+bool DataDictionaryTreeItem::operator<(const QTreeWidgetItem & other) const
+{
+	int column = treeWidget()->sortColumn();
+	int a = text(column).toUInt();
+	int b = other.text(column).toUInt();
+	return (a < b);
+}
+
+
 ReadCardFor6CDlg::ReadCardFor6CDlg(QWidget *parent,workDpaceDlg* pWorkSpaceDlg) :
     QWidget(parent),
     ui(new Ui::ReadCardFor6CDlg)
@@ -391,12 +411,13 @@ QTreeWidgetItem* ReadCardFor6CDlg::CreateTagItem(const QString&strInfo,const QSt
 {
 	QTreeWidgetItem* readerItem = GetReaderItem(strInfo);
 	QTreeWidgetItem* tagItem = NULL;
-	tagItem = new QTreeWidgetItem(readerItem);
-	tagItem->setText(0,QString::fromUtf8("%1").arg(readerItem->childCount()));
+	tagItem = new DataDictionaryTreeItem();
+	tagItem->setText(0,QString::fromUtf8("%1").arg(readerItem->childCount()+1));
 	tagItem->setText(1,cardStr);
 	tagItem->setData(1,Qt::UserRole+1,cardStr);
 	tagItem->setText(3, QString::number(antenna));
 	tagItem->setData(3, Qt::UserRole + 1, antenna);
+	readerItem->addChild(tagItem);
 
 	return tagItem;
 }
