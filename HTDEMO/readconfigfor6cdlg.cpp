@@ -47,6 +47,8 @@ void ReadConfigFor6CDlg::CreateView()
 	gridLayout->setSpacing(0);
 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->addWidget(mPointConfigForm);	
+
+	ui->widget_13->hide();
 }
 
 void ReadConfigFor6CDlg::updateLanguage()

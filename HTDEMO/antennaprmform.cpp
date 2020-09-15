@@ -26,6 +26,29 @@ AntennaPrmForm::AntennaPrmForm(QWidget *parent) :
 	mAntenna3TimeSb = ui->spinBox_3;
 	mAntenna4TimeSb = ui->spinBox_4;
 
+	mFreqPwrCb1 = ui->comboBox;
+	mFreqPwrCb2 = ui->comboBox_2;
+	mFreqPwrCb3 = ui->comboBox_3;
+	mFreqPwrCb4 = ui->comboBox_4;
+
+	QStringList sl;
+	sl.clear();
+	for (int i = 0; i <= 30; i += 2)
+	{
+		if (i == 0)
+		{
+			sl << QString("%1db").arg(i);
+		}
+		else
+		{
+			sl << QString("-%1db").arg(i);
+		}
+	}
+	mFreqPwrCb1->addItems(sl);
+	mFreqPwrCb2->addItems(sl);
+	mFreqPwrCb3->addItems(sl);
+	mFreqPwrCb4->addItems(sl);
+
 	mAntenna1TimeSb->setMinimum(0);
 	mAntenna1TimeSb->setMaximum(255);
 	mAntenna1TimeSb->setValue(1);
@@ -48,8 +71,9 @@ AntennaPrmForm::AntennaPrmForm(QWidget *parent) :
 	ui->checkBox_4->setText(GET_TXT("IDCS_ANTENNA_FOUR"));
 	ui->pushButton->setText(GET_TXT("IDCS_QUERY"));
 	ui->pushButton_2->setText(GET_TXT("IDCS_SET"));
+	ui->label->setText(GET_TXT("IDCS_ATTENUATION"));
 
-	connect( mQurAntennaBtn, SIGNAL( clicked()), this, SLOT( slot_QurAntennaBtnClicked( ) ) );
+	connect(mQurAntennaBtn, SIGNAL(clicked()), this, SLOT(slot_QurAntennaBtnClicked()));
 	connect( mSetAntennaBtn, SIGNAL( clicked()), this, SLOT( slot_SetAntennaBtnClicked( ) ) );
 }
 
@@ -90,6 +114,11 @@ bool AntennaPrmForm::QurAntenna()
 		mAntenna2TimeSb->setValue(0xff&(nPollTime >> 16 ));
 		mAntenna3TimeSb->setValue(0xff&(nPollTime >> 8 ));
 		mAntenna4TimeSb->setValue(0xff&(nPollTime >> 0 ));
+
+		mFreqPwrCb1->setCurrentIndex(0xff & (nParam >> 24));
+		mFreqPwrCb2->setCurrentIndex(0xff & (nParam >> 16));
+		mFreqPwrCb3->setCurrentIndex(0xff & (nParam >> 8));
+		mFreqPwrCb4->setCurrentIndex(0xff & (nParam >> 0));
 	}
 
 	if (bRet)
@@ -143,6 +172,13 @@ bool AntennaPrmForm::SetAntenna()
 	nPollTime += (mAntenna2TimeSb->value())<<16;
 	nPollTime += (mAntenna3TimeSb->value())<<8;
 	nPollTime += (mAntenna4TimeSb->value()) ;
+
+
+	nParam += (mFreqPwrCb1->currentIndex()) << 24;
+	nParam += (mFreqPwrCb2->currentIndex()) << 16;
+	nParam += (mFreqPwrCb3->currentIndex()) << 8;
+	nParam += (mFreqPwrCb4->currentIndex());
+
 
 	bool bRet = SAAT_YAntennaPort_EXSet( 
 		pReaderDllBase->m_hCom,

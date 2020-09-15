@@ -9,6 +9,7 @@ class AntennaPrmForm;
 class QPushButton;
 class QCheckBox;
 class QSpinBox;
+class QComboBox;
 class AntennaPrmForm : public QWidget
 {
     Q_OBJECT
@@ -32,6 +33,11 @@ private:
 	QSpinBox* mAntenna3TimeSb;
 	QSpinBox* mAntenna4TimeSb;
 
+
+	QComboBox* mFreqPwrCb1;//Ω” ’À•ºı∆˜À•ºı
+	QComboBox* mFreqPwrCb2;//Ω” ’À•ºı∆˜À•ºı
+	QComboBox* mFreqPwrCb3;//Ω” ’À•ºı∆˜À•ºı
+	QComboBox* mFreqPwrCb4;//Ω” ’À•ºı∆˜À•ºı
 	
 	bool SetAntenna();
 private slots:
