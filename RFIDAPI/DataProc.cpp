@@ -286,6 +286,11 @@ bool CDataProc::UnPackMsg(unsigned char* revData,int revLength)
 		return false;
 	}
 
+	if (revLength != 0)
+	{
+		printData("接收到数据", revData, revLength);
+	}
+
 	int &pasLength = m_pasLength; //使用引用,不改变原先代码
 	CRFrame &revFrame = m_revFrame;
 	unsigned char *pasBuffer = m_pasBuffer;
@@ -436,6 +441,8 @@ bool CDataProc::UnPackMsg(unsigned char* revData,int revLength)
 		}
 	}
 
+	printData("验证帧数据", (unsigned char*)&revFrame, revFrame.bLength + 5);
+
 	//5.经过以上处理,当前得到的revFrame是一个完整的包，校验接收数据帧中数据
 	//----------------------------------------------------------------------------------------------------------------------------
 	if( CRC16( (unsigned char*)(&revFrame), revFrame.bLength + 5) != 0 )	//错误的时候返回为1个空帧
@@ -445,7 +452,7 @@ bool CDataProc::UnPackMsg(unsigned char* revData,int revLength)
 	}
 
 
-	//printData("接收到数据",(unsigned char*)&revFrame,revFrame.bLength + 5);
+	
 	return true;
 }
 
