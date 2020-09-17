@@ -129,7 +129,7 @@ void ReaderInfo6CForm::slot_RWerTypeSetBtnClicked()
 		return ;
 	}
 
-	if (!mSerialPwdEdit->text().contains("szaat"))
+	if (!mSerialPwdEdit->text().contains("Admin@cirfid.com"))
 	{
 		MainShowMsg(GET_TXT("IDCS_PWD_ERRO"));
 		return ;

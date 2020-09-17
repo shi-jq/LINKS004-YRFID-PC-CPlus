@@ -189,7 +189,7 @@ bool UploadPramForm::ConnetPortQuery()
 	}
 
 	unsigned char nType = 0x02;
-	unsigned char btAddr = 241;
+	unsigned char btAddr = 63;
 	unsigned char nDataLen = 1;//长度
 	unsigned char btParams[1];
 	ZeroMemory(btParams, 1);
@@ -305,7 +305,7 @@ bool UploadPramForm::CommandTypeSet()
 	}
 
 	unsigned char nType = 0x01;
-	unsigned char btAddr = 240;
+	unsigned char btAddr = 63;
 	unsigned char nDataLen = 1;//长度
 	unsigned char btParams[1];
 	ZeroMemory(btParams, 1);
@@ -355,7 +355,7 @@ bool UploadPramForm::ConnetPortSet()
 	}
 
 	unsigned char nType = 0x01;
-	unsigned char btAddr = 241;
+	unsigned char btAddr = 55;
 	unsigned char nDataLen = 1;//长度
 	unsigned char btParams[1];
 	ZeroMemory(btParams, 1);	
@@ -441,7 +441,7 @@ bool UploadPramForm::WorkModelQuery()
 	}
 
 	unsigned char nType = 0x02;
-	unsigned char btAddr = 0;
+	unsigned char btAddr = 56;
 	unsigned char nDataLen = 1;//长度
 	unsigned char btParams[1];
 	ZeroMemory(btParams, 1);
@@ -489,7 +489,7 @@ bool UploadPramForm::WorkModelSet()
 	}
 
 	unsigned char nType = 0x01;
-	unsigned char btAddr = 0;
+	unsigned char btAddr = 56;
 	unsigned char nDataLen = 1;//长度
 	unsigned char btParams[1];
 	ZeroMemory(btParams, 1);
