@@ -1946,7 +1946,7 @@ bool CRFIDReader::SAATYAntennaPortEXQuery(unsigned int* nPortEnable,
 			+ (RFIDFrame.bData[7] << 8)
 			+ (RFIDFrame.bData[8]);
 
-		if (nRealDataLen > 12)
+		if (nRealDataLen >= 12)
 		{
 			*nParam = (RFIDFrame.bData[9] << 24)
 				+ (RFIDFrame.bData[10] << 16)
