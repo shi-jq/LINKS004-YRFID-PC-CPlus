@@ -355,7 +355,7 @@ bool UploadPramForm::ConnetPortSet()
 	}
 
 	unsigned char nType = 0x01;
-	unsigned char btAddr = 55;
+	unsigned char btAddr = 63;
 	unsigned char nDataLen = 1;//³¤¶È
 	unsigned char btParams[1];
 	ZeroMemory(btParams, 1);	
