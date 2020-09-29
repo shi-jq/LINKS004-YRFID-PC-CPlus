@@ -114,7 +114,7 @@ bool ComConfigDlg::Query()
 		return false;
 	}
 
-	int iInfoType = 0x20;
+	int iInfoType = 0x10;
 	unsigned char btParams = 0x00;
 	unsigned char size=1;
 
