@@ -3602,11 +3602,11 @@ bool CRFIDReader::Open()
 
 	//Õ£÷π∂¡ø®÷∏¡Ó
 	m_bOpen = true;
-	//if( !PowerOff() )
-	//{
-	//	m_bOpen = false;
-	//	return false;
-	//}
+	if( !PowerOff() )
+	{
+		m_bOpen = false;
+		return false;
+	}
 
 	return true;
 }
