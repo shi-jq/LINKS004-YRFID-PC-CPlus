@@ -55,9 +55,9 @@ bool CRFIDReaderManager::OpenReaderByObject(CRFIDReader* pNewReader)
 	//出现断线情况,不过这种情况只要对客户说明不要重复去调用SAAT_Open则没事(调用之前必须先关闭原先的对象)
 	if( !pNewReader->Open() )//打开Reader
 	{
-//		pNewReader->Close();
-//		delete pNewReader;
-//		pNewReader = NULL;
+		pNewReader->Close();
+		delete pNewReader;
+		pNewReader = NULL;
 		return false;
 	}
 
@@ -193,6 +193,5 @@ bool CRFIDReaderManager::CloseOrgReader(CRFIDReader* pReader)
 	{
 		return true;
 	}
-    return true;
-        //return CloseReader(pReader);
+	return CloseReader(pReader);
 }

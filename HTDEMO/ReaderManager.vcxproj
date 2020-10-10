@@ -278,7 +278,6 @@
     <ClInclude Include="Singleton.h" />
     <QtMoc Include="UdpWorkerThread.h">
     </QtMoc>
-    <ClInclude Include="\" />
     <QtMoc Include="antennaprmform.h">
     </QtMoc>
     <ClInclude Include="appconfig.h" />

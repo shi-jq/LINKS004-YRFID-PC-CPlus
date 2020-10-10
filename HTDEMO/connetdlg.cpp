@@ -217,6 +217,7 @@ void ConnetDlg::CreateView()
 	mComRefeshBtn = ui->pushButton_7;
 
 	mDeviceList = ui->treeWidget;
+	mDeviceList->setRootIsDecorated(false);
 
 	mConnetStackedWidget->setCurrentIndex(0);
 	mUdpIpAddrCb->setEditable(true);
@@ -735,7 +736,7 @@ void ConnetDlg::SetCurItem(QTreeWidgetItem *item)
 			}
 			else
 			{				
-                mDeviceList->topLevelItem(i)->setText(0,QString::fromLocal8Bit("%1").arg(nIndex));
+                mDeviceList->topLevelItem(i)->setText(0,QString::fromLocal8Bit("☆ %1").arg(nIndex));
 				mDeviceList->topLevelItem(i)->setData(0,Qt::UserRole+1,1);
 			}
 		}

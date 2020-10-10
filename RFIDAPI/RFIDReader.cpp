@@ -3605,6 +3605,7 @@ bool CRFIDReader::Open()
 	if( !PowerOff() )
 	{
 		m_bOpen = false;
+		m_DataProcss.Close();
 		return false;
 	}
 
@@ -3625,6 +3626,7 @@ bool CRFIDReader::Open(CRFIDSystemCfg& cfg)
 	if( !PowerOff() )
 	{
 		m_bOpen = false;
+		m_DataProcss.Close();
 		return false;
 	}
 
