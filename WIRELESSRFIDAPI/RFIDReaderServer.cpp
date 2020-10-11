@@ -1490,15 +1490,15 @@ int CRFIDReaderServer::SAATYRevIDMsgDecRssiExpand(
 				+ (revFrame.bData[11] << 8)
 				+ (revFrame.bData[12]);
 		}
-		if (revFrame.bLength >= 9 + timeLen)
+		if (revFrame.bLength >= 10 + timeLen)
 		{
-			nTime[6] = revFrame.bData[14];
-			nTime[5] = revFrame.bData[13];
-			nTime[4] = revFrame.bData[12];
-			nTime[3] = revFrame.bData[11];
-			nTime[2] = revFrame.bData[10];
-			nTime[1] = revFrame.bData[9];
-			nTime[0] = revFrame.bData[8];
+			nTime[6] = revFrame.bData[15];
+			nTime[5] = revFrame.bData[14];
+			nTime[4] = revFrame.bData[13];
+			nTime[3] = revFrame.bData[12];
+			nTime[2] = revFrame.bData[11];
+			nTime[1] = revFrame.bData[10];
+			nTime[0] = revFrame.bData[9];
 		}
 		else
 		{

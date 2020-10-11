@@ -17,7 +17,7 @@ class QSpinBox;
 class AntennaPrmForm;
 class CarrierConfigForm;
 class PointConfigForm;
-
+class BuzzerConfigForm;
 class ReadConfigFor6CDlg : public QWidget
 {
     Q_OBJECT
@@ -36,6 +36,7 @@ private:
 	AntennaPrmForm* mAntennaPrmForm;
 	CarrierConfigForm* mCarrierConfigForm;
 	PointConfigForm* mPointConfigForm;
+	BuzzerConfigForm* mBuzzerConfigForm;
 
 	bool mIsFirst;
 private:

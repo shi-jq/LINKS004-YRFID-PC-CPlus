@@ -85,7 +85,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;shell32.lib;QtNetwork4.lib;..\bin\RFIDAPI.lib;ws2_32.lib;Ole32.lib;$(QTDIR)\lib\Qt5Multimedia.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;shell32.lib;..\bin\RFIDAPI.lib;ws2_32.lib;Ole32.lib;$(QTDIR)\lib\Qt5Multimedia.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\utils\my_sql\my_sql\lib;C:\utils\postgresql\pgsql\lib;$(QTDIR)\lib;..\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -207,6 +207,7 @@
     <ClCompile Include="antennaprmform.cpp" />
     <ClCompile Include="appconfig.cpp" />
     <ClCompile Include="busaddrconfigdlg.cpp" />
+    <ClCompile Include="buzzerconfigform.cpp" />
     <ClCompile Include="carrierconfigform.cpp" />
     <ClCompile Include="comconfigdlg.cpp" />
     <ClCompile Include="connetdlg.cpp" />
@@ -280,6 +281,8 @@
     </QtMoc>
     <ClInclude Include="appconfig.h" />
     <QtMoc Include="busaddrconfigdlg.h">
+    </QtMoc>
+    <QtMoc Include="buzzerconfigform.h">
     </QtMoc>
     <QtMoc Include="carrierconfigform.h">
     </QtMoc>
@@ -396,6 +399,7 @@
     </CustomBuild>
     <ClInclude Include="ui_antennaprmform.h" />
     <ClInclude Include="ui_busaddrconfigdlg.h" />
+    <ClInclude Include="ui_buzzerconfigform.h" />
     <ClInclude Include="ui_carrierconfigform.h" />
     <ClInclude Include="ui_comconfigdlg.h" />
     <ClInclude Include="ui_connetdlg.h" />
@@ -449,6 +453,10 @@
     <QtUic Include="busaddrconfigdlg.ui">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ui_busaddrconfigdlg.h</OutputFile>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ui_busaddrconfigdlg.h</OutputFile>
+    </QtUic>
+    <QtUic Include="buzzerconfigform.ui">
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ui_buzzerconfigform.h</OutputFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ui_buzzerconfigform.h</OutputFile>
     </QtUic>
     <QtUic Include="carrierconfigform.ui">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ui_carrierconfigform.h</OutputFile>

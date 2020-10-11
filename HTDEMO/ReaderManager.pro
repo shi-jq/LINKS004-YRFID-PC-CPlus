@@ -116,7 +116,8 @@ SOURCES += ./main.cpp \
     lockopform.cpp \
     findtagform.cpp \
     tagopdialog.cpp \
-    tagfilterform.cpp
+    tagfilterform.cpp \
+    buzzerconfigform.cpp
     
 HEADERS  += ./mainwindow.h \
     ./connetdlg.h \
@@ -191,7 +192,8 @@ HEADERS  += ./mainwindow.h \
     lockopform.h \
     findtagform.h \
     tagopdialog.h \
-    tagfilterform.h
+    tagfilterform.h \
+    buzzerconfigform.h
 
 FORMS    += ./mainwindow.ui \
     ./connetdlg.ui \
@@ -246,7 +248,8 @@ FORMS    += ./mainwindow.ui \
     lockopform.ui \
     findtagform.ui \
     tagopdialog.ui \
-    tagfilterform.ui
+    tagfilterform.ui \
+    buzzerconfigform.ui
 
 
 

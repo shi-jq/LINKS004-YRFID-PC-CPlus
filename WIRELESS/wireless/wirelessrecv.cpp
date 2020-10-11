@@ -946,7 +946,7 @@ void WirelessRecvDlg::slot_SetRevMsg(void* pReaderInfo,int msgID,unsigned char b
 				{
 					QString strTmp = QString::fromUtf8((char*)(pTmpData+1),nLen-1);
 					item->setText(3,strTmp);
-					MainShowMsg(GET_TXT("IDCS_DEVICE_NAME_QUERY_SUCCESS"));
+					MainShowMsg(GET_TXT("IDCS_DEVICE_NAME_QUERY_SUCCESS") + "--" + strTmp);
 				}
 			
 			}
@@ -1137,9 +1137,9 @@ void WirelessRecvDlg::slot_itemDeviceConfig()
 TreeRightMenu::TreeRightMenu(QWidget *slotParent,QWidget *parent)
 {
 
-	m_DeviceConfigAct = new QAction( GET_TXT("IDCS_DEVICE_CONFIG"), this );
+	/*m_DeviceConfigAct = new QAction( GET_TXT("IDCS_DEVICE_CONFIG"), this );
 	connect( m_DeviceConfigAct, SIGNAL(triggered()), slotParent, SLOT(slot_itemDeviceConfig()) );
-	addAction(m_DeviceConfigAct);
+	addAction(m_DeviceConfigAct);*/
 
 	m_RemoveAct = new QAction( GET_TXT("IDCS_REMOVE"), this );
 	connect( m_RemoveAct, SIGNAL(triggered()), slotParent, SLOT(slot_itemRemoveClicked()) );

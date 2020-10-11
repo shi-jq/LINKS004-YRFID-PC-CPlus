@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>527</width>
-    <height>283</height>
+    <width>528</width>
+    <height>302</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,7 +44,7 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
+      <item row="0" column="0" rowspan="3">
        <widget class="QWidget" name="widget_9" native="true">
         <property name="styleSheet">
          <string notr="true">.QWidget
@@ -115,50 +115,48 @@ border-top-left-radius: 5px;
        </widget>
       </item>
       <item row="0" column="1">
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QWidget" name="widget_13" native="true">
-          <property name="styleSheet">
-           <string notr="true">.QWidget
+       <widget class="QWidget" name="widget_13" native="true">
+        <property name="styleSheet">
+         <string notr="true">.QWidget
 {
 	border: 1px solid rgb(218,218,218);
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
 }
 </string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_8">
-           <property name="spacing">
-            <number>0</number>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>1</number>
+         </property>
+         <property name="topMargin">
+          <number>1</number>
+         </property>
+         <property name="rightMargin">
+          <number>1</number>
+         </property>
+         <property name="bottomMargin">
+          <number>1</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_18">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
            </property>
-           <property name="leftMargin">
-            <number>1</number>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
            </property>
-           <property name="topMargin">
-            <number>1</number>
-           </property>
-           <property name="rightMargin">
-            <number>1</number>
-           </property>
-           <property name="bottomMargin">
-            <number>1</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="label_18">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;微软雅黑&quot;;
+           <property name="styleSheet">
+            <string notr="true">font: 10pt &quot;微软雅黑&quot;;
 color: rgb(255, 255, 255);
 background-color: rgb(168, 168, 168);
 padding: 3px 3px 3px 10px;
@@ -166,69 +164,69 @@ border: none;
 border-top-right-radius: 5px;
 border-top-left-radius: 5px;
 </string>
-             </property>
-             <property name="text">
-              <string>射频设置</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QWidget" name="widget_14" native="true">
-             <property name="styleSheet">
-              <string notr="true">.QWidget
+           </property>
+           <property name="text">
+            <string>射频设置</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_14" native="true">
+           <property name="styleSheet">
+            <string notr="true">.QWidget
 {
 	border: none;
 	background-color: rgb(240, 241, 243);
 }</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="widget_11" native="true">
-          <property name="styleSheet">
-           <string notr="true">.QWidget
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QWidget" name="widget_11" native="true">
+        <property name="styleSheet">
+         <string notr="true">.QWidget
 {
 	border: 1px solid rgb(218,218,218);
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
 }
 </string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_7">
-           <property name="spacing">
-            <number>0</number>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>1</number>
+         </property>
+         <property name="topMargin">
+          <number>1</number>
+         </property>
+         <property name="rightMargin">
+          <number>1</number>
+         </property>
+         <property name="bottomMargin">
+          <number>1</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_17">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
            </property>
-           <property name="leftMargin">
-            <number>1</number>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
            </property>
-           <property name="topMargin">
-            <number>1</number>
-           </property>
-           <property name="rightMargin">
-            <number>1</number>
-           </property>
-           <property name="bottomMargin">
-            <number>1</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="label_17">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;微软雅黑&quot;;
+           <property name="styleSheet">
+            <string notr="true">font: 10pt &quot;微软雅黑&quot;;
 color: rgb(255, 255, 255);
 background-color: rgb(168, 168, 168);
 padding: 3px 3px 3px 10px;
@@ -236,32 +234,97 @@ border: none;
 border-top-right-radius: 5px;
 border-top-left-radius: 5px;
 </string>
-             </property>
-             <property name="text">
-              <string>载波设置</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QWidget" name="widget_12" native="true">
-             <property name="styleSheet">
-              <string notr="true">.QWidget
+           </property>
+           <property name="text">
+            <string>载波设置</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_12" native="true">
+           <property name="styleSheet">
+            <string notr="true">.QWidget
 {
 	border: none;
 	background-color: rgb(240, 241, 243);
 }</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QWidget" name="widget_15" native="true">
+        <property name="styleSheet">
+         <string notr="true">.QWidget
+{
+	border: 1px solid rgb(218,218,218);
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>1</number>
+         </property>
+         <property name="topMargin">
+          <number>1</number>
+         </property>
+         <property name="rightMargin">
+          <number>1</number>
+         </property>
+         <property name="bottomMargin">
+          <number>1</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_19">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 10pt &quot;微软雅黑&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(168, 168, 168);
+padding: 3px 3px 3px 10px;
+border: none;
+border-top-right-radius: 5px;
+border-top-left-radius: 5px;
+</string>
+           </property>
+           <property name="text">
+            <string>读卡声音</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_16" native="true">
+           <property name="styleSheet">
+            <string notr="true">.QWidget
+{
+	border: none;
+	background-color: rgb(240, 241, 243);
+}</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
-     <zorder>widget_9</zorder>
-     <zorder>widget_11</zorder>
-     <zorder>widget_13</zorder>
     </widget>
    </item>
   </layout>

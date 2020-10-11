@@ -11,6 +11,7 @@
 #include "antennaprmform.h"
 #include "carrierconfigform.h"
 #include "pointconfigform.h"
+#include "buzzerconfigform.h"
 
 ReadConfigFor6CDlg::ReadConfigFor6CDlg(QWidget *parent) :
     QWidget(parent),
@@ -48,6 +49,13 @@ void ReadConfigFor6CDlg::CreateView()
 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->addWidget(mPointConfigForm);	
 
+
+	mBuzzerConfigForm = new BuzzerConfigForm(ui->widget_16);
+	gridLayout = new QGridLayout(ui->widget_16);
+	gridLayout->setSpacing(0);
+	gridLayout->setContentsMargins(0, 0, 0, 0);
+	gridLayout->addWidget(mBuzzerConfigForm);
+
 	ui->widget_13->hide();
 }
 
@@ -56,6 +64,7 @@ void ReadConfigFor6CDlg::updateLanguage()
 	ui->label_16->setText(GET_TXT("IDCS_ANTENNA_PORT_SET"));
 	ui->label_18->setText(GET_TXT("IDCS_RADIO_CONFIG"));
 	ui->label_17->setText(GET_TXT("IDCS_CARRIER_PARAM"));
+	ui->label_19->setText(GET_TXT("IDCS_READ_SOUND"));
 }
 
 void ReadConfigFor6CDlg::showEvent(QShowEvent *event)

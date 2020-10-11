@@ -80,6 +80,9 @@
     <ClCompile Include="busaddrconfigdlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="buzzerconfigform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="carrierconfigform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -281,6 +284,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="busaddrconfigdlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="buzzerconfigform.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="carrierconfigform.h">
@@ -490,6 +496,8 @@
     
     
     
+    
+    
     <CustomBuild Include="Debug\moc\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
@@ -548,6 +556,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="ui_busaddrconfigdlg.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_buzzerconfigform.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="ui_carrierconfigform.h">
@@ -688,6 +699,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="busaddrconfigdlg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="buzzerconfigform.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="carrierconfigform.ui">
