@@ -18,7 +18,6 @@ CONFIG += debug_and_release warn_on qt thread
     MOC_DIR      = ./Debug/moc
     OBJECTS_DIR  = ./Debug/obj
     LIBS += -L"../bin"
-    #LIBS += -lQtNetworkd4
 
 } else {
     DEFINES += QT_NO_DEBUG QT_NO_DEBUG_OUTPUT QT_NO_WARNING_OUTPUT
@@ -27,7 +26,6 @@ CONFIG += debug_and_release warn_on qt thread
     MOC_DIR      = ./Release/moc
     OBJECTS_DIR  = ./Release/obj
     LIBS += -L"../bin"
-    LIBS += -lQtNetwork4
 
 }
 

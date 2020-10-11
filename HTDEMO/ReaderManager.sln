@@ -5,7 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RFIDAPI", "..\RFIDAPI\RFIDAPI.vcxproj", "{6EED8EEC-2090-4FD9-832E-AFB1CA0300A4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WIRELESSRFIDAPI", "..\WIRELESSRFIDAPI\WIRELESSRFIDAPI.vcxproj", "{BC09B8F3-D96D-496B-9A0B-061B0B582B27}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReaderManager", "ReaderManager.vcxproj", "{1B9A90CD-8862-3C94-A7CA-77100FEFC804}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WirelessDemo", "..\WIRELESS\WirelessDemo.vcxproj", "{275AC539-89B2-3552-9B2C-F4590A31B80C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +27,30 @@ Global
 		{6EED8EEC-2090-4FD9-832E-AFB1CA0300A4}.Release|x64.Build.0 = Release|x64
 		{6EED8EEC-2090-4FD9-832E-AFB1CA0300A4}.Release|x86.ActiveCfg = Release|Win32
 		{6EED8EEC-2090-4FD9-832E-AFB1CA0300A4}.Release|x86.Build.0 = Release|Win32
+		{BC09B8F3-D96D-496B-9A0B-061B0B582B27}.Debug|x64.ActiveCfg = Debug|x64
+		{BC09B8F3-D96D-496B-9A0B-061B0B582B27}.Debug|x64.Build.0 = Debug|x64
+		{BC09B8F3-D96D-496B-9A0B-061B0B582B27}.Debug|x86.ActiveCfg = Debug|Win32
+		{BC09B8F3-D96D-496B-9A0B-061B0B582B27}.Debug|x86.Build.0 = Debug|Win32
+		{BC09B8F3-D96D-496B-9A0B-061B0B582B27}.Release|x64.ActiveCfg = Release|Win32
+		{BC09B8F3-D96D-496B-9A0B-061B0B582B27}.Release|x86.ActiveCfg = Release|Win32
+		{BC09B8F3-D96D-496B-9A0B-061B0B582B27}.Release|x86.Build.0 = Release|Win32
 		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Debug|x64.ActiveCfg = Debug|x64
 		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Debug|x64.Build.0 = Debug|x64
 		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Debug|x86.ActiveCfg = Debug|x64
 		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Release|x64.ActiveCfg = Release|x64
 		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Release|x64.Build.0 = Release|x64
 		{1B9A90CD-8862-3C94-A7CA-77100FEFC804}.Release|x86.ActiveCfg = Release|x64
+		{275AC539-89B2-3552-9B2C-F4590A31B80C}.Debug|x64.ActiveCfg = Debug|x64
+		{275AC539-89B2-3552-9B2C-F4590A31B80C}.Debug|x64.Build.0 = Debug|x64
+		{275AC539-89B2-3552-9B2C-F4590A31B80C}.Debug|x86.ActiveCfg = Debug|x64
+		{275AC539-89B2-3552-9B2C-F4590A31B80C}.Release|x64.ActiveCfg = Release|x64
+		{275AC539-89B2-3552-9B2C-F4590A31B80C}.Release|x64.Build.0 = Release|x64
+		{275AC539-89B2-3552-9B2C-F4590A31B80C}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = msvc2015_64
 	EndGlobalSection
 EndGlobal
