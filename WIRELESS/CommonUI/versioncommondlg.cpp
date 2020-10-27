@@ -11,7 +11,7 @@ VersionCommonDlg::VersionCommonDlg(QWidget *parent) :
     ui->setupUi(this);
 	this->setWindowTitle(GET_TXT("IDCS_SOFT_VER"));
 	ui->label->setText(GET_TXT("IDCS_SOFT_VER"));
-
+	ui->label_4->setText(GET_TXT("IDCS_SOFT_MAKE_TIME"));
 	mSoftLabel = ui->label_8;
 	mSoftCreateTimeLabel = ui->label_5;
 

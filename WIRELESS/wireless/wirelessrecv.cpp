@@ -249,6 +249,7 @@ void WirelessRecvDlg::updateLanguage()
 	//mServerConfigBtn->setText(GET_TXT("IDCS_SERVER_CONFIG"));
 	mServerListenBtn->setText(GET_TXT("IDCS_START_LISTEN"));
 	mAddReaderBtn->setText(GET_TXT("IDCS_READER_ADD"));
+	ui->checkBox->setText(GET_TXT("IDCS_RECORD_INFO"));
 }
 
 void WirelessRecvDlg::slot_RecvreaderInfo(void* pReaderInfo)

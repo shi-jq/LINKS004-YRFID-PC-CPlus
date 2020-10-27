@@ -28,7 +28,9 @@ SoftConfigDlg::SoftConfigDlg(QWidget *parent) :
 
 	ui->label->setText(GET_TXT("IDCS_LANGUAGE_CONFIG"));
 	ui->pushButton->setText(GET_TXT("IDCS_SET"));
-	ui->pushButton_2->setText(GET_TXT("IDCS_CANCEL"));
+	ui->pushButton_2->setText(GET_TXT("IDCS_CANCEL"));	
+	ui->label_2->setText(GET_TXT("IDCS_SAVE_FILE"));
+	ui->pushButton_3->setText(GET_TXT("IDCS_BROWSE"));
 }
 
 SoftConfigDlg::~SoftConfigDlg()
