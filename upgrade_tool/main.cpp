@@ -1,10 +1,10 @@
-#include "QtGuiApplication1.h"
+#include "adb_tool.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	QtGuiApplication1 w;
+	adb_tool w;
 	w.show();
 	return a.exec();
 }
