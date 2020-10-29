@@ -9,10 +9,15 @@
 #include "QMessageBox"
 #include "QProgressBar"
 #include "QSettings"
+#include <windows.h>
 
-QString PathName, checkTemp, starttemp, canceltemp, pathinfo, lastPath, file;
+
 //QProgressBar *startprogressbar;
 
+static const QString defaultApkPackage = "com.handheld.yhfr";
+static const QString defaultApkActivity = "com.rfid_demo.main.MainActivity";
+static const QString defaultLauncherPackage = "com.android.launcher3";
+static const QString defaultLauncherActivity = "com.android.launcher3.Launcher";
 
 adb_tool::adb_tool(QWidget *parent) :
 	QMainWindow(parent),
@@ -23,11 +28,31 @@ adb_tool::adb_tool(QWidget *parent) :
 	ui->progressBar->setValue(0);
 	p = new QProcess(this);
 	ui->setupButton->setChecked(true);
+	ui->installtypewdg->hide();
+
+	QSettings setting("./Setting.ini", QSettings::IniFormat);//保存路径信息至运行目录
+	QString lastPath = setting.value("LastFilePath").toString();//获取路径
+	QString PathName = setting.value("LastFilePath", "").toString();	
+	QFile file(PathName);
+	if (file.exists())
+	{
+		ui->pathtEdit->setText(PathName);//文件名称显示
+	}
+
+	apkPackage = setting.value("apkPackage", defaultApkPackage).toString();
+	apkActivity = setting.value("apkActivity", defaultApkActivity).toString();
+	launcherPackage = setting.value("launcherPackage", defaultLauncherPackage).toString();
+	launcherActivity = setting.value("launcherActivity", defaultLauncherActivity).toString();
 
 }
 
 adb_tool::~adb_tool()
 {
+	if (p)
+	{
+		delete p;
+		p = NULL;
+	}
 	delete ui;
 
 }
@@ -103,6 +128,26 @@ void adb_tool::on_choseButton_clicked()
 //开始功能
 void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的adb命令
 {
+	pathinfo = ui->pathtEdit->text();
+	if (pathinfo.isEmpty())
+	{
+		QMessageBox testMassage;
+		testMassage.setWindowTitle("提示！");
+		testMassage.setText("请选择文件");
+		testMassage.exec();
+		return;
+	}
+	QFile file(pathinfo);
+	if (!file.exists())
+	{
+		QMessageBox testMassage;
+		testMassage.setWindowTitle("提示！");
+		testMassage.setText("文件不存在");
+		testMassage.exec();
+		return;
+	}
+
+
 	//安装程序
 	if (ui->setupButton->isChecked())
 	{	
@@ -110,7 +155,7 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 		p->waitForStarted();
 		p->waitForFinished();
 		QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
-		pathinfo = ui->pathtEdit->text();
+		
 		if (checkTemp.isNull())
 		{
 			QMessageBox testMassage;
@@ -153,9 +198,28 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 				ui->progressBar->setValue(100);//成功后设置进度条值为100%
 				QString startTemp = QString::fromUtf8(p->readAllStandardOutput());
 
-				p->start("cmd", QStringList() << "/c" << "adb reboot");	//push文件至手机sdcrad目录
+				if (ui->bootCkb->isChecked())
+				{
+					p->start("cmd", QStringList() << "/c" << QString("adb shell cmd package set-home-activity %1/%2").arg(apkPackage).arg(apkActivity));
+				}
+				else
+				{
+					p->start("cmd", QStringList() << "/c" << QString("adb shell cmd package set-home-activity %1/%2").arg(launcherPackage).arg(launcherActivity));
+				}
+
 				p->waitForStarted();
 				p->waitForFinished();
+
+				p->start("cmd", QStringList() << "/c" << QString("adb shell am start -n  %1/%2").arg(apkPackage).arg(apkActivity));
+				p->waitForStarted();
+				p->waitForFinished();
+
+				startTemp = QString::fromUtf8(p->readAllStandardOutput());
+
+				
+				//p->start("cmd", QStringList() << "/c" << "adb reboot");	//push文件至手机sdcrad目录
+				//p->waitForStarted();
+				//p->waitForFinished();
 
 				QMessageBox testMassage;
 				testMassage.setWindowTitle("提示！");
@@ -241,4 +305,105 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 void adb_tool::on_cancelButton_clicked()
 {
 	QWidget::close(); //点击退出按钮重置界面并关闭程序，kill adb进程，先实现关闭窗口，adb命令不怎么消耗资源
+}
+
+
+
+
+void adb_tool::on_rebootBtn_clicked()
+{
+	p->start("cmd", QStringList() << "/c" << "adb shell getprop ro.product.model");//检查设备是否存在
+	p->waitForStarted();
+	p->waitForFinished();
+	QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
+	pathinfo = ui->pathtEdit->text();
+	if (checkTemp.isNull())
+	{
+		QMessageBox testMassage;
+		testMassage.setWindowTitle("提示！");
+		testMassage.setText("设备未连接");
+		testMassage.exec();
+		return;
+	}
+
+	p->start("cmd", QStringList() << "/c" << "adb reboot");//检查设备是否存在
+	p->waitForStarted();
+	p->waitForFinished();
+
+	QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
+
+	QMessageBox testMassage;
+	testMassage.setWindowTitle("提示！");
+	testMassage.setText("重启成功! " + startTemp);
+	testMassage.exec();
+	ui->progressBar->setValue(0);
+}
+
+
+
+void adb_tool::on_uninstallBtn_clicked()
+{
+	p->start("cmd", QStringList() << "/c" << "adb shell getprop ro.product.model");//检查设备是否存在
+	p->waitForStarted();
+	p->waitForFinished();
+	QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
+	pathinfo = ui->pathtEdit->text();
+	if (checkTemp.isNull())
+	{
+		QMessageBox testMassage;
+		testMassage.setWindowTitle("提示！");
+		testMassage.setText("设备未连接");
+		testMassage.exec();
+		return;
+	}
+
+	p->start("cmd", QStringList() << "/c" << QString("adb shell pm uninstall -k %1").arg(apkPackage));//检查设备是否存在
+	p->waitForStarted();
+	p->waitForFinished();
+
+	QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
+
+	QMessageBox testMassage;
+	testMassage.setWindowTitle("提示！");
+	testMassage.setText("卸载成功! " + startTemp);
+	testMassage.exec();
+	ui->progressBar->setValue(0);
+}
+
+
+void adb_tool::on_setbootBtn_clicked()
+{
+	p->start("cmd", QStringList() << "/c" << "adb shell getprop ro.product.model");//检查设备是否存在
+	p->waitForStarted();
+	p->waitForFinished();
+	QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
+	pathinfo = ui->pathtEdit->text();
+	if (checkTemp.isNull())
+	{
+		QMessageBox testMassage;
+		testMassage.setWindowTitle("提示！");
+		testMassage.setText("设备未连接");
+		testMassage.exec();
+		return;
+	}
+
+	if (ui->bootCkb->isChecked())
+	{
+		p->start("cmd", QStringList() << "/c" << QString("adb shell cmd package set-home-activity %1/%2").arg(apkPackage).arg(apkActivity));
+	}
+	else
+	{
+		p->start("cmd", QStringList() << "/c" << QString("adb shell cmd package set-home-activity %1/%2").arg(launcherPackage).arg(launcherActivity));
+	}
+
+	p->waitForStarted();
+	p->waitForFinished();
+
+	QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
+
+	QMessageBox testMassage;
+	testMassage.setWindowTitle("提示！");
+	testMassage.setText("设置成功! " + startTemp);
+	testMassage.exec();
+	ui->progressBar->setValue(0);
 }

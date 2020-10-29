@@ -30,9 +30,28 @@ public:
 
 	void on_checkButton_clicked();
 
+	void on_rebootBtn_clicked();
+	void on_uninstallBtn_clicked();
+
+	void on_setbootBtn_clicked();
 private:
 	Ui::MainWindow *ui;
 	QProcess *p;
+
+	QString PathName;
+	QString checkTemp;
+	QString starttemp;
+	QString canceltemp;
+	QString pathinfo;
+	QString lastPath;
+	QString file;
+
+
+	QString apkPackage;
+	QString apkActivity;
+
+	QString launcherPackage;
+	QString launcherActivity;
 
 };
 
