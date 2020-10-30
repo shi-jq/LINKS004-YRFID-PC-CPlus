@@ -37,18 +37,20 @@ public:
     QGridLayout *gridLayout_5;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_2;
-    QGridLayout *gridLayout;
-    QLineEdit *pathtEdit;
-    QPushButton *choseButton;
-    QLabel *pathtext;
-    QProgressBar *progressBar;
-    QPushButton *startButton;
     QWidget *installtypewdg;
     QHBoxLayout *horizontalLayout_3;
     QSpacerItem *horizontalSpacer_5;
     QRadioButton *setupButton;
     QRadioButton *uploadButton;
     QSpacerItem *horizontalSpacer_4;
+    QGridLayout *gridLayout;
+    QLineEdit *pathtEdit;
+    QPushButton *choseButton;
+    QLabel *pathtext;
+    QProgressBar *progressBar;
+    QHBoxLayout *horizontalLayout_4;
+    QSpacerItem *horizontalSpacer_3;
+    QPushButton *startButton;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_3;
     QSpacerItem *horizontalSpacer_6;
@@ -73,7 +75,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(404, 324);
+        MainWindow->resize(410, 355);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout_5 = new QGridLayout(centralWidget);
@@ -86,38 +88,6 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        gridLayout = new QGridLayout();
-        gridLayout->setSpacing(6);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        pathtEdit = new QLineEdit(groupBox);
-        pathtEdit->setObjectName(QStringLiteral("pathtEdit"));
-
-        gridLayout->addWidget(pathtEdit, 0, 1, 1, 1);
-
-        choseButton = new QPushButton(groupBox);
-        choseButton->setObjectName(QStringLiteral("choseButton"));
-
-        gridLayout->addWidget(choseButton, 0, 2, 1, 1);
-
-        pathtext = new QLabel(groupBox);
-        pathtext->setObjectName(QStringLiteral("pathtext"));
-
-        gridLayout->addWidget(pathtext, 0, 0, 1, 1);
-
-        progressBar = new QProgressBar(groupBox);
-        progressBar->setObjectName(QStringLiteral("progressBar"));
-        progressBar->setValue(24);
-
-        gridLayout->addWidget(progressBar, 2, 1, 1, 2);
-
-        startButton = new QPushButton(groupBox);
-        startButton->setObjectName(QStringLiteral("startButton"));
-
-        gridLayout->addWidget(startButton, 0, 3, 1, 1);
-
-
-        gridLayout_2->addLayout(gridLayout, 1, 0, 1, 1);
-
         installtypewdg = new QWidget(groupBox);
         installtypewdg->setObjectName(QStringLiteral("installtypewdg"));
         horizontalLayout_3 = new QHBoxLayout(installtypewdg);
@@ -145,6 +115,48 @@ public:
 
         gridLayout_2->addWidget(installtypewdg, 0, 0, 1, 1);
 
+        gridLayout = new QGridLayout();
+        gridLayout->setSpacing(6);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        pathtEdit = new QLineEdit(groupBox);
+        pathtEdit->setObjectName(QStringLiteral("pathtEdit"));
+
+        gridLayout->addWidget(pathtEdit, 0, 1, 1, 1);
+
+        choseButton = new QPushButton(groupBox);
+        choseButton->setObjectName(QStringLiteral("choseButton"));
+
+        gridLayout->addWidget(choseButton, 0, 2, 1, 1);
+
+        pathtext = new QLabel(groupBox);
+        pathtext->setObjectName(QStringLiteral("pathtext"));
+
+        gridLayout->addWidget(pathtext, 0, 0, 1, 1);
+
+        progressBar = new QProgressBar(groupBox);
+        progressBar->setObjectName(QStringLiteral("progressBar"));
+        progressBar->setValue(24);
+
+        gridLayout->addWidget(progressBar, 2, 1, 1, 2);
+
+
+        gridLayout_2->addLayout(gridLayout, 1, 0, 1, 1);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_3);
+
+        startButton = new QPushButton(groupBox);
+        startButton->setObjectName(QStringLiteral("startButton"));
+
+        horizontalLayout_4->addWidget(startButton);
+
+
+        gridLayout_2->addLayout(horizontalLayout_4, 2, 0, 1, 1);
+
 
         gridLayout_5->addWidget(groupBox, 2, 0, 1, 2);
 
@@ -154,7 +166,7 @@ public:
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        horizontalSpacer_6 = new QSpacerItem(282, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_6 = new QSpacerItem(288, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_3->addItem(horizontalSpacer_6, 0, 0, 1, 1);
 
@@ -247,11 +259,11 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "adb_tool", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainWindow", "\345\215\207\347\272\247", Q_NULLPTR));
-        choseButton->setText(QApplication::translate("MainWindow", "\346\265\217\350\247\210", Q_NULLPTR));
-        pathtext->setText(QApplication::translate("MainWindow", "\346\226\207\344\273\266\350\267\257\345\276\204", Q_NULLPTR));
-        startButton->setText(QApplication::translate("MainWindow", "\345\215\207\347\272\247", Q_NULLPTR));
         setupButton->setText(QApplication::translate("MainWindow", "\345\256\211\350\243\205\347\250\213\345\272\217", Q_NULLPTR));
         uploadButton->setText(QApplication::translate("MainWindow", "\344\270\212\344\274\240\346\226\207\344\273\266", Q_NULLPTR));
+        choseButton->setText(QApplication::translate("MainWindow", "\346\265\217\350\247\210", Q_NULLPTR));
+        pathtext->setText(QApplication::translate("MainWindow", "\346\226\207\344\273\266\350\267\257\345\276\204", Q_NULLPTR));
+        startButton->setText(QApplication::translate("MainWindow", "\345\256\211\350\243\205", Q_NULLPTR));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "\345\215\270\350\275\275", Q_NULLPTR));
         uninstallBtn->setText(QApplication::translate("MainWindow", "\345\215\270\350\275\275", Q_NULLPTR));
         groupBox_3->setTitle(QApplication::translate("MainWindow", "\345\274\200\346\234\272\350\207\252\345\220\257", Q_NULLPTR));

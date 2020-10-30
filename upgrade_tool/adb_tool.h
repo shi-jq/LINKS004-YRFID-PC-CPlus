@@ -52,6 +52,7 @@ private:
 
 	QString launcherPackage;
 	QString launcherActivity;
+	QString exePath;
 
 };
 

@@ -29,6 +29,7 @@ adb_tool::adb_tool(QWidget *parent) :
 	p = new QProcess(this);
 	ui->setupButton->setChecked(true);
 	ui->installtypewdg->hide();
+	exePath = QCoreApplication::applicationDirPath()+"/platform-tools";
 
 	QSettings setting("./Setting.ini", QSettings::IniFormat);//保存路径信息至运行目录
 	QString lastPath = setting.value("LastFilePath").toString();//获取路径
@@ -62,7 +63,9 @@ adb_tool::~adb_tool()
 void adb_tool::on_checkButton_clicked()
 {
 	//p = new QProcess(this);
-	p->start("cmd", QStringList() << "/c" << "adb shell getprop ro.product.model");
+	QString test = QString("%1/adb shell getprop ro.product.model").arg(exePath);
+
+	p->start("cmd", QStringList() << "/c" << QString("%1/adb shell getprop ro.product.model").arg(exePath));
 	p->waitForStarted();
 	p->waitForFinished();
 	//成功则提示连接成功并打印设备型号，否则打印连接失败
@@ -151,7 +154,7 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 	//安装程序
 	if (ui->setupButton->isChecked())
 	{	
-		p->start("cmd", QStringList() << "/c" << "adb shell getprop ro.product.model");//检查设备是否存在
+		p->start("cmd", QStringList() << "/c" << QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
 		p->waitForStarted();
 		p->waitForFinished();
 		QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
@@ -175,7 +178,7 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 			}
 			else
 			{
-				p->start("cmd", QStringList() << "/c" << "adb install" << pathinfo);//调用cmd命令执行安装
+				p->start("cmd", QStringList() << "/c" << QString("%1/adb install").arg(exePath) << pathinfo);//调用cmd命令执行安装
 																					//p->waitForStarted();
 				if (!p->waitForStarted())
 				{
@@ -200,17 +203,17 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 
 				if (ui->bootCkb->isChecked())
 				{
-					p->start("cmd", QStringList() << "/c" << QString("adb shell cmd package set-home-activity %1/%2").arg(apkPackage).arg(apkActivity));
+					p->start("cmd", QStringList() << "/c" << QString("%1/adb shell cmd package set-home-activity %2/%3").arg(exePath).arg(apkPackage).arg(apkActivity));
 				}
 				else
 				{
-					p->start("cmd", QStringList() << "/c" << QString("adb shell cmd package set-home-activity %1/%2").arg(launcherPackage).arg(launcherActivity));
+					p->start("cmd", QStringList() << "/c" << QString("%1/adb shell cmd package set-home-activity %2/%3").arg(exePath).arg(launcherPackage).arg(launcherActivity));
 				}
 
 				p->waitForStarted();
 				p->waitForFinished();
 
-				p->start("cmd", QStringList() << "/c" << QString("adb shell am start -n  %1/%2").arg(apkPackage).arg(apkActivity));
+				p->start("cmd", QStringList() << "/c" << QString("%1/adb shell am start -n  %2/%3").arg(exePath).arg(apkPackage).arg(apkActivity));
 				p->waitForStarted();
 				p->waitForFinished();
 
@@ -238,7 +241,7 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 	//上传文件
 	if (ui->uploadButton->isChecked())
 	{
-		p->start("cmd", QStringList() << "/c" << "adb shell getprop ro.product.model");	//push文件至手机sdcrad目录
+		p->start("cmd", QStringList() << "/c" << QString("%1/adb shell getprop ro.product.model").arg(exePath));	//push文件至手机sdcrad目录
 		p->waitForStarted();
 		p->waitForFinished();
 		QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
@@ -263,7 +266,7 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 			else
 			{
 				//QString path = ui->pathtEdit->toPlainText();
-				p->start("cmd", QStringList() << "/c" << "adb push" << pathinfo << "/sdcard");//上传文件至/sdcard根目录
+				p->start("cmd", QStringList() << "/c" << QString("%1/adb push").arg(exePath) << pathinfo << "/sdcard");//上传文件至/sdcard根目录
 				//p->waitForStarted();
 				if (!p->waitForStarted(-1))
 				{
@@ -312,7 +315,7 @@ void adb_tool::on_cancelButton_clicked()
 
 void adb_tool::on_rebootBtn_clicked()
 {
-	p->start("cmd", QStringList() << "/c" << "adb shell getprop ro.product.model");//检查设备是否存在
+	p->start("cmd", QStringList() << "/c" << QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
 	p->waitForStarted();
 	p->waitForFinished();
 	QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
@@ -326,7 +329,7 @@ void adb_tool::on_rebootBtn_clicked()
 		return;
 	}
 
-	p->start("cmd", QStringList() << "/c" << "adb reboot");//检查设备是否存在
+	p->start("cmd", QStringList() << "/c" << QString("%1/adb reboot").arg(exePath));//检查设备是否存在
 	p->waitForStarted();
 	p->waitForFinished();
 
@@ -343,7 +346,7 @@ void adb_tool::on_rebootBtn_clicked()
 
 void adb_tool::on_uninstallBtn_clicked()
 {
-	p->start("cmd", QStringList() << "/c" << "adb shell getprop ro.product.model");//检查设备是否存在
+	p->start("cmd", QStringList() << "/c" << QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
 	p->waitForStarted();
 	p->waitForFinished();
 	QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
@@ -357,7 +360,7 @@ void adb_tool::on_uninstallBtn_clicked()
 		return;
 	}
 
-	p->start("cmd", QStringList() << "/c" << QString("adb shell pm uninstall -k %1").arg(apkPackage));//检查设备是否存在
+	p->start("cmd", QStringList() << "/c" << QString("%1/adb shell pm uninstall -k %2").arg(exePath).arg(apkPackage));//检查设备是否存在
 	p->waitForStarted();
 	p->waitForFinished();
 
@@ -373,7 +376,7 @@ void adb_tool::on_uninstallBtn_clicked()
 
 void adb_tool::on_setbootBtn_clicked()
 {
-	p->start("cmd", QStringList() << "/c" << "adb shell getprop ro.product.model");//检查设备是否存在
+	p->start("cmd", QStringList() << "/c" << QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
 	p->waitForStarted();
 	p->waitForFinished();
 	QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
@@ -389,11 +392,11 @@ void adb_tool::on_setbootBtn_clicked()
 
 	if (ui->bootCkb->isChecked())
 	{
-		p->start("cmd", QStringList() << "/c" << QString("adb shell cmd package set-home-activity %1/%2").arg(apkPackage).arg(apkActivity));
+		p->start("cmd", QStringList() << "/c" << QString("%1/adb shell cmd package set-home-activity %2/%3").arg(exePath).arg(apkPackage).arg(apkActivity));
 	}
 	else
 	{
-		p->start("cmd", QStringList() << "/c" << QString("adb shell cmd package set-home-activity %1/%2").arg(launcherPackage).arg(launcherActivity));
+		p->start("cmd", QStringList() << "/c" << QString("%1/adb shell cmd package set-home-activity %2/%3").arg(exePath).arg(launcherPackage).arg(launcherActivity));
 	}
 
 	p->waitForStarted();
