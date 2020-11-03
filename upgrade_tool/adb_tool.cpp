@@ -10,18 +10,18 @@
 #include "QProgressBar"
 #include "QSettings"
 #include <windows.h>
-
+#include "LanguageSrc.h"
+#include "MessageBox.h"
+#include <QMenuBar>
+#include "widgetconfig.h"
 
 //QProgressBar *startprogressbar;
 
-static const QString defaultApkPackage = "com.handheld.yhfr";
-static const QString defaultApkActivity = "com.rfid_demo.main.MainActivity";
-static const QString defaultLauncherPackage = "com.android.launcher3";
-static const QString defaultLauncherActivity = "com.android.launcher3.Launcher";
 
 adb_tool::adb_tool(QWidget *parent) :
 	QMainWindow(parent),
-	ui(new Ui::MainWindow)
+	ui(new Ui::MainWindow),
+	isNeedReboot(false)
 {
 	ui->setupUi(this);
 	//初始化界面
@@ -40,11 +40,36 @@ adb_tool::adb_tool(QWidget *parent) :
 		ui->pathtEdit->setText(PathName);//文件名称显示
 	}
 
-	apkPackage = setting.value("apkPackage", defaultApkPackage).toString();
-	apkActivity = setting.value("apkActivity", defaultApkActivity).toString();
+	apkPackage = WIDGETSTRING_GET("adb_tool", "ApkPackage");
+	apkActivity = WIDGETSTRING_GET("adb_tool", "ApkActivity");
 	launcherPackage = setting.value("launcherPackage", defaultLauncherPackage).toString();
 	launcherActivity = setting.value("launcherActivity", defaultLauncherActivity).toString();
 
+	QMenu* fileMenu = NULL;
+	fileMenu = menuBar()->addMenu(GET_TXT("IDCS_FILE"));
+	mSoftConfigDlg = new SoftConfigDlg(this);
+	mSoftConfigDlg->setMainwindow(this);
+	mSoftCongfigAc = fileMenu->addAction(GET_TXT("IDCS_SOFT_CONFIG"));
+	connect(mSoftCongfigAc, SIGNAL(triggered()), this, SLOT(slot_SoftConfigAc()));
+	mExitAc = fileMenu->addAction(GET_TXT("IDCS_QUIT"));
+	connect(mExitAc, SIGNAL(triggered()), this, SLOT(slot_ExitAc()));
+
+	this->setWindowTitle(GET_TXT("IDCS_INSTALL"));
+	
+	ui->tabWidget->setTabText(0,GET_TXT("IDCS_INSTALL"));
+	ui->tabWidget->setTabText(1, GET_TXT("IDCS_POWERBOOT"));
+	ui->pathtext->setText(GET_TXT("IDCS_FILE"));
+	ui->choseButton->setText(GET_TXT("IDCS_BROWSE"));
+	ui->startButton->setText(GET_TXT("IDCS_INSTALL"));
+	ui->uninstallBtn->setText(GET_TXT("IDCS_UNINSTALL"));
+
+	ui->rebootBtn->setText(GET_TXT("IDCS_REBOOT"));
+	ui->checkButton->setText(GET_TXT("IDCS_CHECK_LINK"));
+	ui->cancelButton->setText(GET_TXT("IDCS_CLOSE"));
+	ui->bootCkb->setText(GET_TXT("IDCS_POWERBOOT"));
+	ui->label->setText(GET_TXT("IDCS_PWD"));
+	ui->setbootBtn->setText(GET_TXT("IDCS_SET"));
+	
 }
 
 adb_tool::~adb_tool()
@@ -73,15 +98,15 @@ void adb_tool::on_checkButton_clicked()
 	if (checkTemp.isNull())
 	{
 		QMessageBox testMassage;
-		testMassage.setWindowTitle("提示！");
-		testMassage.setText("连接失败！");
+		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+		testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
 		testMassage.exec();
 	}
 	else
 	{
 		QMessageBox testMassage;
-		testMassage.setWindowTitle("提示！");
-		testMassage.setText("设备已连接!\n设备型号:" + checkTemp);
+		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+		testMassage.setText(GET_TXT("IDCS_LINKED") +"  "+ checkTemp);
 		testMassage.exec();
 	}
 
@@ -97,7 +122,7 @@ void adb_tool::on_choseButton_clicked()
 		QDir dir;
 		QSettings setting("./Setting.ini", QSettings::IniFormat);//保存路径信息至运行目录
 		QString lastPath = setting.value("LastFilePath").toString();//获取路径
-		PathName = QFileDialog::getOpenFileName(this, "请选择文件路径", lastPath, "*apk");
+		PathName = QFileDialog::getOpenFileName(this, GET_TXT("IDCS_PLEASE_SELECT_FILE"), lastPath, "*apk");
 		if (!PathName.isEmpty())
 		{
 			setting.setValue("LastFilePath", PathName);//记录最后一次使用路径
@@ -111,7 +136,7 @@ void adb_tool::on_choseButton_clicked()
 	if (ui->uploadButton->isChecked())
 	{
 		QDir dir;
-		PathName = QFileDialog::getOpenFileName(this, "请选择文件路径", "D:/");
+		PathName = QFileDialog::getOpenFileName(this, GET_TXT("IDCS_PLEASE_SELECT_FILE"), "D:/");
 		//PathName.replace("/","\\");// 单斜杠转换双斜杠
 		ui->pathtEdit->setText(PathName);//文件名称显示
 		/*
@@ -135,8 +160,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 	if (pathinfo.isEmpty())
 	{
 		QMessageBox testMassage;
-		testMassage.setWindowTitle("提示！");
-		testMassage.setText("请选择文件");
+		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+		testMassage.setText(GET_TXT("IDCS_PLEASE_SELECT_FILE"));
 		testMassage.exec();
 		return;
 	}
@@ -144,8 +169,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 	if (!file.exists())
 	{
 		QMessageBox testMassage;
-		testMassage.setWindowTitle("提示！");
-		testMassage.setText("文件不存在");
+		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+		testMassage.setText(GET_TXT("IDCS_FILE_NOT_VALIDITY"));
 		testMassage.exec();
 		return;
 	}
@@ -162,8 +187,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 		if (checkTemp.isNull())
 		{
 			QMessageBox testMassage;
-			testMassage.setWindowTitle("提示！");
-			testMassage.setText("设备未连接");
+			testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+			testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
 			testMassage.exec();
 		}
 		else
@@ -172,8 +197,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 			if (b == true)
 			{
 				QMessageBox testMassage;
-				testMassage.setWindowTitle("提示！");
-				testMassage.setText("路径不能包含中文字符");
+				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+				testMassage.setText(GET_TXT("IDCS_CHOOSE_ENGLISH_PATH"));
 				testMassage.exec();
 			}
 			else
@@ -183,8 +208,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 				if (!p->waitForStarted())
 				{
 					QMessageBox testMassage;
-					testMassage.setWindowTitle("提示！");
-					testMassage.setText("执行失败！");
+					testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+					testMassage.setText(GET_TXT("IDCS_EXECUTE_FAILED"));
 					testMassage.exec();
 				}
 				for (int i = 0; i <= 70; i++)
@@ -195,13 +220,13 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 				if (!p->waitForFinished())
 				{
 					QMessageBox testMassage;
-					testMassage.setText("执行失败！");
+					testMassage.setText(GET_TXT("IDCS_EXECUTE_FAILED"));
 					testMassage.exec();
 				}
 				ui->progressBar->setValue(100);//成功后设置进度条值为100%
 				QString startTemp = QString::fromUtf8(p->readAllStandardOutput());
 
-				if (ui->bootCkb->isChecked())
+				if (true)//ui->bootCkb->isChecked())
 				{
 					p->start("cmd", QStringList() << "/c" << QString("%1/adb shell cmd package set-home-activity %2/%3").arg(exePath).arg(apkPackage).arg(apkActivity));
 				}
@@ -225,8 +250,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 				//p->waitForFinished();
 
 				QMessageBox testMassage;
-				testMassage.setWindowTitle("提示！");
-				testMassage.setText("执行安装成功！请检查或操作手机执行安装!\n安装信息：" + startTemp);
+				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+				testMassage.setText(GET_TXT("IDCS_INSTALL_SUCCESS")+" " + startTemp);
 				testMassage.exec();
 				ui->progressBar->setValue(0);//初始化进度条
 
@@ -249,8 +274,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 		if (checkTemp.isNull())
 		{
 			QMessageBox testMassage;
-			testMassage.setWindowTitle("提示！");
-			testMassage.setText("设备未连接");
+			testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+			testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
 			testMassage.exec();
 		}
 		else
@@ -259,8 +284,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 			if (b == true)
 			{
 				QMessageBox testMassage;
-				testMassage.setWindowTitle("提示！");
-				testMassage.setText("路径不能包含中文字符");
+				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+				testMassage.setText(GET_TXT("IDCS_CHOOSE_ENGLISH_PATH"));
 				testMassage.exec();
 			}
 			else
@@ -271,8 +296,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 				if (!p->waitForStarted(-1))
 				{
 					QMessageBox testMassage;
-					testMassage.setWindowTitle("提示！");
-					testMassage.setText("上传失败！");
+					testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+					testMassage.setText(GET_TXT("IDCS_UPLOAD_FAILED"));
 					testMassage.exec();
 				}
 				for (int i = 0; i <= 70; i++)
@@ -283,8 +308,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 				if (!p->waitForFinished(-1))
 				{
 					QMessageBox testMassage;
-					testMassage.setWindowTitle("提示！");
-					testMassage.setText("上传失败！");
+					testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+					testMassage.setText(GET_TXT("IDCS_UPLOAD_FAILED"));
 					testMassage.exec();
 				}
 				ui->progressBar->setValue(100);//成功后设置进度条值为100%
@@ -292,8 +317,8 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作类型执行不同的
 				QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
 
 				QMessageBox testMassage;
-				testMassage.setWindowTitle("提示！");
-				testMassage.setText("执行上传命令成功！请检查！\n下载信息：" + startTemp);
+				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+				testMassage.setText(GET_TXT("IDCS_UPLOAD_SUCCESS")+" " + startTemp);
 				testMassage.exec();
 				ui->progressBar->setValue(0);//初始化进度条
 			}
@@ -323,8 +348,8 @@ void adb_tool::on_rebootBtn_clicked()
 	if (checkTemp.isNull())
 	{
 		QMessageBox testMassage;
-		testMassage.setWindowTitle("提示！");
-		testMassage.setText("设备未连接");
+		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+		testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
 		testMassage.exec();
 		return;
 	}
@@ -336,8 +361,8 @@ void adb_tool::on_rebootBtn_clicked()
 	QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
 
 	QMessageBox testMassage;
-	testMassage.setWindowTitle("提示！");
-	testMassage.setText("重启成功! " + startTemp);
+	testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+	testMassage.setText(GET_TXT("IDCS_REBOOT_SUCCESS")+" " + startTemp);
 	testMassage.exec();
 	ui->progressBar->setValue(0);
 }
@@ -354,8 +379,8 @@ void adb_tool::on_uninstallBtn_clicked()
 	if (checkTemp.isNull())
 	{
 		QMessageBox testMassage;
-		testMassage.setWindowTitle("提示！");
-		testMassage.setText("设备未连接");
+		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+		testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
 		testMassage.exec();
 		return;
 	}
@@ -367,8 +392,8 @@ void adb_tool::on_uninstallBtn_clicked()
 	QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
 
 	QMessageBox testMassage;
-	testMassage.setWindowTitle("提示！");
-	testMassage.setText("卸载成功! " + startTemp);
+	testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+	testMassage.setText(GET_TXT("IDCS_UNINSTALL_SUCCESS")+" " + startTemp);
 	testMassage.exec();
 	ui->progressBar->setValue(0);
 }
@@ -376,6 +401,14 @@ void adb_tool::on_uninstallBtn_clicked()
 
 void adb_tool::on_setbootBtn_clicked()
 {
+	if (!ui->lineEdit->text().compare("Admin@cirfid.com") == 0)
+	{
+		QMessageBox testMassage;
+		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+		testMassage.setText(GET_TXT("IDCS_PWD_ERRO"));
+		testMassage.exec();
+		return;
+	}
 	p->start("cmd", QStringList() << "/c" << QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
 	p->waitForStarted();
 	p->waitForFinished();
@@ -384,8 +417,8 @@ void adb_tool::on_setbootBtn_clicked()
 	if (checkTemp.isNull())
 	{
 		QMessageBox testMassage;
-		testMassage.setWindowTitle("提示！");
-		testMassage.setText("设备未连接");
+		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+		testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
 		testMassage.exec();
 		return;
 	}
@@ -405,8 +438,32 @@ void adb_tool::on_setbootBtn_clicked()
 	QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
 
 	QMessageBox testMassage;
-	testMassage.setWindowTitle("提示！");
-	testMassage.setText("设置成功! " + startTemp);
+	testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+	testMassage.setText(GET_TXT("IDCS_SET_SUCCESS") + " " + startTemp);
 	testMassage.exec();
 	ui->progressBar->setValue(0);
+}
+
+void adb_tool::slot_SoftConfigAc()
+{
+	mSoftConfigDlg->exec();
+}
+
+void adb_tool::slot_ExitAc()
+{
+	if (HtMessageBox::Question(GET_TXT("IDCS_QUIT_SOFT"), this)
+		== HtMessageBox::RET_ENTER)
+	{
+		qApp->quit();
+	}
+}
+
+void adb_tool::SetNeedReboot(bool b)
+{
+	isNeedReboot = b;
+}
+
+bool adb_tool::GetNeedReboot()
+{
+	return isNeedReboot;
 }

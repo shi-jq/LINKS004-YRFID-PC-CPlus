@@ -28,11 +28,10 @@ CONFIG += debug_and_release warn_on qt thread
 
 }
 
-LIBS += -lWIRELESSRFIDAPI
-
 DEPENDPATH += .
 INCLUDEPATH += ../bin
 INCLUDEPATH += ./
+INCLUDEPATH += ./Common
 
 win32: {
         DEFINES += WIN32
@@ -40,15 +39,42 @@ win32: {
         LIBS += -lws2_32 -lOle32
 }
 
-RESOURCES += adb_tool.qrc
+RESOURCES += HTDEMO.qrc
+RC_FILE = HTDEMO.rc
 
 SOURCES += ./main.cpp\
-    ./adb_tool.cpp
-    
-HEADERS  += ./upgrade_tool.pro \
-    ./adb_tool.h
+    ./adb_tool.cpp \
+  ./Common/widgetconfig.cpp \
+./Common/mainapp.cpp \
+    ./Common/appconfig.cpp \
+    ./Common/SetDebugNew.cpp \
+ ./Common/CheckTime.cpp \
+    ./Common/LanguageSrc.cpp \
+    ./Common/maininit.cpp  \
+ ./Common/widgetconfig.cpp \
+        ./Common/Lock.cpp \
+ ./Common/BuzzerSpeakerCtrl.cpp \
+    softconfigdlg.cpp \
+    MessageBox.cpp
 
-FORMS    += ./adb_tool.ui
+HEADERS  += ./upgrade_tool.pro \
+    ./adb_tool.h \
+./Common/Singleton.h \
+    ./Common/mainapp.h \
+    ./Common/appconfig.h \
+./Common/SetDebugNew.h \
+    ./Common/CheckTime.h\
+    ./Common/LanguageSrc.h \
+    ./Common/AppPath.h \
+    ./Common/maininit.h \
+  ./Common/widgetconfig.h \
+    ./Common/Lock.h \
+./Common/BuzzerSpeakerCtrl.h \
+    softconfigdlg.h \
+    MessageBox.h
+
+FORMS    += ./adb_tool.ui \
+    softconfigdlg.ui
 
 
 

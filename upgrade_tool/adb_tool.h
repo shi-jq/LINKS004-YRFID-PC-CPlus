@@ -7,10 +7,16 @@
 #include "ui_adb_tool.h"
 //#include "adb_tool.ui"
 
+#include "SoftConfigDlg.h"
 
 namespace Ui {
 	class MainWindow;
 }
+
+static const QString defaultApkPackage = "com.handheld.yhfr";
+static const QString defaultApkActivity = "com.rfid_demo.main.MainActivity";
+static const QString defaultLauncherPackage = "com.android.launcher3";
+static const QString defaultLauncherActivity = "com.android.launcher3.Launcher";
 
 
 class adb_tool : public QMainWindow
@@ -20,6 +26,10 @@ class adb_tool : public QMainWindow
 public:
 	explicit adb_tool(QWidget *parent = 0);
 	~adb_tool();
+
+	void SetNeedReboot(bool b);
+
+	bool GetNeedReboot();
 
 	private slots:
 	void on_choseButton_clicked();
@@ -34,8 +44,18 @@ public:
 	void on_uninstallBtn_clicked();
 
 	void on_setbootBtn_clicked();
+
+	//²Ëµ¥À¸
+	void slot_SoftConfigAc();
+	void slot_ExitAc();
 private:
 	Ui::MainWindow *ui;
+
+	SoftConfigDlg* mSoftConfigDlg;
+	//²Ëµ¥À¸	
+	QAction* mSoftCongfigAc;
+	QAction* mExitAc;
+
 	QProcess *p;
 
 	QString PathName;
@@ -54,6 +74,7 @@ private:
 	QString launcherActivity;
 	QString exePath;
 
+	bool isNeedReboot;
 };
 
 #endif // MAINWINDOW_H
