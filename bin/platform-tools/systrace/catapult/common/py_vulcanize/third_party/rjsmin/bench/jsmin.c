@@ -1,4 +1,4 @@
-/* jsmin.c
+﻿/* jsmin.c
    2011-01-22
 
 Copyright (c) 2002 Douglas Crockford  (www.crockford.com)

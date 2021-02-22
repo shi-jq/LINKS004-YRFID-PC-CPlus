@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2011 - 2014
  * Andr\xe9 Malo or his licensors, as applicable
  *
