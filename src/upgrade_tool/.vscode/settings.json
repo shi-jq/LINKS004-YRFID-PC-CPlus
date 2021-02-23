@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "qdir": "cpp",
+        "qdatetime": "cpp",
+        "qmainwindow": "cpp"
+    }
+}

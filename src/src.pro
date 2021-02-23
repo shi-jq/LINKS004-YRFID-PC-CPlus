@@ -8,7 +8,7 @@ CONFIG  += ordered
 
 SUBDIRS +=  WIRELESSRFIDAPI \
             RFIDAPI \           
-            WIRELESS \ 
-			upgrade_tool \
-			HTDEMO \
+            WirelessDemo \
+            upgrade_tool \
+            ReaderManager \
 
