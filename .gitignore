@@ -97,8 +97,7 @@ HTDEMO/savefile.txt
 HTDEMO/ui_forwardconfigdlg.h
 HTDEMO/ui_forwardsetdlg.h
 HTDEMO/ui_tabforwardconfigform.h
-build-upgrade_tool-Desktop_Qt_5_9_2_MinGW_32bit-Debug/Makefile
-build-upgrade_tool-Desktop_Qt_5_9_2_MinGW_32bit-Debug/Makefile.Debug
 *.Release
 *.Debug
-build-upgrade_tool-Desktop_Qt_5_9_2_MinGW_32bit-Debug/ui_adb_tool.h
+temp/*
+build-src-*
