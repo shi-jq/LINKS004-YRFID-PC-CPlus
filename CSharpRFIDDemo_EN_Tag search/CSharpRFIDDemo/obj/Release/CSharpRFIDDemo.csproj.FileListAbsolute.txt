@@ -1,8 +1,0 @@
-C:\Users\shi_j\Desktop\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo\bin\CSharpRFIDDemo.exe
-C:\Users\shi_j\Desktop\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo\bin\CSharpRFIDDemo.pdb
-C:\Users\shi_j\Desktop\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo\obj\Release\CSharpRFIDDemo.csprojResolveAssemblyReference.cache
-C:\Users\shi_j\Desktop\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo\obj\Release\CSharpRFIDDemo.frmMain.resources
-C:\Users\shi_j\Desktop\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo\obj\Release\CSharpRFIDDemo.Properties.Resources.resources
-C:\Users\shi_j\Desktop\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo\obj\Release\CSharpRFIDDemo.csproj.GenerateResource.Cache
-C:\Users\shi_j\Desktop\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo\obj\Release\CSharpRFIDDemo.exe
-C:\Users\shi_j\Desktop\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo_EN_Tag search\CSharpRFIDDemo\obj\Release\CSharpRFIDDemo.pdb
