@@ -101,3 +101,5 @@ HTDEMO/ui_tabforwardconfigform.h
 *.Debug
 temp/*
 build-src-*
+src/upgrade_tool/upgrade_tool.VC.db
+src/upgrade_tool/upgrade_tool.vcxproj.filters

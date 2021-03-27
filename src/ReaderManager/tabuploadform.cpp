@@ -5,6 +5,7 @@
 #include "flashconfigfor6cdlg.h"
 #include "uploadpramform.h"
 #include "forwardsetdlg.h"
+#include "gprsconfigdlg.h"
 TabUploadForm::TabUploadForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TabUploadForm)
@@ -36,12 +37,20 @@ TabUploadForm::TabUploadForm(QWidget *parent) :
 	gridLayout->setContentsMargins(0, 0, 0, 0);
 	gridLayout->addWidget(mForwardSetDlg);
 
+	//*
+	mGprsConfigDlg = new GprsConfigDlg(ui->widget_10);
+	gridLayout = new QGridLayout(ui->widget_10);
+	gridLayout->setSpacing(0);
+	gridLayout->setContentsMargins(0, 0, 0, 0);
+	gridLayout->addWidget(mGprsConfigDlg);
+	//*/
 	ui->widget_5->hide();
 
 	ui->label_6->setText(GET_TXT("IDCS_UP_CONFIG"));
 	ui->label_9->setText(GET_TXT("IDCS_NET_CONFIG"));
 	ui->label_7->setText(GET_TXT("IDCS_FILTER_TAG"));
 	ui->label_8->setText(GET_TXT("IDCS_FLASH"));
+	ui->label_10->setText(GET_TXT("IDCS_CPRS_CONFIG"));
 }
 
 TabUploadForm::~TabUploadForm()

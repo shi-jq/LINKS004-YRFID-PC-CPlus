@@ -10,6 +10,7 @@ class FiltrateTagFor6CDlg;
 class FlashConfigFor6CDlg;
 class UploadPramForm;
 class ForwardSetDlg;
+class GprsConfigDlg;
 class TabUploadForm : public QWidget
 {
     Q_OBJECT
@@ -24,6 +25,7 @@ private:
 	FlashConfigFor6CDlg* mFlashConfigFor6CDlg;
 	UploadPramForm* mUploadPramForm;
 	ForwardSetDlg* mForwardSetDlg;
+	GprsConfigDlg* mGprsConfigDlg;
 };
 
 #endif // TABUPLOADFORM_H

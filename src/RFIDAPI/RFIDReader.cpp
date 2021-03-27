@@ -374,13 +374,16 @@ bool CRFIDReader::SAATParmOp(unsigned char nType, unsigned char nStartAddrr, uns
 			break;
 		case 0x02://导出系统参数表
 			{
-				if( nLen > *pDataLen )
+			int realLen = RFIDFrame.bLength - 2;
+				if( nLen > *pDataLen || realLen > *pDataLen)
 				{
 					SetErrorCode(ERR_MOREDATA_NEED);
 					bRet = false;
 					break;
 				}
-				memcpy(pData,RFIDFrame.bData+1,nLen);
+
+				
+				memcpy(pData,RFIDFrame.bData+1, realLen);
 				bRet = true;
 			}
 			break;

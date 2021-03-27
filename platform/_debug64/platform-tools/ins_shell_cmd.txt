@@ -1,0 +1,5 @@
+su
+mount -o rw,remount -t auto /system
+cat /sdcard/app-release.apk > /system/app/app-release.apk
+chmod 777 /system/app/app-release.apk
+reboot

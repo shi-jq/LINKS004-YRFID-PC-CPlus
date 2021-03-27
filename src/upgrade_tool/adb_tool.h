@@ -45,9 +45,16 @@ public:
 
 	void on_setbootBtn_clicked();
 
-	//²Ëµ¥À¸
 	void slot_SoftConfigAc();
 	void slot_ExitAc();
+
+	bool uninstallPathFileOld();
+
+	bool uninstallPathFile();
+	bool installPathFile(const QString& pathinfo);
+
+	bool checkConnect();
+	void showInfoDialog(const QString& str);
 private:
 	Ui::MainWindow *ui;
 

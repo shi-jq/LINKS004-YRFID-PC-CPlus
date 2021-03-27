@@ -30,7 +30,7 @@ FiltrateTagFor6CDlg::FiltrateTagFor6CDlg(QWidget *parent) :
 
 	connect( mQueryBtn, SIGNAL( clicked()), this, SLOT( slot_QueryBtnClicked( ) ) );
 	connect( mSetBtn, SIGNAL( clicked()), this, SLOT( slot_SetBtnClicked( ) ) );
-	connect( mEnableCb, SIGNAL( stateChanged(int )), this, SLOT( slot_EnableStateChanged(int ) ) );
+//	connect( mEnableCb, SIGNAL( stateChanged(int )), this, SLOT( slot_EnableStateChanged(int ) ) );
 }
 
 FiltrateTagFor6CDlg::~FiltrateTagFor6CDlg()

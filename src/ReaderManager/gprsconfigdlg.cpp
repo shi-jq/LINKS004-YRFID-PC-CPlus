@@ -14,22 +14,15 @@ GprsConfigDlg::GprsConfigDlg(QWidget *parent) :
 	this->setWindowTitle(GET_TXT("IDCS_CPRS_CONFIG"));
 	mQueryBtn = ui->pushButton;
 	mSetBtn = ui->pushButton_2;
-	mIpaddrEdit = ui->lineEdit;
-	mPortEdit = ui->lineEdit_2;
 	mApnEdit = ui->lineEdit_3;
 	mAccoundEdit = ui->lineEdit_4; 
 	mPwdEdit = ui->lineEdit_5;
 
-	ui->label->setText(GET_TXT("IDCS_IP_ADDR"));
-	ui->label_2->setText(GET_TXT("IDCS_LISENT_PORT"));
 	ui->label_3->setText(GET_TXT("IDCS_APN"));
 	ui->label_4->setText(GET_TXT("IDCS_ACCOUNT_NAME"));
 	ui->label_5->setText(GET_TXT("IDCS_PWD"));
 	ui->pushButton->setText(GET_TXT("IDCS_QUERY"));
 	ui->pushButton_2->setText(GET_TXT("IDCS_SET"));
-
-	mIpaddrEdit->setInputMask(QString("000.000.000.000;"));
-	//mPwdEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
 
 	mFirst = true;
 
@@ -63,16 +56,6 @@ void GprsConfigDlg::slot_SetBtnClicked()
 	}
 
 	bool bRet = true;
-	if (bRet)
-	{
-		bRet = SetIpAddr();
-	}
-
-	if (bRet)
-	{
-		bRet = SetDSCPort();
-	}
-
 	if (bRet)
 	{
 		bRet = SetApn();
@@ -118,88 +101,6 @@ void GprsConfigDlg::showEvent(QShowEvent *event)
 	}
 	QWidget::showEvent(event);
 }
-
-bool GprsConfigDlg::QueryIpAddr()
-{
-	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();	
-	if (!pReaderDllBase)
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return false;
-	}
-	if (!pReaderDllBase->CheckState(STATE_CONNET))
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return false;
-	}
-
-	unsigned char btAddr = 126;	//设备名称起始地址
-	unsigned char nDataLen = 20;//长度
-	unsigned char btExportData[20];
-	ZeroMemory(btExportData,20);
-	unsigned char nBufferSize = 20;
-
-	btAddr = 250;		//IP地址起始地址
-	nDataLen = 4;		//IP地址长度
-	ZeroMemory(btExportData,20);
-	nBufferSize = 20;
-	bool bRet = SAAT_ParmOp (pReaderDllBase->m_hCom,
-		0x02,
-		btAddr, 
-		nDataLen,  
-		btExportData,
-		&nBufferSize);		
-
-	if (bRet)
-	{		
-		in_addr ia;
-		memcpy(&ia,&btExportData,4);
-		mIpaddrEdit->setText(QString::fromUtf8(inet_ntoa(ia)));
-	}
-
-	return bRet;
-}
-
-bool GprsConfigDlg::QueryPort()
-{
-	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();	
-	if (!pReaderDllBase)
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return false;
-	}
-	if (!pReaderDllBase->CheckState(STATE_CONNET))
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return false;
-	}
-
-	unsigned char btAddr = 126;	//设备名称起始地址
-	unsigned char nDataLen = 20;//长度
-	unsigned char btExportData[20];
-	ZeroMemory(btExportData,20);
-	unsigned char nBufferSize = 20;
-
-	btAddr = 254;		//端口号起始地址
-	nDataLen = 2;		//端口号长度
-	ZeroMemory(btExportData,20);
-	nBufferSize = 20;
-	bool bRet = SAAT_ParmOp (pReaderDllBase->m_hCom,
-		0x02,
-		btAddr, 
-		nDataLen,  
-		btExportData,
-		&nBufferSize);		
-
-	if (bRet)
-	{		
-		int gprsPort = MAKEWORD(btExportData[1],btExportData[0]);
-		mPortEdit->setText(QString("%1").arg(gprsPort));
-	}
-	
-	return bRet;
-}
-
 
 bool GprsConfigDlg::QueryApn()
 {
@@ -312,105 +213,6 @@ bool GprsConfigDlg::QueryPwd()
 	{	
 		mPwdEdit->setText(QString::fromUtf8((char*)btExportData));
 	}
-
-	return bRet;
-}
-
-bool GprsConfigDlg::SetIpAddr()
-{
-	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();	
-	if (!pReaderDllBase)
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return false;
-	}
-	if (!pReaderDllBase->CheckState(STATE_CONNET))
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return false;
-	}
-	
-	if (!CheckIPEdit(mIpaddrEdit->text()))
-	{
-		MainShowMsg(GET_TXT("IDCS_IPADDR_INVAID"));
-		return false;
-	}
-
-	unsigned char btParams[16];
-	ZeroMemory(btParams, 16);
-
-	QStringList tmpList = mIpaddrEdit->text().split(".");
-	if (tmpList.size() < 4)
-	{
-		MainShowMsg(GET_TXT("IDCS_IP_ERRO"));
-		return false;
-	}
-
-	btParams[0] = tmpList.at(0).toUInt();
-	btParams[1] = tmpList.at(1).toUInt();
-	btParams[2] = tmpList.at(2).toUInt();
-	btParams[3] = tmpList.at(3).toUInt();
-
-	unsigned char btAddr = 126;	
-	unsigned char nDataLen = 11; 
-	unsigned char nBufferSize = 16;
-
-	btAddr = 250;	//IP地址参数表中起始地址
-	nDataLen = 4;	//IP地址长度
-	nBufferSize = 4;
-
-	bool bRet = SAAT_ParmOp (pReaderDllBase->m_hCom,
-		0x01,
-		btAddr, 
-		nDataLen,  
-		btParams,
-		&nBufferSize);
-	
-	return bRet;
-}
-
-bool GprsConfigDlg::SetDSCPort()
-{
-	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();	
-
-	if (!pReaderDllBase)
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return false;
-	}
-	if (!pReaderDllBase->CheckState(STATE_CONNET))
-	{
-		MainShowMsg(GET_TXT("IDCS_READ_NO_LINK"));
-		return false;
-	}
-
-	if (mPortEdit->text().isEmpty())
-	{
-		MainShowMsg(GET_TXT("IDCS_INPUT_EMPTY"));
-		return false;
-	}
-
-	unsigned char btParams[16]= {0};
-
-	unsigned char btAddr = 126;	
-	unsigned char nDataLen = 11; 
-	unsigned char nBufferSize = 16;
-
-	btAddr = 254;
-	nDataLen = 2;
-	nBufferSize = 2;
-
-	ZeroMemory(btParams, 16);
-	WORD dLoSocketPort =  LOWORD(mPortEdit->text().toUInt());
-	btParams[0] = HIBYTE(dLoSocketPort);
-	btParams[1] = LOBYTE(dLoSocketPort);
-
-	bool bRet = SAAT_ParmOp (pReaderDllBase->m_hCom,
-		0x01,
-		btAddr, 
-		nDataLen,  
-		btParams,
-		&nBufferSize);
 
 	return bRet;
 }
@@ -560,24 +362,6 @@ bool GprsConfigDlg::SetPwd()
 }
 
 
-bool GprsConfigDlg::CheckIPEdit(const QString& str)
-{
-	QRegExp regexp( "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)" );
-
-	QRegExpValidator regexp_validator( regexp, this );
-	int nPos = 0;
-	if ( str.isEmpty() )
-	{
-		return false;
-	}
-	QString tmp = str;
-	if ( !str.isEmpty() && regexp_validator.validate( tmp, nPos ) != QValidator::Acceptable )
-	{
-		return false;
-	}
-	return true;
-}
-
 bool GprsConfigDlg::QueryAll()
 {
 	ReaderDllBase*	pReaderDllBase = pMainApp->GetReader();
@@ -593,16 +377,7 @@ bool GprsConfigDlg::QueryAll()
 	}
 
 	bool bRet = true;
-	if (bRet)
-	{
-		bRet = QueryIpAddr();
-	}
-
-	if (bRet)
-	{
-		bRet = QueryPort();
-	}
-
+	
 	if (bRet)
 	{
 		bRet = QueryApn();

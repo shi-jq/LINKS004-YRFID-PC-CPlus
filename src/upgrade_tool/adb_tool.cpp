@@ -13,6 +13,7 @@
 #include "MessageBox.h"
 #include <QMenuBar>
 #include "widgetconfig.h"
+#include <QDebug>
 
 //QProgressBar *startprogressbar;
 
@@ -29,6 +30,8 @@ adb_tool::adb_tool(QWidget *parent) :
 	ui->setupButton->setChecked(true);
 	ui->installtypewdg->hide();
 	exePath = QCoreApplication::applicationDirPath()+"/platform-tools";
+	qDebug() << "exePath:"<< exePath;
+	p->setWorkingDirectory(exePath);
 
 	QSettings setting("./Setting.ini", QSettings::IniFormat);//保存路径信息至运行目录
 	QString lastPath = setting.value("LastFilePath").toString();//获取路径
@@ -55,8 +58,8 @@ adb_tool::adb_tool(QWidget *parent) :
 
 	this->setWindowTitle(GET_TXT("IDCS_INSTALL"));
 	
-	ui->tabWidget->setTabText(0,GET_TXT("IDCS_INSTALL"));
-	ui->tabWidget->setTabText(1, GET_TXT("IDCS_POWERBOOT"));
+//	ui->tabWidget->setTabText(0,GET_TXT("IDCS_INSTALL"));
+//	ui->tabWidget->setTabText(1, GET_TXT("IDCS_POWERBOOT"));
 	ui->pathtext->setText(GET_TXT("IDCS_FILE"));
 	ui->choseButton->setText(GET_TXT("IDCS_BROWSE"));
 	ui->startButton->setText(GET_TXT("IDCS_INSTALL"));
@@ -86,30 +89,14 @@ adb_tool::~adb_tool()
 //检测装置
 void adb_tool::on_checkButton_clicked()
 {
-	//p = new QProcess(this);
-	QString test = QString("%1/adb shell getprop ro.product.model").arg(exePath);
-
-	//p->start("cmd", QStringList() << "/c" << QString("%1/adb shell getprop ro.product.model").arg(exePath));
-	p->start(QString("%1/adb shell getprop ro.product.model").arg(exePath));
-	p->waitForStarted();
-	p->waitForFinished();
-	//成功则提示连接成功并打印设备型号，否则打印连接失败
-	QString checkTemp = QString::fromLocal8Bit(p->readAllStandardOutput());
-	if (checkTemp.isNull())
+	if (!checkConnect())
 	{
-		QMessageBox testMassage;
-		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-		testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
-		testMassage.exec();
+		showInfoDialog(GET_TXT("IDCS_CONNET_FAILED"));
 	}
 	else
 	{
-		QMessageBox testMassage;
-		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-		testMassage.setText(GET_TXT("IDCS_LINKED") +"  "+ checkTemp);
-		testMassage.exec();
+		showInfoDialog(GET_TXT("IDCS_LINKED"));
 	}
-
 }
 
 
@@ -159,194 +146,53 @@ void adb_tool::on_startButton_clicked() //点击开始按钮根据勾选操作�
 	pathinfo = ui->pathtEdit->text();
 	if (pathinfo.isEmpty())
 	{
-		QMessageBox testMassage;
-		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-		testMassage.setText(GET_TXT("IDCS_PLEASE_SELECT_FILE"));
-		testMassage.exec();
+		showInfoDialog(GET_TXT("IDCS_PLEASE_SELECT_FILE"));
 		return;
 	}
 	QFile file(pathinfo);
 	if (!file.exists())
 	{
-		QMessageBox testMassage;
-		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-		testMassage.setText(GET_TXT("IDCS_FILE_NOT_VALIDITY"));
-		testMassage.exec();
+		showInfoDialog(GET_TXT("IDCS_FILE_NOT_VALIDITY"));
 		return;
 	}
 
+	if (file.fileName().contains(" "))
+	{
+		showInfoDialog(GET_TXT("IDCS_NOT_SPACE_FILE"));
+		return;
+	}
 
-	//安装程序
-	if (ui->setupButton->isChecked())
-	{	
-		//p->start("cmd", QStringList() << "/c" << QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
-		p->start(QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
-		p->waitForStarted();
-		p->waitForFinished();
-		QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
-		
-		if (checkTemp.isNull())
+	if (!checkConnect())
+	{
+		showInfoDialog(GET_TXT("IDCS_CONNET_FAILED"));
+		return;
+	}
+
+	bool b = pathinfo.contains(QRegExp("[\\x4e00-\\x9fa5]+"));//检查路径中是否包含中文		
+	if (b == true)
+	{
+		QMessageBox testMassage;
+		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+		testMassage.setText(GET_TXT("IDCS_CHOOSE_ENGLISH_PATH"));
+		testMassage.exec();
+	}
+	else
+	{
+		if (!uninstallPathFile())
 		{
-			QMessageBox testMassage;
-			testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-			testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
-			testMassage.exec();
 			return;
 		}
-		else
+
+		if (!installPathFile(pathinfo))
 		{
-			QFile file(pathinfo);
-			if (!file.exists())
-			{
-				QMessageBox testMassage;
-				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-				testMassage.setText(GET_TXT("IDCS_FILE_NOT_VALIDITY"));
-				testMassage.exec();
-				return;
-			}
-
-			if (file.fileName().contains(" "))
-			{
-				QMessageBox testMassage;
-				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-				testMassage.setText(GET_TXT("IDCS_NOT_SPACE_FILE"));
-				testMassage.exec();
-				return;
-			}
-			bool b = pathinfo.contains(QRegExp("[\\x4e00-\\x9fa5]+"));//检查路径中是否包含中文		
-			if (b == true)
-			{
-				QMessageBox testMassage;
-				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-				testMassage.setText(GET_TXT("IDCS_CHOOSE_ENGLISH_PATH"));
-				testMassage.exec();
-			}
-			else
-			{
-				p->start(QString("%1/adb install  ").arg(exePath) + pathinfo);//调用cmd命令执行安装
-																					//p->waitForStarted();
-				if (!p->waitForStarted())
-				{
-					QMessageBox testMassage;
-					testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-					testMassage.setText(GET_TXT("IDCS_EXECUTE_FAILED"));
-					testMassage.exec();
-				}
-				for (int i = 0; i <= 70; i++)
-				{
-					ui->progressBar->setValue(i);//进度条，执行命令无法获取命令执行状态，先实现进度效果
-				}
-				//p->waitForFinished();
-				if (!p->waitForFinished())
-				{
-					QMessageBox testMassage;
-					testMassage.setText(GET_TXT("IDCS_EXECUTE_FAILED"));
-					testMassage.exec();
-				}
-				ui->progressBar->setValue(100);//成功后设置进度条值为100%
-				QString startTemp = QString::fromUtf8(p->readAllStandardOutput());
-
-				if (true)//ui->bootCkb->isChecked())
-				{
-					p->start(QString("%1/adb shell cmd package set-home-activity %2/%3").arg(exePath).arg(apkPackage).arg(apkActivity));
-				}
-				else
-				{
-					p->start(QString("%1/adb shell cmd package set-home-activity %2/%3").arg(exePath).arg(launcherPackage).arg(launcherActivity));
-				}
-
-				p->waitForStarted();
-				p->waitForFinished();
-
-				p->start( QString("%1/adb shell am start -n  %2/%3").arg(exePath).arg(apkPackage).arg(apkActivity));
-				p->waitForStarted();
-				p->waitForFinished();
-
-				startTemp = QString::fromUtf8(p->readAllStandardOutput());
-
-				
-				//p->start("cmd", QStringList() << "/c" << "adb reboot");	//push文件至手机sdcrad目录
-				//p->waitForStarted();
-				//p->waitForFinished();
-
-				QMessageBox testMassage;
-				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-				testMassage.setText(GET_TXT("IDCS_INSTALL_SUCCESS")+" " + startTemp);
-				testMassage.exec();
-				ui->progressBar->setValue(0);//初始化进度条
-
-			}
-
-
+			return;
 		}
+			
+		ui->progressBar->setValue(100);//成功后设置进度条值为100%
 
+		showInfoDialog(GET_TXT("IDCS_INSTALL_SUCCESS"));
+		ui->progressBar->setValue(0);//初始化进度条
 	}
-
-
-	//上传文件
-	if (ui->uploadButton->isChecked())
-	{
-		p->start(QString("%1/adb shell getprop ro.product.model").arg(exePath));	//push文件至手机sdcrad目录
-		p->waitForStarted();
-		p->waitForFinished();
-		QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
-		pathinfo = ui->pathtEdit->text();
-		if (checkTemp.isNull())
-		{
-			QMessageBox testMassage;
-			testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-			testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
-			testMassage.exec();
-		}
-		else
-		{			
-			bool b = pathinfo.contains(QRegExp("[\\x4e00-\\x9fa5]+"));//检查路径中是否包含中文
-			if (b == true)
-			{
-				QMessageBox testMassage;
-				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-				testMassage.setText(GET_TXT("IDCS_CHOOSE_ENGLISH_PATH"));
-				testMassage.exec();
-			}
-			else
-			{
-				//QString path = ui->pathtEdit->toPlainText();
-				p->start(QString("%1/adb push ").arg(exePath) + pathinfo + " /sdcard");//上传文件至/sdcard根目录
-				//p->waitForStarted();
-				if (!p->waitForStarted(-1))
-				{
-					QMessageBox testMassage;
-					testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-					testMassage.setText(GET_TXT("IDCS_UPLOAD_FAILED"));
-					testMassage.exec();
-				}
-				for (int i = 0; i <= 70; i++)
-				{
-					ui->progressBar->setValue(i);//进度条，执行命令无法获取命令执行状态，先实现进度效果
-				}
-				//p->waitForFinished();
-				if (!p->waitForFinished(-1))
-				{
-					QMessageBox testMassage;
-					testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-					testMassage.setText(GET_TXT("IDCS_UPLOAD_FAILED"));
-					testMassage.exec();
-				}
-				ui->progressBar->setValue(100);//成功后设置进度条值为100%
-
-				QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
-
-				QMessageBox testMassage;
-				testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-				testMassage.setText(GET_TXT("IDCS_UPLOAD_SUCCESS")+" " + startTemp);
-				testMassage.exec();
-				ui->progressBar->setValue(0);//初始化进度条
-			}
-
-		}
-
-	}
-
 }
 
 //退出功能
@@ -360,17 +206,9 @@ void adb_tool::on_cancelButton_clicked()
 
 void adb_tool::on_rebootBtn_clicked()
 {
-	p->start(QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
-	p->waitForStarted();
-	p->waitForFinished();
-	QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
-	pathinfo = ui->pathtEdit->text();
-	if (checkTemp.isNull())
+	if (!checkConnect())
 	{
-		QMessageBox testMassage;
-		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-		testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
-		testMassage.exec();
+		showInfoDialog(GET_TXT("IDCS_CONNET_FAILED"));
 		return;
 	}
 
@@ -391,29 +229,19 @@ void adb_tool::on_rebootBtn_clicked()
 
 void adb_tool::on_uninstallBtn_clicked()
 {
-	p->start(QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
-	p->waitForStarted();
-	p->waitForFinished();
-	QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
-	pathinfo = ui->pathtEdit->text();
-	if (checkTemp.isNull())
+	if (!checkConnect())
 	{
-		QMessageBox testMassage;
-		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-		testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
-		testMassage.exec();
+		showInfoDialog(GET_TXT("IDCS_CONNET_FAILED"));
 		return;
 	}
 
-	p->start(QString("%1/adb shell pm uninstall -k %2").arg(exePath).arg(apkPackage));//检查设备是否存在
-	p->waitForStarted();
-	p->waitForFinished();
+	uninstallPathFile();
 
-	QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
+	ui->progressBar->setValue(100);//成功后设置进度条值为100%
 
 	QMessageBox testMassage;
 	testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-	testMassage.setText(GET_TXT("IDCS_UNINSTALL_SUCCESS")+" " + startTemp);
+	testMassage.setText(GET_TXT("IDCS_UNINSTALL_SUCCESS"));
 	testMassage.exec();
 	ui->progressBar->setValue(0);
 }
@@ -421,47 +249,7 @@ void adb_tool::on_uninstallBtn_clicked()
 
 void adb_tool::on_setbootBtn_clicked()
 {
-	if (!ui->lineEdit->text().compare("Admin@cirfid.com") == 0)
-	{
-		QMessageBox testMassage;
-		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-		testMassage.setText(GET_TXT("IDCS_PWD_ERRO"));
-		testMassage.exec();
-		return;
-	}
-	p->start(QString("%1/adb shell getprop ro.product.model").arg(exePath));//检查设备是否存在
-	p->waitForStarted();
-	p->waitForFinished();
-	QString checkTemp = QString::fromUtf8(p->readAllStandardOutput());
-	pathinfo = ui->pathtEdit->text();
-	if (checkTemp.isNull())
-	{
-		QMessageBox testMassage;
-		testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-		testMassage.setText(GET_TXT("IDCS_CONNET_FAILED"));
-		testMassage.exec();
-		return;
-	}
-
-	if (ui->bootCkb->isChecked())
-	{
-		p->start(QString("%1/adb shell cmd package set-home-activity %2/%3").arg(exePath).arg(apkPackage).arg(apkActivity));
-	}
-	else
-	{
-		p->start(QString("%1/adb shell cmd package set-home-activity %2/%3").arg(exePath).arg(launcherPackage).arg(launcherActivity));
-	}
-
-	p->waitForStarted();
-	p->waitForFinished();
-
-	QString startTemp = QString::fromUtf8(p->readAllStandardOutput());//使用UTF8可暂时过滤中文文件传输丢失后续或乱码问题，直接复制失败				
-
-	QMessageBox testMassage;
-	testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
-	testMassage.setText(GET_TXT("IDCS_SET_SUCCESS") + " " + startTemp);
-	testMassage.exec();
-	ui->progressBar->setValue(0);
+	
 }
 
 void adb_tool::slot_SoftConfigAc()
@@ -476,6 +264,112 @@ void adb_tool::slot_ExitAc()
 	{
 		qApp->quit();
 	}
+}
+
+bool adb_tool::uninstallPathFileOld()
+{
+	p->start(QString("%1/adb shell pm uninstall -k %2").arg(exePath).arg(apkPackage));//检查设备是否存在
+	p->waitForStarted();
+	p->waitForFinished();
+	return false;
+}
+
+bool adb_tool::uninstallPathFile()
+{
+	uninstallPathFileOld();
+
+	qDebug() <<"exePath:"<< exePath;
+
+	p->start(QString("%1/adb root ").arg(exePath));
+	p->waitForStarted();
+	p->waitForFinished();
+	QString msg = QString::fromUtf8(p->readAllStandardOutput());
+	qDebug() << msg;
+	
+
+	ui->progressBar->setValue(5);
+	p->start(QString("%1/adb remount ").arg(exePath));
+	p->waitForStarted();
+	p->waitForFinished();
+	msg = QString::fromUtf8(p->readAllStandardOutput());
+	qDebug() << msg;
+
+	
+	ui->progressBar->setValue(10);
+	msg = QString("rm_cmd.bat");
+	qDebug() << msg;
+	p->start(QString("%1/rm_cmd.bat ").arg(exePath));//调用cmd命令执行安装
+	p->waitForStarted();
+	p->waitForFinished(3000);
+	msg = QString::fromUtf8(p->readAllStandardOutput());
+	qDebug() << msg;
+
+
+	msg = QString("rm_cmd.bat");
+	qDebug() << msg;
+	p->start(QString("%1/rm_cmd.bat ").arg(exePath));//调用cmd命令执行安装
+	p->waitForStarted();
+	p->waitForFinished(3000);
+	msg = QString::fromUtf8(p->readAllStandardOutput());
+	qDebug() << msg;
+	
+	p->close();
+	ui->progressBar->setValue(20);
+	return true;
+
+}
+
+bool adb_tool::installPathFile(const QString& pathinfo)
+{
+
+	p->start(QString("%1/adb root ").arg(exePath));
+	p->waitForStarted();
+	p->waitForFinished();
+	QString msg;
+
+	msg = QString::fromUtf8(p->readAllStandardOutput());
+	qDebug() << msg;
+
+	p->start(QString("%1/adb push %2 /sdcard/ ").arg(exePath).arg(pathinfo));
+	p->waitForStarted();
+	p->waitForFinished();
+	msg = QString::fromUtf8(p->readAllStandardOutput());
+	qDebug() << msg;
+	p->start(QString("%1/ins_cmd.bat ").arg(exePath));//调用cmd命令执行安装
+	p->waitForStarted();
+	p->waitForFinished();
+	msg = QString::fromUtf8(p->readAllStandardOutput());
+	qDebug() << msg;
+	p->close();
+	ui->progressBar->setValue(100);//成功后设置进度条值为100%
+	return true;
+}
+
+bool adb_tool::checkConnect()
+{
+	p->start(QString("%1/adb shell getprop ro.product.model").arg(exePath));
+	p->waitForStarted();
+	p->waitForFinished();
+	//成功则提示连接成功并打印设备型号，否则打印连接失败
+	QString checkTemp = QString::fromLocal8Bit(p->readAllStandardOutput());
+	if (checkTemp.isNull())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+
+	return true;
+}
+
+void adb_tool::showInfoDialog(const QString& str)
+{
+	QMessageBox testMassage;
+	testMassage.setWindowTitle(GET_TXT("IDCS_INFO"));
+	testMassage.setText(str);
+	testMassage.exec();
 }
 
 void adb_tool::SetNeedReboot(bool b)

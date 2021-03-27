@@ -1,0 +1,4 @@
+su
+mount -o rw,remount -t auto /system
+rm  /system/app/app-release.apk
+rm  /system/app/app-release.apk
